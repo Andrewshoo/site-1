@@ -176,7 +176,7 @@ nav ul li a:hover {
      url('../images/bg0.jpeg');
   background-size: cover;
   background-position: bottom;
-  #background-attachment: fixed; /* Эффект параллакса */
+  /*background-attachment: fixed; /* Эффект параллакса */
 }
 
 /* О компании */
