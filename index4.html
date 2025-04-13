@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyModern - Авиационный Журнал</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sky-blue: #0077cc;
+            --jet-black: #f8f9fa;
+            --cloud-white: #121212;
+            --thunder-red: #e63946;
+            --metal-gray: #e0e0e0;
+            --section-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @font-face {
+            font-family: 'Aero';
+            src: url('https://fonts.cdnfonts.com/css/aero-matics') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--metal-gray);
+            color: var(--cloud-white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        
+        /* Навигация - изначально скрыта */
+        .main-nav {
+            position: fixed;
+            top: -70px; /* Скрываем за верхним краем */
+            left: 0;
+            right: 0;
+            background: var(--section-bg);
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: top 0.3s ease, background 0.3s, box-shadow 0.3s;
+        }
+
+        .main-nav.visible {
+            top: 0; /* Показываем при скролле */
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            height: 30px;
+            transition: transform 0.3s;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.10);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.3rem 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--thunder-red);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--thunder-red);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active .nav-link {
+            color: var(--thunder-red);
+        }
+
+        .nav-item.active .nav-link::after {
+            width: 100%;
+        }
+
+        /* Полноэкранный хедер */
+        .fullscreen-header {
+            height: 100vh;
+            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.7)), 
+                        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+
+        .header-content {
+            animation: fadeInUp 1.5s ease-out;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            width: min(80%, 700px);
+            filter: drop-shadow(0 5px 15px rgba(0,119,204,0.6));
+            margin-bottom: 2rem;
+            transition: transform 0.5s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        
+        .issue-date {
+            font-family: 'Aero', sans-serif;
+            letter-spacing: 3px;
+            color: var(--thunder-red);
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Анимированные разделители */
+        .divider {
+            height: 3px;
+            width: 100px;
+            background: var(--thunder-red);
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--sky-blue), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        /* Секции с контентом */
+        .content-section {
+            background: var(--section-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            margin: 0 auto 60px;
+            max-width: 1000px;
+            position: relative;
+        }
+        
+        /* Фото на стене */
+        .wall-photo {
+            max-width: 800px;
+            margin: 3rem auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .wall-photo img {
+            width: 100%;
+            border: 1px solid var(--metal-gray);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+        
+        .wall-photo:hover img {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .article-title {
+            font-family: 'Aero', sans-serif;
+            color: var(--sky-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .article-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--thunder-red);
+            transition: width 0.5s;
+        }
+        
+        .article-title:hover::after {
+            width: 100%;
+        }
+
+        .columns {
+            column-count: 2;
+            column-gap: 40px;
+            text-align: justify;
+            margin: 20px 0;
+            color: var(--text-dark);
+        }
+        
+        /* Интерактивная таблица самолетов */
+        .inventory-section {
+            background: var(--section-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            margin: 0 auto 60px;
+            max-width: 1000px;
+        }
+        
+        .inventory-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .inventory-title {
+            font-family: 'Aero', sans-serif;
+            color: var(--sky-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .aircraft-market {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .market-column {
+            flex: 1;
+            min-width: 300px;
+            background: var(--metal-gray);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-top: 3px solid var(--thunder-red);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .market-column:hover {
+            transform: translateY(-5px);
+        }
+        
+        .market-title {
+            font-family: 'Aero', sans-serif;
+            color: var(--sky-blue);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .aircraft {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--section-bg);
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .aircraft:hover {
+            background: rgba(0, 119, 204, 0.05);
+            transform: translateX(5px);
+            border-color: var(--thunder-red);
+        }
+        
+        .aircraft img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 1rem;
+            border: 1px solid var(--metal-gray);
+            transition: border-color 0.3s;
+        }
+        
+        .aircraft:hover img {
+            border-color: var(--thunder-red);
+        }
+        
+        .aircraft-info {
+            color: var(--text-dark);
+        }
+        
+        .aircraft-info strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--sky-blue);
+        }
+        
+        .aircraft-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: var(--thunder-red);
+        }
+        
+        /* Анимированный футер */
+        footer {
+            background: var(--section-bg);
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/connected.png');
+            opacity: 0.05;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+        
+        .social-link:hover {
+            color: var(--thunder-red);
+            transform: translateY(-5px) scale(1.2);
+        }
+        
+        /* Кнопка скролла вниз */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-dark);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shine {
+            to {
+                left: 100%;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                clip-path: circle(0px at 90% -10%);
+                transition: clip-path 0.7s ease-out;
+                pointer-events: none;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.open {
+                clip-path: circle(1500px at 90% -10%);
+                pointer-events: all;
+            }
+
+            .nav-item {
+                margin: 1rem 0;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+            }
+
+            .nav-menu.open .nav-item {
+                opacity: 1;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .fullscreen-header {
+                height: 100vh;
+                margin-bottom: 40px;
+            }
+            
+            .content-section, 
+            .inventory-section {
+                padding: 1.5rem;
+                margin: 0 20px 40px;
+            }
+            
+            .wall-photo {
+                margin: 1.5rem auto;
+            }
+            
+            .wall-photo img {
+                border-width: 1px;
+            }
+
+            .columns {
+                column-count: 1;
+            }
+            
+            .aircraft-market {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация (изначально скрыта) -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="#home">
+                <img src="apple-touch-icon.png" alt="SkyModern" class="nav-logo">
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item active">
+                    <a href="#home" class="nav-link">Main</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#inventory" class="nav-link">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contacts</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="magazine">
+        <!-- Полноэкранный хедер -->
+        <header class="fullscreen-header" id="home">
+            <div class="header-content">
+                <img src="logo.png" alt="SkyModern" class="logo">
+                <h1 style="color: var(--text-dark);">Aircraft sales</h1>
+                <div class="divider"></div>
+                <p style="color: var(--text-dark); font-family: 'Aero', sans-serif;">Premium aviation solutions since 2007</p>
+            </div>
+            <a href="#about" class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </header>
+        
+        <!-- Основное содержание -->
+        <main>
+            <!-- О компании -->
+            <section class="content-section" id="about">
+                <h2 class="article-title">About Us</h2>
+                <div class="divider"></div>
+                
+                <!-- Фото на стене -->
+                <div class="wall-photo">
+                    <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Boeing 747 в коллекции">
+                </div>
+                
+                <div class="columns">
+                    <p>Upcast has been successfully promoting foreign aviation brands on the Russian market 
+                        since 2007. Its founder Ivan Veretennikov was directly involved in creating or 
+                        developing all major business aviation publications in this region.</p>
+                    <p>An in-depth knowledge of the local media business, established contacts
+                         with journalists and trendsetters, a dedication to the aviation industry, 
+                         as well as a range of world firsts in marketing tools including the Upcast 
+                         AvBooks range of aircraft comparison applications, make Ivan and Upcast 
+                         the finest Russian partner for Emerald to support companies based looking to 
+                         establish a foothold in this thriving market.</p>
+                    <p>Though formally educated in linguistics and foreign affairs, Ivan became a passionate aviator immediately after joining the Russian media 
+                            powerhouse Legend Media in 2007 and was since then involved in all major 
+                            business aviation media projects in Russia as Senior Editor, Editor-in-Chief, 
+                            and Advisor, as well as earned worldwide recognition as an industry journalist.</p>
+                    <p>His next project was JetBook, the hi-tech application that eventually became 
+                            the backbone of innovation and futuristic sales and business development methods 
+                            at ArcosJet. Since then Ivan has become a successful aircraft broker in his own right. 
+                            He is an avid helicopter enthusiast and flies the Robinson R44 and R66 
+                            under his Russian PPL.</p>
+                </div>
+            </section>
+            
+            <!-- Инвентарь -->
+            <section class="inventory-section" id="inventory">
+                <div class="inventory-header">
+                    <h2 class="inventory-title">Our Inventory</h2>
+                    <div class="divider"></div>
+                    <p style="color: var(--text-light);">Explore our current aircraft selection and what we're looking to acquire</p>
+                </div>
+                
+                <div class="aircraft-market">
+                    <div class="market-column">
+                        <h3 class="market-title"><i class="fas fa-tag"></i> Currently for sale</h3>
+                        <div class="aircraft">
+                            <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Boeing 747">
+                            <div class="aircraft-info">
+                                <strong>Boeing 747-200 "Jumbo Jet"</strong>
+                                <p>Year: 1978 | Hours: 45,000</p>
+                                <p>Configuration: VIP</p>
+                                <p class="price">$450-600 million</p>
+                            </div>
+                        </div>
+                        <div class="aircraft">
+                            <img src="https://images.unsplash.com/photo-1526281216101-45f5b8f51d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Concorde">
+                            <div class="aircraft-info">
+                                <strong>Concorde G-BOAC</strong>
+                                <p>Year: 1976 | Hours: 22,000</p>
+                                <p>Configuration: Original</p>
+                                <p class="price">$380-500 million</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="market-column">
+                        <h3 class="market-title"><i class="fas fa-search"></i> Looking to buy</h3>
+                        <div class="aircraft">
+                            <img src="https://images.unsplash.com/photo-1556565680-8e9a6fbc6f53?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Tu-144">
+                            <div class="aircraft-info">
+                                <strong>Ту-144 "Конкордски"</strong>
+                                <p>Year: 1968+ | Any condition</p>
+                                <p>Prefer complete aircraft</p>
+                                <p class="price">Up to $800 million</p>
+                            </div>
+                        </div>
+                        <div class="aircraft">
+                            <img src="https://images.unsplash.com/photo-1526281216101-45f5b8f51d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="AN-225">
+                            <div class="aircraft-info">
+                                <strong>Ан-225 "Мрия"</strong>
+                                <p>Year: 1988 | Any condition</p>
+                                <p>Will consider partials</p>
+                                <p class="price">Negotiable</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Футер -->
+        <footer id="contact">
+            <h3 style="color: var(--text-dark);">UPCAST Aircraft sales</h3>
+            <div class="divider"></div>
+            <p style="color: var(--text-light);">Contact us for more information</p>
+            
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            </div>
+            
+            <p style="color: var(--text-light);">© 2023 SkyModern. Все права защищены.</p>
+            <p style="color: var(--text-light);">Редакция: <a href="mailto:editor@skymodern.com" style="color: var(--thunder-red);">editor@skymodern.com</a></p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мобильное меню
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mainNav = document.querySelector('.main-nav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('open');
+                this.innerHTML = navMenu.classList.contains('open') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Плавная прокрутка
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if(navMenu.classList.contains('open')) {
+                        navMenu.classList.remove('open');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Управление видимостью навигации при скролле
+            let lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+                
+                // Показываем/скрываем навигацию
+                if (currentScroll > 100) {
+                    mainNav.classList.add('visible');
+                    
+                    // Изменение прозрачности навигации
+                    if (currentScroll > lastScroll) {
+                        // Скролл вниз
+                        mainNav.style.background = 'rgba(255, 255, 255, 0.98)';
+                    } else {
+                        // Скролл вверх
+                        mainNav.style.background = 'rgba(255, 255, 255, 0.95)';
+                    }
+                    mainNav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+                } else {
+                    mainNav.classList.remove('visible');
+                    mainNav.style.background = 'rgba(255, 255, 255, 0.9)';
+                    mainNav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+                }
+                lastScroll = currentScroll;
+                
+                // Подсветка текущего раздела
+                document.querySelectorAll('section, footer').forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (currentScroll >= sectionTop && currentScroll < sectionBottom) {
+                        document.querySelectorAll('.nav-item').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        
+                        const correspondingNavItem = document.querySelector(`.nav-item a[href="#${sectionId}"]`);
+                        if (correspondingNavItem) {
+                            correspondingNavItem.parentElement.classList.add('active');
+                        }
+                    }
+                });
+            });
+            
+            // Анимация при прокрутке
+            const observerOptions = {
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.content-section, .wall-photo, .market-column, .inventory-section').forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(item);
+            });
+            
+            // Прокрутка вниз при клике на стрелку
+            document.querySelector('.scroll-down').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: document.querySelector('#about').offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
