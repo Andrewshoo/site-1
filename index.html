@@ -210,11 +210,8 @@
         /* Адаптация для планшетов */
         @media (max-width: 768px) {
            
-            .logo-fixed {
-                position: static;
-                text-align: center;
-                margin: 20px auto;
-                display: block;
+            .logo-fixed img {
+                max-width: 300px;
             }
             .main-container {
                 padding-top: 20px;
@@ -232,11 +229,9 @@
         }
         /* Адаптация для мобильных */
         @media (max-width: 480px) {
-            body {
-                background-image: url("sky.webp");
-            }
+            
             .logo-fixed img {
-                max-width: 300px;
+                max-width: 240px;
             }
             .header-text {
                 font-size: 1.1em;
