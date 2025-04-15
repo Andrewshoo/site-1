@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPCAST | Aircraft Sales</title>
-    
+    <title> UPCAST Business Aviation Solutions</title>
     <style>
-
-        @import url('https://fonts.cdnfonts.com/css/itc-avant-garde-gothic-std-book');
-
         :root {
             --primary: #1a3e72;
             --secondary: #e8c31e;
         }
+        
         * {
             box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
             color: #333;
             background-color: #f9f9f9;
             background-image: url('bg.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            position: relative;
             min-height: 100vh;
+            overflow-x: hidden;
         }
+        
         body::before {
             content: "";
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -40,114 +39,118 @@
             backdrop-filter: blur(5px);
             z-index: -1;
         }
-
-        .title {
-            font-family: 'ITC Avant Garde Gothic Std Book', sans-serif;
-            font-weight: 700;
-            transform: skew(-10deg);
-            }
-
-        .title-stroke {
-            -webkit-text-stroke: 1px #e8c31e;
-            }
-                    
-        /* Логотип (фиксирован слева) */
+        
+        /* Fixed logo */
         .logo-fixed {
             position: absolute;
             left: 20px;
             top: 20px;
             z-index: 10;
+            width: 350px;
         }
+        
         .logo-fixed img {
-            max-width: 400px;
+            width: 100%;
             height: auto;
         }
-        /* Основной контейнер */
+        
+        /* Main container */
         .main-container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 80px 20px 20px;
+            padding: 100px 20px 40px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
         }
-        /* Шапка с текстом */
+        
+        /* Header text */
         .header-text {
             text-align: center;
-            font-size: 1.5em;
+            font-size: 1.8em;
             color: var(--primary);
-            font-weight: light;
-            margin-bottom: 30px;
+            font-weight: ligt;
+            margin-bottom: 40px;
             padding: 0 20px;
         }
 
-    
-        /* Блок с фото самолёта */
+        .header-text span {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: bold;
+        }
+        
+        /* Airplane photo */
         .airplane-photo {
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
             max-width: 800px;
         }
+        
         .airplane-photo img {
             width: 100%;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        /* Описание */
+        
+        /* Description */
         .description {
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
             line-height: 1.6;
             color: #555;
             background: rgba(255, 255, 255, 0.7);
-            padding: 25px;
+            padding: 30px;
             border-radius: 8px;
             max-width: 800px;
+            text-align: justify;
+            hyphens: auto;
         }
-        /* Контакты */
+        
+        /* Contacts */
         .contact {
-            margin: 40px auto;
+            margin: 50px auto;
             text-align: center;
         }
+        
         .contact-circle {
             display: inline-block;
             width: 150px;
             height: 150px;
             border-radius: 50%;
             background-color: var(--primary);
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
             overflow: hidden;
             border: 3px solid white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        
         .contact-circle img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: top center;
         }
+        
         .contact-info {
-            margin-top: 20px;
+            margin-top: 25px;
         }
+        
         .contact-info a {
             display: inline-block;
-            margin: 8px 12px;
+            margin: 10px 15px;
             color: var(--primary);
             text-decoration: none;
             font-weight: bold;
             background: rgba(255, 255, 255, 0.7);
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 25px;
             transition: all 0.3s ease;
-            min-width: 140px;
+            min-width: 160px;
         }
+        
         .contact-info a:hover {
             background: var(--primary);
             color: white;
         }
-
-        .contact-info a[href^="mailto:"] {
-            word-break: break-all; /* Перенос длинных email */
-            padding: 10px 15px; /* Увеличенные отступы */
-        }
-
-
-        /* Секция с воздушными судами */
+        
+        /* Aircraft section */
         .aircraft-section {
             margin: 60px auto;
             background: rgba(255, 255, 255, 0.8);
@@ -156,32 +159,38 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             max-width: 800px;
         }
+        
         .aircraft-section h2 {
             color: var(--primary);
             margin-bottom: 30px;
             text-align: center;
         }
+        
         .aircraft-columns {
             display: flex;
             justify-content: space-between;
             text-align: left;
             flex-wrap: wrap;
         }
+        
         .aircraft-column {
             flex: 1;
             min-width: 250px;
             padding: 0 15px;
             margin-bottom: 20px;
         }
+        
         .aircraft-column h3 {
             color: var(--primary);
             border-bottom: 2px solid var(--secondary);
             padding-bottom: 10px;
         }
+        
         .aircraft-list {
             list-style: none;
             padding: 0;
         }
+        
         .aircraft-list li {
             margin: 15px 0;
             padding: 12px;
@@ -189,130 +198,123 @@
             border-radius: 5px;
             transition: all 0.3s;
         }
+        
         .aircraft-list li:hover {
             transform: translateX(5px);
             background: rgba(234, 234, 234, 0.9);
         }
-
-        .english-justified {
-            text-align: justify;
-            text-justify: inter-word; /* Optimal for English */
-            hyphens: auto; /* Enables word breaks */
-            word-spacing: normal;
-        }
-
-        .premium-justify {
-            text-align: justify;
-            text-justify: distribute; /* Smoother spacing */
-            word-spacing: -0.03em; /* Subtle tightening */
-            letter-spacing: 0.01em; /* Improves readability */
-        }   
-        /* Адаптация для планшетов */
-        @media (max-width: 768px) {
-           
-            .logo-fixed img {
-                max-width: 300px;
+        
+        /* Tablet styles */
+        @media (max-width: 992px) {
+            .logo-fixed {
+                width: 120px;
+                left: 15px;
+                top: 15px;
             }
+            
             .main-container {
-                padding-top: 20px;
+                padding-top: 80px;
             }
+            
+            .header-text {
+                font-size: 1.5em;
+            }
+            
+            .contact-info a {
+                display: block;
+                margin: 15px auto;
+                max-width: 220px;
+            }
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .logo-fixed {
+                position: relative;
+                left: auto;
+                top: auto;
+                margin: 20px auto;
+                display: block;
+                text-align: center;
+            }
+            
+            .main-container {
+                padding: 40px 15px;
+            }
+            
             .header-text {
                 font-size: 1.3em;
-                margin-bottom: 20px;
+                margin-bottom: 30px;
             }
-            .contact-info a[href^="mailto:"] {
-                font-size: 0.9em; /* Чуть меньший размер */
-                padding: 8px 12px;
-    }
-
             
-        }
-        /* Адаптация для мобильных */
-        @media (max-width: 480px) {
-            
-            .logo-fixed img {
-                max-width: 240px;
-            }
-            .header-text {
-                font-size: 1.1em;
-                padding: 0 10px;
-            }
             .description {
-                padding: 15px;
+                padding: 20px;
             }
-            .aircraft-column {
-                flex: 100%;
-                padding: 0;
-            }
+            
             .contact-circle {
                 width: 100px;
                 height: 100px;
             }
-            .contact-info a {
-                padding: 8px 15px;
-                min-width: 120px;
-            }
             
+            .contact-info a {
+                padding: 10px 20px;
+                min-width: 140px;
+            }
         }
-
-        
     </style>
 </head>
 <body>
-    <!-- Логотип (фиксирован слева и не влияет на поток) -->
+    <!-- Fixed logo -->
     <div class="logo-fixed">
-        <img src="logo6.png" alt="Логотип компании">
+        <img src="logo6.png" alt="Company Logo">
     </div>
 
-    <!-- Основной контент -->
+    <!-- Main container -->
     <div class="main-container">
-        <!-- Текст в шапке -->
+        <!-- Header text -->
         <div class="header-text">
-            <span class="title">Thoughtful, Individual, Efficient </span>approach to buying and selling aircraft!
-
+            <span>Thoughtful, Individual, Efficient</span> approach to buying and selling aircraft!
         </div>
 
-        <!-- Фото самолёта -->
+        <!-- Airplane photo -->
         <div class="airplane-photo">
-            <img src="ext3.jpg" alt="Частный самолёт">
+            <img src="ext3.jpg" alt="Private Jet">
         </div>
 
-        <!-- Описание -->
+        <!-- Description -->
         <div class="description">
             <h2>The Art of Business Jet Transactions</h2>
-            <p class="premium-justify">This business is built on an understanding of subtle nuances—where technical perfection meets impeccable taste, and behind the dry numbers of every deal lie human ambition and dreams of freedom.
-
-                I know this from the inside.
-                
-                Decades in aviation have taught me to listen not only to the roar of engines but also to the quiet needs of those who entrust me with their projects. Here, there are no trivial details—only the flawless geometry of a transaction: from the first handshake to the moment when the client, squinting in the sunlight, watches their new jet lift off the runway.
-                
-                This isn’t just sales. It’s the ability to see an aircraft not as a commodity but as an extension of the owner’s character. To recognize the difference between "prestigious" and "perfectly suited." To strike a balance between a passion for the skies and cold, hard calculation.
-                
-                My clients are those who value this depth of understanding. Those who care that behind every detail stands a professional fluent in the language of both pilots and financiers. Who want a deal to deliver not just profit but the distinct satisfaction of an impeccably executed process.
-                
-                In this business, you either do it with elegance—or you don’t do it at all. I choose the former.
-                
-                Let’s discuss how this applies to your situation.</p>
+            <p>This business is built on an understanding of subtle nuances—where technical perfection meets impeccable taste, 
+                and behind the dry numbers of every deal lie human ambition and dreams of freedom. I know this from the inside. 
+                Decades in aviation have taught me to listen not only to the roar of engines but also to the quiet needs of those 
+                who entrust me with their projects. Here, there are no trivial details—only the flawless geometry of a transaction: 
+                from the first handshake to the moment when the client, squinting in the sunlight, watches their new jet lift off the runway. 
+                This isn’t just sales. It’s the ability to see an aircraft not as a commodity but as an extension of the owner’s character. 
+                To recognize the difference between "prestigious" and "perfectly suited." To strike a balance between a passion for 
+                the skies and cold, hard calculation. My clients are those who value this depth of understanding. Those who care that behind 
+                every detail stands a professional fluent in the language of both pilots and financiers. Who want a deal to deliver not just 
+                profit but the distinct satisfaction of an impeccably executed process. In this business, you either do it with elegance—or you 
+                don’t do it at all. I choose the former. Let’s discuss how this applies to your situation.</p>
         </div>
 
-        <!-- Контакты -->
+        <!-- Contacts -->
         <div class="contact">
             <div class="contact-circle">
-                <img src="ivan.jpg" alt="Контактное лицо">
+                <img src="ivan.jpg" alt="Contact Person">
             </div>
             <div class="contact-info">
                 <a href="https://t.me/ivjet" target="_blank">Telegram</a>
                 <a href="https://wa.me/79001234567" target="_blank">WhatsApp</a>
-                <a href="mailto:info@upcast.pro">info@upcast.pro</a>
+                <a href="mailto:info@upcast.pro">contact@aviation.com</a>
             </div>
         </div>
 
-        <!-- Воздушные суда -->
+        <!-- Aircraft section -->
         <div class="aircraft-section">
-            <h2>Airplanes</h2>
+            <h2>Aircrafts</h2>
             <div class="aircraft-columns">
                 <div class="aircraft-column">
-                    <h3>Purchase</h3>
+                    <h3>Acquisition</h3>
                     <ul class="aircraft-list">
                         <li>Gulfstream G650ER</li>
                         <li>Gulfstream G650ER</li>
@@ -322,7 +324,7 @@
                     </ul>
                 </div>
                 <div class="aircraft-column">
-                    <h3>Sale</h3>
+                    <h3>Disposition</h3>
                     <ul class="aircraft-list">
                         <li>Gulfstream G650ER</li>
                         <li>Gulfstream G650ER</li>
