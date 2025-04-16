@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> UPCAST Business Aviation Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title> UPCAST By Ivan Veretennikov</title>
     <style>
         :root {
             --primary: #1a3e72;
@@ -39,6 +40,15 @@
             backdrop-filter: blur(5px);
             z-index: -1;
         }
+
+        .my-divider {
+            border: none;         /* Убираем стандартную рамку */
+            height: 2px;          /* Толщина линии */
+            background: var(--secondary);     /* Цвет */
+            margin: 20px auto;       /* Отступы */
+            width: 50%;
+            
+        }
         
         /* Fixed logo */
         .logo-fixed {
@@ -66,18 +76,14 @@
         /* Header text */
         .header-text {
             text-align: center;
-            font-size: 1.8em;
-            color: var(--primary);
+            text-shadow: 2px 2px 4px rgba(78, 78, 78, 0.2);
+            font-size: 1.7em;
+            color: var(--black);
             font-weight: ligt;
             margin-bottom: 40px;
             padding: 0 20px;
         }
 
-        .header-text span {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: bold;
-        }
-        
         /* Airplane photo */
         .airplane-photo {
             margin: 0 auto 40px;
@@ -92,8 +98,12 @@
         
         /* Description */
         .description {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500; /* Средняя насыщенность */
+            font-size:large;
+            text-shadow: 2px 2px 6px rgba(78, 78, 78, 0.3);
             margin: 0 auto 40px;
-            line-height: 1.6;
+            line-height: 2;
             color: #555;
             background: rgba(255, 255, 255, 0.7);
             padding: 30px;
@@ -125,7 +135,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top center;
+            object-position:center center;
         }
         
         .contact-info {
@@ -199,10 +209,6 @@
             transition: all 0.3s;
         }
         
-        .aircraft-list li:hover {
-            transform: translateX(5px);
-            background: rgba(234, 234, 234, 0.9);
-        }
         
         /* Tablet styles */
         @media (max-width: 992px) {
@@ -273,68 +279,83 @@
     <div class="main-container">
         <!-- Header text -->
         <div class="header-text">
-            <span>Thoughtful, Individual, Efficient</span> approach to buying and selling aircraft!
+            Вдумчивый, индивидуальный, эффективный подход <p>при покупке и продаже самолётов.</p>
+            <hr class="my-divider">
         </div>
 
         <!-- Airplane photo -->
         <div class="airplane-photo">
-            <img src="ext3.jpg" alt="Private Jet">
+            <img src="photo.JPG" alt="Private Jet">
         </div>
 
         <!-- Description -->
         <div class="description">
-            <h2>The Art of Business Jet Transactions</h2>
-            <p>This business is built on an understanding of subtle nuances—where technical perfection meets impeccable taste, 
-                and behind the dry numbers of every deal lie human ambition and dreams of freedom. I know this from the inside. 
-                Decades in aviation have taught me to listen not only to the roar of engines but also to the quiet needs of those 
-                who entrust me with their projects. Here, there are no trivial details—only the flawless geometry of a transaction: 
-                from the first handshake to the moment when the client, squinting in the sunlight, watches their new jet lift off the runway. 
-                This isn’t just sales. It’s the ability to see an aircraft not as a commodity but as an extension of the owner’s character. 
-                To recognize the difference between "prestigious" and "perfectly suited." To strike a balance between a passion for 
-                the skies and cold, hard calculation. My clients are those who value this depth of understanding. Those who care that behind 
-                every detail stands a professional fluent in the language of both pilots and financiers. Who want a deal to deliver not just 
-                profit but the distinct satisfaction of an impeccably executed process. In this business, you either do it with elegance—or you 
-                don’t do it at all. I choose the former. Let’s discuss how this applies to your situation.</p>
+            <hr class="my-divider">
+            
+            <p>В мире нейросетей, автоматизации, воронок продаж даже такое сокровенное и редкое событие, как покупку самолёта,
+                многие пытаются поставить на шаблонные рельсы, поручить алгоритмам и максимально подогнать под какой-то общий стандарт – 
+                потому что «так положено». Но самолёт покупают незаурядные люди, и у каждого из них есть свои мечты, свой характер, свои правила и принципы. 
+                И вы, те редкие и уникальные люди, которые задумываются о покупке самолёта или уже стали владельцем, точно добились этого не потому, что слушали «как положено» – 
+                а потому что прокладывали свой путь. Поэтому, получив разносторонний опыт в отрасли, полетав на множестве разных джетов 
+                и успешно закрыв достаточное количество изощрённых сделок, я решил отбросить все шаблоны и подойти к делу так, 
+                как оно и замышлялось изначально: лично и внимательно разбираясь в нюансах каждого покупателя, 
+                а затем приступая к поиску индивидуального, максимально подходящего решения.</p>
         </div>
 
         <!-- Contacts -->
         <div class="contact">
             <div class="contact-circle">
-                <img src="ivan.jpg" alt="Contact Person">
+                <img src="photoiv.png" alt="Contact Person">
             </div>
             <div class="contact-info">
-                <a href="https://t.me/ivjet" target="_blank">Telegram</a>
-                <a href="https://wa.me/79001234567" target="_blank">WhatsApp</a>
+                <a href="#" onclick="openEncodedLink()">Telegram</a>
+                <a href="#" onclick="openWA()">WhatsApp</a>
                 <a href="mailto:info@upcast.pro">info@upcast.pro</a>
             </div>
         </div>
 
         <!-- Aircraft section -->
         <div class="aircraft-section">
-            <h2>Aircrafts</h2>
+            <h2>Текущие проекты</h2>
             <div class="aircraft-columns">
                 <div class="aircraft-column">
-                    <h3>Acquisition</h3>
+                    <h3>Продажа</h3>
                     <ul class="aircraft-list">
-                        <li>Gulfstream G650ER</li>
-                        <li>Gulfstream G650ER</li>
-                        <li>Gulfstream G650ER</li>
-                        <li>Gulfstream G650ER</li>
-                        <li>Gulfstream G650ER</li>
+                        <li>2009 BBJ</li>
+                        <li>2003 Legacy 600</li>
+                        <li>2010 Legacy 650</li>
+                        <li>2012 Falcon 2000LX</li>
+                        <li>2015 Global 5000</li>
                     </ul>
                 </div>
                 <div class="aircraft-column">
-                    <h3>Disposition</h3>
+                    <h3>Покупка</h3>
                     <ul class="aircraft-list">
-                        <li>Gulfstream G650ER</li>
-                        <li>Gulfstream G650ER</li>
-                        <li>Gulfstream G650ER</li>
-                        <li>Gulfstream G650ER</li>
-                        <li>Gulfstream G650ER</li>
+                        <li>ACJ320 Neo</li>
+                        <li>Challenger 605</li>
+                        <li>Challenger 650</li>
+                        <li>G650ER / G700</li>
+                        <li>Gulfstream G450</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
+<script>
+    function openEncodedLink() {
+      const encoded = 'aHR0cHM6Ly90Lm1lL2l2amV0'; // Пример закодированной ссылки
+      const url = atob(encoded); // Раскодируем
+      window.open(url, '_blank');
+    }
+
+    
+    function openWA() {
+    const encoded = 'NzkwMDEyMzQ1Njc='; // Закодированный номер (79001234567)
+    const phone = atob(encoded);
+    window.open(`https://wa.me/${phone}`, '_blank');
+    }
+
+  </script>
 </html>
