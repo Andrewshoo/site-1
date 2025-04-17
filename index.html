@@ -61,12 +61,12 @@
         .logo-column {
             grid-area: logo;
             padding: 30px;
-            position: sticky;
+            position: relative;
             top: 0;
             height: 100vh;
-            display: flex;
+            display:flex;
             align-items: top center;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0);
         }
         
         .logo {
@@ -101,7 +101,9 @@
         .photo-content {
             grid-area: photo;
             padding-right: 30px;
+            padding-left: 10px;
             background: rgba(255, 255, 255, 0.9);
+            object-position: center;
         }
         
         .airplane-photo img {
@@ -202,6 +204,7 @@
         .aircraft-content {
             grid-area: aircraft;
             padding-right: 30px;
+            padding-left: 10px;
             padding-bottom: 40px;
             background: rgba(255, 255, 255, 0.9);
         }
@@ -266,6 +269,9 @@
             width: 100%;
         }
 
+
+
+
         /* Адаптация для планшетов */
         @media (max-width: 992px) {
             .page-wrapper {
@@ -278,6 +284,8 @@
 
             .description {
                 text-align: left;
+                hyphens: none;
+                padding: 20px 15px; /* Уменьшаем отступы */
             }
         }
 
@@ -329,6 +337,18 @@
             
             .contact-icons i {
                 font-size: 25px;
+            }
+
+            description p {
+                line-height: 1.6; /* Уменьшаем межстрочный интервал */
+                margin-bottom: 1em; /* Оптимальные отступы */
+            }
+
+            .copyright {
+                font-size: 12px;
+            }
+            .company-name {
+                font-size: 16px;
             }
         }
     </style>
@@ -418,7 +438,7 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         function openEncodedLink() {
             const encoded = 'aHR0cHM6Ly90Lm1lL2l2amV0';
@@ -431,6 +451,9 @@
             const phone = atob(encoded);
             window.open(`https://wa.me/${phone}`, '_blank');
         }
+
+        // Автоматическое обновление года
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
