@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title> UPCAST By Ivan Veretennikov</title>
     <style>
@@ -76,6 +78,7 @@
         
         /* Header text */
         .header-text {
+            font-family: 'Manrope', sans-serif;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(78, 78, 78, 0.2);
             font-size: 1.7em;
@@ -99,10 +102,10 @@
         
         /* Description */
         .description {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Playfair display', sans-serif;
             font-weight: 500; /* Средняя насыщенность */
             font-size:large;
-            text-shadow: 2px 2px 6px rgba(78, 78, 78, 0.2);
+            /* text-shadow: 2px 2px 6px rgba(78, 78, 78, 0.2); */
             margin: 0 auto 40px;
             line-height: 2;
             color: #555;
@@ -198,6 +201,7 @@
         }
         
         .aircraft-list {
+            font-family: 'Playfair display', sans-serif;
             list-style: none;
             padding: 0;
         }
@@ -209,6 +213,7 @@
             border-radius: 5px;
             transition: all 0.3s;
         }
+
 
         /* .language-switcher {
         position: absolute;
@@ -291,6 +296,42 @@
                 padding: 10px 20px;
                 min-width: 140px;
             }
+        }
+
+                /* Для iPad Pro (1024px - 1366px) */
+        @media (min-width: 1024px) and (max-width: 1366px) {
+        .logo-fixed {
+            width: 250px;
+            left: 15px;
+            top: 15px;
+        }
+        
+        .main-container {
+            padding-top: 120px;
+        }
+        }
+
+        /* Для больших экранов (iPad Pro 12.9" и аналоги) */
+        @media (min-width: 1367px) {
+        .logo-fixed {
+            width: 300px;
+            left: 30px;
+            top: 30px;
+        }
+        
+        .main-container {
+            padding-top: 150px;
+        }
+        }
+
+        /* Общие стили для логотипа */
+        .logo-fixed img {
+        max-width: 100%;
+        height: auto;
+        }
+
+        .main-container {
+        z-index: 5;
         }
 
     </style>
