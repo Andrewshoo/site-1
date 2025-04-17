@@ -123,7 +123,7 @@
         
         .description {
             font-family: 'Manrope', serif;
-            font-weight: 500;
+            font-weight: 400;
             font-size: large;
             line-height: 2;
             color: #555;
@@ -269,6 +269,43 @@
             width: 100%;
         }
 
+        .site-footer {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 0;
+            text-align: center;
+            font-family: 'Manrope', sans-serif;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: black;
+            opacity: 0.8;
+        }
+
+        .company-name {
+            font-size: 16px;
+            color: black;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .footer-divider {
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+            margin: 15px auto;
+            opacity: 0.7;
+        }
+
 
 
 
@@ -350,6 +387,17 @@
             .company-name {
                 font-size: 16px;
             }
+
+            .site-footer {
+                padding: 25px 0;
+                margin-top: 40px;
+            }
+            .copyright {
+                font-size: 12px;
+            }
+            .company-name {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
@@ -365,7 +413,7 @@
         <!-- Заголовок -->
         <div class="header-content">
             <div class="header-text">
-                Вдумчивый, индивидуальный, эффективный подход при покупке и продаже самолётов.
+                Вдумчивый, индивидуальный, эффективный подход к покупке и продаже самолётов.
             </div>
         </div>
 
@@ -434,6 +482,15 @@
                             <li>Gulfstream G450</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div class="footer-content">
+                <div class="copyright">
+                    &copy; <span id="current-year"></span> UPCAST. Все права защищены
+                </div>
+                <div class="footer-divider"></div>
+                <div class="company-name">
+                    UPCAST By Ivan Veretennikov
                 </div>
             </div>
         </div>
