@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <title> UPCAST By Ivan Veretennikov</title>
+    <title>UPCAST By Ivan Veretennikov</title>
     <style>
         :root {
             --primary: #1a3e72;
@@ -27,7 +26,6 @@
             background-image: url('bg.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -44,82 +42,110 @@
             z-index: -1;
         }
 
-        .my-divider {
-            border: none;         /* Убираем стандартную рамку */
-            height: 2px;          /* Толщина линии */
-            background: var(--secondary);     /* Цвет */
-            margin: 20px auto;       /* Отступы */
-            width: 50%;
-            
-        }
-        
-        /* Fixed logo */
-        .logo-fixed {
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            z-index: 10;
-            width: 350px;
-        }
-        
-        .logo-fixed img {
-            width: 100%;
-            height: auto;
-        }
-        
-        /* Main container */
-        .main-container {
-            max-width: 1000px;
+        /* Основная сетка */
+        .page-wrapper {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            grid-template-areas: 
+                "logo header"
+                "logo photo"
+                "logo description"
+                "logo contacts"
+                "logo aircraft";
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 20px 40px;
-            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Логотип (фиксированная ширина 300px) */
+        .logo-column {
+            grid-area: logo;
+            padding: 30px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: top center;
             background: rgba(255, 255, 255, 0.9);
         }
         
-        /* Header text */
-        .header-text {
-            font-family: 'Manrope', sans-serif;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(78, 78, 78, 0.2);
-            font-size: 1.7em;
-            color: var(--black);
-            font-weight: ligt;
-            margin-bottom: 40px;
-            padding: 0 20px;
+        .logo {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: auto;
         }
 
-        /* Airplane photo */
-        .airplane-photo {
-            margin: 0 auto 40px;
-            max-width: 800px;
+        /* Заголовок */
+        .header-content {
+            grid-area: header;
+            padding: 30px 30px 30px 30px;
+            display: flex;
+            align-items: center;
+            min-height: 150px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .header-text {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.8em;
+            color: black;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        /* Фото */
+        .photo-content {
+            grid-area: photo;
+            padding-right: 30px;
+            background: rgba(255, 255, 255, 0.9);
         }
         
         .airplane-photo img {
             width: 100%;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        /* Описание */
+        .description-content {
+            grid-area: description;
+            padding-right: 30px;
+            background: rgba(255, 255, 255, 0.9);
         }
         
-        /* Description */
         .description {
-            font-family: 'Playfair display', sans-serif;
-            font-weight: 500; /* Средняя насыщенность */
-            font-size:large;
-            /* text-shadow: 2px 2px 6px rgba(78, 78, 78, 0.2); */
-            margin: 0 auto 40px;
+            font-family: 'Manrope', serif;
+            font-weight: 500;
+            font-size: large;
             line-height: 2;
             color: #555;
             background: rgba(255, 255, 255, 0.7);
             padding: 30px;
             border-radius: 8px;
-            max-width: 800px;
             text-align: justify;
             hyphens: auto;
         }
+
+        .sign {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* Контакты */
+        .contacts-content {
+            grid-area: contacts;
+            padding-right: 30px;
+            background: rgba(255, 255, 255, 0.9);
+        }
         
-        /* Contacts */
         .contact {
-            margin: 50px auto;
+            margin: 30px 0;
             text-align: center;
         }
         
@@ -139,45 +165,62 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position:center center;
+            object-position: center center;
         }
         
-        .contact-info {
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
             margin-top: 25px;
         }
         
-        .contact-info a {
-            display: inline-block;
-            margin: 10px 15px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
+        .contact-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
             background: rgba(255, 255, 255, 0.7);
-            padding: 12px 25px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            min-width: 160px;
+            border-radius: 50%;
+            color: black;
+            text-decoration: none;
+            transition: all 0.3s;
         }
         
-        .contact-info a:hover {
-            background: var(--primary);
+        .contact-icons i {
+            font-size: 30px;
+        }
+        
+        .contact-icons a:hover {
+            background: black;
             color: white;
+            transform: scale(1.1);
+        }
+
+        /* Секция самолетов */
+        .aircraft-content {
+            grid-area: aircraft;
+            padding-right: 30px;
+            padding-bottom: 40px;
+            background: rgba(255, 255, 255, 0.9);
         }
         
-        /* Aircraft section */
         .aircraft-section {
-            margin: 60px auto;
+            margin: 30px 0;
             background: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
         }
         
         .aircraft-section h2 {
-            color: var(--primary);
-            margin-bottom: 30px;
+            color: black;
+            margin-bottom: 50px;
             text-align: center;
+            font-family: 'Manrope', sans-serif;
+            font-size: 30px;
+            font-weight: 500;
         }
         
         .aircraft-columns {
@@ -195,13 +238,14 @@
         }
         
         .aircraft-column h3 {
-            color: var(--primary);
-            border-bottom: 2px solid var(--secondary);
+            color: black;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.493);
             padding-bottom: 10px;
+            font-family: 'Manrope', sans-serif;
         }
         
         .aircraft-list {
-            font-family: 'Playfair display', sans-serif;
+            font-family: 'Monrope', serif;
             list-style: none;
             padding: 0;
         }
@@ -214,230 +258,175 @@
             transition: all 0.3s;
         }
 
-
-        /* .language-switcher {
-        position: absolute;
-        top: 20px;
-        right: 20px;
+        .my-divider {
+            border: none;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.555);
+            margin: 20px 0;
+            width: 100%;
         }
 
-        .language-switcher a {
-        margin: 0 5px;
-        opacity: 0.7;
-        transition: opacity 0.3s;
-        }
-
-        .language-switcher a:hover {
-        opacity: 1;
-        }
-
-        .language-switcher img {
-        width: 20px;
-        height: auto;
-        border-radius: 2px;
-        } */
-
-        
-        
-        
-        /* Tablet styles */
+        /* Адаптация для планшетов */
         @media (max-width: 992px) {
-            .logo-fixed {
-                width: 120px;
-                left: 15px;
-                top: 15px;
-            }
-            
-            .main-container {
-                padding-top: 80px;
+            .page-wrapper {
+                grid-template-columns: 200px 1fr;
             }
             
             .header-text {
                 font-size: 1.5em;
             }
-            
-            .contact-info a {
-                display: block;
-                margin: 15px auto;
-                max-width: 220px;
-            }
         }
-        
-        /* Mobile styles */
+
+        /* Адаптация для мобильных */
         @media (max-width: 768px) {
-            .logo-fixed {
-                position: relative;
-                left: auto;
-                top: auto;
-                margin: 20px auto;
-                display: block;
-                text-align: center;
+            .page-wrapper {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "logo"
+                    "header"
+                    "photo"
+                    "description"
+                    "contacts"
+                    "aircraft";
             }
             
-            .main-container {
-                padding: 40px 15px;
+            .logo-column {
+                position: static;
+                height: auto;
+                padding: 20px;
+                justify-content: center;
+            }
+            
+            .logo {
+                max-width: 200px;
+            }
+            
+            .header-content,
+            .photo-content,
+            .description-content,
+            .contacts-content,
+            .aircraft-content {
+                padding: 20px;
             }
             
             .header-text {
                 font-size: 1.3em;
-                margin-bottom: 30px;
+                text-align: center;
             }
             
-            .description {
-                padding: 20px;
+            .contact-icons {
+                gap: 20px;
             }
             
-            .contact-circle {
-                width: 100px;
-                height: 100px;
+            .contact-icons a {
+                width: 50px;
+                height: 50px;
             }
             
-            .contact-info a {
-                padding: 10px 20px;
-                min-width: 140px;
+            .contact-icons i {
+                font-size: 25px;
             }
         }
-
-                /* Для iPad Pro (1024px - 1366px) */
-        @media (min-width: 1024px) and (max-width: 1366px) {
-        .logo-fixed {
-            width: 250px;
-            left: 15px;
-            top: 15px;
-        }
-        
-        .main-container {
-            padding-top: 120px;
-        }
-        }
-
-        /* Для больших экранов (iPad Pro 12.9" и аналоги) */
-        @media (min-width: 1367px) {
-        .logo-fixed {
-            width: 300px;
-            left: 30px;
-            top: 30px;
-        }
-        
-        .main-container {
-            padding-top: 150px;
-        }
-        }
-
-        /* Общие стили для логотипа */
-        .logo-fixed img {
-        max-width: 100%;
-        height: auto;
-        }
-
-        .main-container {
-        z-index: 5;
-        }
-
     </style>
 </head>
-
 <body>
-
-    <!-- Change lang -->
-    <!-- <div class="language-switcher">
-        <a href="/en/" title="English">
-            <img src="https://flagcdn.com/w20/gb.png" alt="EN">
-        </a>
-        <a href="/ru/" title="Русский">
-            <img src="https://flagcdn.com/w20/ru.png" alt="RU">
-        </a>
-    </div> -->
-    
-
-    <!-- Fixed logo -->
-    <div class="logo-fixed">
-        <img src="logo6.png" alt="Company Logo">
-    </div>
-
-    <!-- Main container -->
-    <div class="main-container">
-        <!-- Header text -->
-        <div class="header-text">
-            Вдумчивый, индивидуальный, эффективный подход <p>при покупке и продаже самолётов.</p>
-            <hr class="my-divider">
-        </div>
-
-        <!-- Airplane photo -->
-        <div class="airplane-photo">
-            <img src="photo-web.jpg" alt="Private Jet">
-        </div>
-
-        <!-- Description -->
-        <div class="description">
-            <hr class="my-divider">
-            
-            <p>В мире нейросетей, автоматизации, воронок продаж даже такое сокровенное и редкое событие, как покупку самолёта,
-                многие пытаются поставить на шаблонные рельсы, поручить алгоритмам и максимально подогнать под какой-то общий стандарт – 
-                потому что «так положено». Но самолёт покупают незаурядные люди, и у каждого из них есть свои мечты, свой характер, свои правила и принципы. 
-                И вы, те редкие и уникальные люди, которые задумываются о покупке самолёта или уже стали владельцем, точно добились этого не потому, что слушали «как положено» – 
-                а потому что прокладывали свой путь. Поэтому, получив разносторонний опыт в отрасли, полетав на множестве разных джетов 
-                и успешно закрыв достаточное количество изощрённых сделок, я решил отбросить все шаблоны и подойти к делу так, 
-                как оно и замышлялось изначально: лично и внимательно разбираясь в нюансах каждого покупателя, 
-                а затем приступая к поиску индивидуального, максимально подходящего решения.</p>
-        </div>
-
-        <!-- Contacts -->
-        <div class="contact">
-            <div class="contact-circle">
-                <img src="photoiv.jpg" alt="Contact Person">
-            </div>
-            <div class="contact-info">
-                <a href="#" onclick="openEncodedLink()">Telegram</a>
-                <a href="#" onclick="openWA()">WhatsApp</a>
-                <a href="mailto:info@upcast.pro">info@upcast.pro</a>
+    <div class="page-wrapper">
+        <!-- Логотип (левая колонка) -->
+        <div class="logo-column">
+            <div class="logo">
+                <img src="logo6.png" alt="Company Logo">
             </div>
         </div>
 
-        <!-- Aircraft section -->
-        <div class="aircraft-section">
-            <h2>Текущие проекты</h2>
-            <div class="aircraft-columns">
-                <div class="aircraft-column">
-                    <h3>Продажа</h3>
-                    <ul class="aircraft-list">
-                        <li>2009 BBJ</li>
-                        <li>2003 Legacy 600</li>
-                        <li>2010 Legacy 650</li>
-                        <li>2012 Falcon 2000LX</li>
-                        <li>2015 Global 5000</li>
-                    </ul>
+        <!-- Заголовок -->
+        <div class="header-content">
+            <div class="header-text">
+                Вдумчивый, индивидуальный, эффективный подход при покупке и продаже самолётов.
+            </div>
+        </div>
+
+        <!-- Фото самолета -->
+        <div class="photo-content">
+            <div class="airplane-photo">
+                <img src="photo-web.jpg" alt="Private Jet">
+            </div>
+        </div>
+
+        <!-- Описание -->
+        <div class="description-content">
+            <div class="description">
+                <hr class="my-divider">
+                <p>В мире нейросетей, автоматизации, воронок продаж даже такое сокровенное и редкое событие, как покупку самолёта,
+                    многие пытаются поставить на шаблонные рельсы, поручить алгоритмам и максимально подогнать под какой-то общий стандарт – 
+                    потому что «так положено». Но самолёт покупают незаурядные люди, и у каждого из них есть свои мечты, свой характер, свои правила и принципы. 
+                    И вы, те редкие и уникальные люди, которые задумываются о покупке самолёта или уже стали владельцем, точно добились этого не потому, что слушали «как положено» – 
+                    а потому что прокладывали свой путь.Поэтому, получив разносторонний опыт в отрасли, полетав на множестве разных джетов и успешно закрыв достаточное количество изощрённых сделок, я решил отбросить все шаблоны и подойти к делу так, как оно и замышлялось изначально: лично и внимательно разбираясь в нюансах каждого покупателя, а затем приступая к поиску индивидуального, максимально подходящего решения.</p>
+                    <p class="sign">Иван Веретенников</p>
+            </div>
+        </div>
+
+        <!-- Контакты -->
+        <div class="contacts-content">
+            <div class="contact">
+                <div class="contact-circle">
+                    <img src="photoiv2.JPG" alt="Contact Person">
                 </div>
-                <div class="aircraft-column">
-                    <h3>Покупка</h3>
-                    <ul class="aircraft-list">
-                        <li>ACJ320 Neo</li>
-                        <li>Challenger 605</li>
-                        <li>Challenger 650</li>
-                        <li>G650ER / G700</li>
-                        <li>Gulfstream G450</li>
-                    </ul>
+                <div class="contact-icons">
+                    <a href="#" onclick="openEncodedLink()" title="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" onclick="openWA()" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:info@upcast.pro" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
                 </div>
             </div>
         </div>
+
+        <!-- Секция самолетов -->
+        <div class="aircraft-content">
+            <div class="aircraft-section">
+                <h2>Текущие проекты</h2>
+                <div class="aircraft-columns">
+                    <div class="aircraft-column">
+                        <h3>Продажа</h3>
+                        <ul class="aircraft-list">
+                            <li>2009 BBJ</li>
+                            <li>2003 Legacy 600</li>
+                            <li>2010 Legacy 650</li>
+                            <li>2012 Falcon 2000LX</li>
+                            <li>2015 Global 5000</li>
+                        </ul>
+                    </div>
+                    <div class="aircraft-column">
+                        <h3>Покупка</h3>
+                        <ul class="aircraft-list">
+                            <li>ACJ320 Neo</li>
+                            <li>Challenger 605</li>
+                            <li>Challenger 650</li>
+                            <li>G650ER / G700</li>
+                            <li>Gulfstream G450</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function openEncodedLink() {
+            const encoded = 'aHR0cHM6Ly90Lm1lL2l2amV0';
+            const url = atob(encoded);
+            window.open(url, '_blank');
+        }
+        
+        function openWA() {
+            const encoded = 'NzkwMDEyMzQ1Njc=';
+            const phone = atob(encoded);
+            window.open(`https://wa.me/${phone}`, '_blank');
+        }
+    </script>
 </body>
-
-
-<script>
-    function openEncodedLink() {
-      const encoded = 'aHR0cHM6Ly90Lm1lL2l2amV0'; // Пример закодированной ссылки
-      const url = atob(encoded); // Раскодируем
-      window.open(url, '_blank');
-    }
-
-    
-    function openWA() {
-    const encoded = 'NzkwMDEyMzQ1Njc='; // Закодированный номер (79001234567)
-    const phone = atob(encoded);
-    window.open(`https://wa.me/${phone}`, '_blank');
-    }
-
-  </script>
-
 </html>
