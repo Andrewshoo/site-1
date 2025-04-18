@@ -314,6 +314,10 @@ body::before {
       hyphens: none;
       padding: 20px 15px; /* Уменьшаем отступы */
   }
+
+  .sign {
+    margin-top: 2em;
+  }
 }
 
 /* Адаптация для мобильных */
