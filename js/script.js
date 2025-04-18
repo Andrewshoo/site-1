@@ -15,6 +15,3 @@ function sendEmail() {
                         "?subject=Запрос с сайта UPCAST" +
                         "&body=Здравствуйте, Иван.%0D%0A%0D%0AМеня интересует...";
 }
-
-// Автоматическое обновление года
-document.getElementById('current-year').textContent = new Date().getFullYear();
