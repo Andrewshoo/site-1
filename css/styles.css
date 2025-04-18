@@ -116,7 +116,7 @@ body::before {
   font-weight: 400;
   font-size: large;
   line-height: 1.5;
-  color: #555;
+  color: #000000;
   background: rgba(255, 255, 255, 0.7);
   padding: 30px;
   border-radius: 8px;
@@ -369,6 +369,10 @@ body::before {
   description p {
       line-height: 1.6; /* Уменьшаем межстрочный интервал */
       margin-bottom: 1em; /* Оптимальные отступы */
+  }
+
+  .sign {
+    margin-top: 2em;
   }
 
   .copyright {
