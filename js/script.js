@@ -58,7 +58,7 @@ function detectLanguageByRegion() {
 const translations = {
   ru: {
     header: "Вдумчивый, индивидуальный, эффективный подход к покупке и продаже самолётов.",
-    description: "В мире нейросетей, автоматизации, воронок продаж даже такое сокровенное и редкое событие, как покупку самолёта, многие пытаются поставить на шаблонные рельсы, поручить алгоритмам и максимально подогнать под какой-то общий стандарт – потому что «так положено». Но самолёт покупают незаурядные люди...",
+    description: "В мире нейросетей, автоматизации, воронок продаж даже такое сокровенное и редкое событие, как покупку самолёта, многие пытаются поставить на шаблонные рельсы, поручить алгоритмам и максимально подогнать под какой-то общий стандарт – потому что «так положено». Но самолёт покупают незаурядные люди, и у каждого из них есть свои мечты, свой характер, свои правила и принципы. И вы, те редкие и уникальные люди, которые задумываются о покупке самолёта или уже стали владельцем, точно добились этого не потому, что слушали «как положено» – а потому что прокладывали свой путь. Поэтому, получив разносторонний опыт в отрасли, полетав на множестве разных джетов и успешно закрыв достаточное количество изощрённых сделок, я решил отбросить все шаблоны и подойти к делу так, как оно и замышлялось изначально: лично и внимательно разбираясь в нюансах каждого покупателя, а затем приступая к поиску индивидуального, максимально подходящего решения.",
     signature: "Иван Веретенников",
     projects: "Текущие проекты",
     sale: "Продажа",
@@ -69,12 +69,12 @@ const translations = {
     emailTitle: "Написать email"
   },
   en: {
-    header: "Thoughtful, personalized, effective approach to aircraft acquisition and sales.",
-    description: "In the era of neural networks, automation, and sales pipelines, even such an exclusive event as aircraft purchase is often standardized and delegated to algorithms - because 'that's how it's done'. But aircraft are purchased by extraordinary individuals...",
+    header: "Thoughtful, individual, human approach to buying and selling business aircraft.",
+    description: "In my first career as a journalist, I became something like the Nabokov of business aviation – that is, the only Russian I’m aware of to be published in leading international publications and well-known to the English-speaking world. I interviewed top businessmen and celebrities, spoke at conferences, and even published JetBook, the first-of-a-kind app for mobiles and tablets. With that experience, I went on to join what became a very successful aircraft sales company and learnt all aspects of the trade: intricacies of cross-border transactions, key things to look for in a business jet, the emotions that really guide buyers and sellers. I also got a pilot licence for the Robinson R44 and R66 – I strongly recommend learning to fly to anyone who gets the opportunity, much like buying an aircraft. There’s not a single disadvantage to doing it! Now I’m out to start my own aircraft brokerage. In a world seeking to automate and outsource to AI, I think buying and selling business jets remains a very individual, human, and personal experience. And anyone who reaches this point in their life deserves special treatment. That’s why I approach every conversation with an open mind and take the time to really understand each situation and request, rather than using mass-market generalisations to push a client into some “standard solution”. You’re not standard if you’re buying or selling an airplane! ",
     signature: "Ivan Veretennikov",
-    projects: "Current Projects",
-    sale: "Aircraft for Sale",
-    purchase: "Aircraft Wanted",
+    projects: "Currently working on",
+    sale: "Offering for Sale",
+    purchase: "Looking to Buy",
     copyright: "UPCAST By Ivan Veretennikov",
     telegramTitle: "Telegram",
     whatsappTitle: "WhatsApp",
