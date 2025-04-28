@@ -312,8 +312,6 @@ body::before {
 }
 
 
-
-
 /* Адаптация для планшетов */
 @media (max-width: 992px) {
   .page-wrapper {
