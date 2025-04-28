@@ -11,9 +11,7 @@ function openWA() {
 }
 
 function sendEmail() {
-  window.location.href = "mailto:ivan@upcast.pro" + 
-                        "?subject=Запрос с сайта UPCAST" +
-                        "&body=Здравствуйте, Иван.%0D%0A%0D%0AМеня интересует...";
+  window.location.href = "mailto:ivan@upcast.pro";
 }
 
 // Функция для переключения языка
@@ -124,14 +122,5 @@ document.addEventListener('DOMContentLoaded', () => {
   switchLanguage(activeLang);
 });
 
-// Контактные функции (замените на реальные данные)
-function openEncodedLink() {
-  window.open('https://t.me/username', '_blank');
-}
-function openWA() {
-  window.open('https://wa.me/1234567890', '_blank');
-}
-function sendEmail() {
-  window.location.href = 'mailto:email@example.com';
-}
+
 
