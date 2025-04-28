@@ -1,18 +1,4 @@
-function openEncodedLink() {
-  const encoded = 'aHR0cHM6Ly90Lm1lL2l2amV0';
-  const url = atob(encoded);
-  window.open(url, '_blank');
-}
 
-function openWA() {
-  const encoded = 'NzkwMzY2NjE1MTM=';
-  const phone = atob(encoded);
-  window.open(`https://wa.me/${phone}`, '_blank');
-}
-
-function sendEmail() {
-  window.location.href = "mailto:ivan@upcast.pro";
-}
 
 // Функция для переключения языка
 function switchLanguage(lang) {
@@ -121,6 +107,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const activeLang = langParam || savedLang || browserLang;
   switchLanguage(activeLang);
 });
+
+function openEncodedLink() {
+  const encoded = 'aHR0cHM6Ly90Lm1lL2l2amV0';
+  const url = atob(encoded);
+  window.open(url, '_blank');
+}
+
+function openWA() {
+  const encoded = 'NzkwMzY2NjE1MTM=';
+  const phone = atob(encoded);
+  window.open(`https://wa.me/${phone}`, '_blank');
+}
+
+function sendEmail() {
+  window.location.href = "mailto:ivan@upcast.pro";
+}
 
 
 
