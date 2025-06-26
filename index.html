@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- Логотип (левая колонка) -->
+        <!-- Логотип -->
         <div class="logo-column">
             <div class="logo">
                 <img src="images/logo6.png" alt="Company Logo">
@@ -41,8 +41,8 @@
         <div class="description-content">
             <div class="description">
                 <hr class="my-divider">
-                <p>В мире нейросетей, автоматизации, воронок продаж даже такое сокровенное и редкое событие, как покупку самолёта, многие пытаются поставить на шаблонные рельсы, поручить алгоритмам и максимально подогнать под какой-то общий стандарт – потому что «так положено». Но самолёт покупают незаурядные люди, и у каждого из них есть свои мечты, свой характер, свои правила и принципы. И вы, те редкие и уникальные люди, которые задумываются о покупке самолёта или уже стали владельцем, точно добились этого не потому, что слушали «как положено» – а потому что прокладывали свой путь. Поэтому, получив разносторонний опыт в отрасли, полетав на множестве разных джетов и успешно закрыв достаточное количество изощрённых сделок, я решил отбросить все шаблоны и подойти к делу так, как оно и замышлялось изначально: лично и внимательно разбираясь в нюансах каждого покупателя, а затем приступая к поиску индивидуального, максимально подходящего решения.</p>
-                    <p class="sign">Иван Веретенников</p>
+                <p>В мире нейросетей, автоматизации, воронок продаж даже такое сокровенное и редкое событие, как покупку самолёта, многие пытаются поставить на шаблонные рельсы, поручить алгоритмам и максимально подогнать под какой-то общий стандарт – потому что «так положено». Но самолёт покупают незаурядные люди, и у каждого из них есть свои мечты, свой характер, свои правила и принципы. И вы, те редкие и уникальные люди, которые задумываются о покупке самолёта или уже стали владельцем, точно добились этого не потому, что слушали «как положено» – а потому что прокладывали свой путь.</p>
+                <p class="sign">Иван Веретенников</p>
             </div>
         </div>
 
@@ -93,17 +93,44 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-content">
-                <div class="copyright">
-                    UPCAST By Ivan Veretennikov
+        </div>
+
+        <!-- Блог -->
+        <div class="blog-content">
+            <div class="blog-section">
+                <h2>Блог</h2>
+                <div class="articles-grid" id="articles-container"></div>
+                <div class="pagination">
+                    <button id="prev-page" disabled><i class="fas fa-chevron-left"></i></button>
+                    <span id="page-info">Страница 1 из 1</span>
+                    <button id="next-page" disabled><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </div>
+
+        <!-- Футер -->
+        <div class="footer-content">
+            <div class="copyright">
+                UPCAST By Ivan Veretennikov
+            </div>
+        </div>
+
+        <!-- Модальное окно статьи -->
+        <div class="article-modal" id="article-modal">
+            <div class="modal-content">
+                <button class="close-modal">&times;</button>
+                <div class="modal-body" id="modal-body"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- Переключатель языка -->
     <div class="language-switcher">
         <button onclick="switchLanguage('ru')">RU</button>
         <button onclick="switchLanguage('en')">EN</button>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>

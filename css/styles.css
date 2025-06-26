@@ -1,435 +1,678 @@
 :root {
-  --primary: #1a3e72;
-  --secondary: #e8c31e;
+    --primary: #1a3e72;
+    --secondary: #e8c31e;
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  color: #333;
-  background-color: #f9f9f9;
-  background-image: url('../images/background.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  overflow-x: hidden;
+    font-family: 'Manrope', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(5px);
-  z-index: -1;
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: -1;
 }
 
-/* Основная сетка */
 .page-wrapper {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-areas: 
-      "logo header"
-      "logo photo"
-      "logo description"
-      "logo contacts"
-      "logo aircraft";
-  max-width: 1200px;
-  margin: 0 auto;
-  min-height: 100vh;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 
+        "logo header"
+        "logo photo"
+        "logo description"
+        "logo contacts"
+        "logo aircraft"
+        "logo blog";
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
 }
 
-/* Логотип (фиксированная ширина 300px) */
+/* Логотип */
 .logo-column {
-  grid-area: logo;
-  padding: 30px;
-  position: relative;
-  top: 0;
-  height: 100vh;
-  display:flex;
-  align-items: top center;
-  background: rgba(255, 255, 255, 0);
+    grid-area: logo;
+    padding: 30px;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0);
 }
 
 .logo {
-  width: 100%;
-  max-width: 400px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .logo img {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 }
 
 /* Заголовок */
 .header-content {
-  grid-area: header;
-  padding: 30px 30px 30px 30px;
-  display: flex;
-  align-items: center;
-  min-height: 150px;
-  background: rgba(255, 255, 255, 0.9);
+    grid-area: header;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    min-height: 150px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .header-text {
-  font-family: 'Manrope', sans-serif;
-  font-size: 1.3em;
-  color: black;
-  font-weight: 400;
-  line-height: 1.4;
+    font-size: 1.3em;
+    color: black;
+    font-weight: 400;
+    line-height: 1.4;
 }
 
 /* Фото */
 .photo-content {
-  grid-area: photo;
-  padding-right: 30px;
-  padding-left: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  object-position: center;
+    grid-area: photo;
+    padding: 0 30px 0 10px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .airplane-photo img {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-height: 400px;
-  object-fit: cover;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    object-fit: cover;
 }
 
 /* Описание */
 .description-content {
-  grid-area: description;
-  padding-right: 30px;
-  background: rgba(255, 255, 255, 0.9);
+    grid-area: description;
+    padding-right: 30px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .description {
-  font-family: 'Manrope', serif;
-  font-weight: 400;
-  font-size: large;
-  line-height: 1.5;
-  color: #000000;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 30px;
-  border-radius: 8px;
-  text-align: justify;
-  hyphens: auto;
+    font-weight: 400;
+    font-size: large;
+    line-height: 1.5;
+    color: #000000;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.my-divider {
+    border: none;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.555);
+    margin: 20px 0;
+    width: 100%;
 }
 
 .sign {
-  margin-top: 2em;
-  font-weight: bold;
-  text-align: right;
+    margin-top: 2em;
+    font-weight: bold;
+    text-align: right;
 }
 
 /* Контакты */
 .contacts-content {
-  grid-area: contacts;
-  padding-right: 30px;
-  background: rgba(255, 255, 255, 0.9);
+    grid-area: contacts;
+    padding-right: 30px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .contact {
-  margin: 30px 0;
-  text-align: center;
+    margin: 30px 0;
+    text-align: center;
 }
 
 .contact-circle {
-  display: inline-block;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: var(--primary);
-  margin: 0 auto 20px;
-  overflow: hidden;
-  border: 3px solid white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    margin: 0 auto 20px;
+    overflow: hidden;
+    border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .contact-circle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
 }
 
 .contact-icons {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
 }
 
 .contact-icons a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  color: black;
-  text-decoration: none;
-  transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    color: black;
+    text-decoration: none;
+    transition: all 0.3s;
 }
 
 .contact-icons i {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 .contact-icons a:hover {
-  background: black;
-  color: white;
-  transform: scale(1.1);
+    background: black;
+    color: white;
+    transform: scale(1.1);
 }
 
 /* Секция самолетов */
 .aircraft-content {
-  grid-area: aircraft;
-  padding-right: 30px;
-  padding-left:10px;
-  padding-bottom: 40px;
-  background: rgba(255, 255, 255, 0.9);
+    grid-area: aircraft;
+    padding: 0 30px 40px 10px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .aircraft-section {
-  margin: 30px 0;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .aircraft-section h2 {
-  color: black;
-  margin-bottom: 50px;
-  text-align: center;
-  font-family: 'Manrope', sans-serif;
-  font-size: 30px;
-  font-weight: 500;
+    color: black;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
 }
 
 .aircraft-columns {
-  display: flex;
-  justify-content: space-between;
-  text-align: left;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    flex-wrap: wrap;
 }
 
 .aircraft-column {
-  flex: 1;
-  min-width: 250px;
-  padding: 0 15px;
-  margin-bottom: 20px;
+    flex: 1;
+    min-width: 250px;
+    padding: 0 15px;
+    margin-bottom: 20px;
 }
 
 .aircraft-column h3 {
-  color: black;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.493);
-  padding-bottom: 10px;
-  font-family: 'Manrope', sans-serif;
+    color: black;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.493);
+    padding-bottom: 10px;
 }
 
 .aircraft-list {
-  font-family: 'Monrope', serif;
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .aircraft-list li {
-  margin: 15px 0;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 5px;
-  transition: all 0.3s;
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    transition: all 0.3s;
 }
 
-.my-divider {
-  border: none;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.555);
-  margin: 20px 0;
-  width: 100%;
+/* Блог */
+.blog-content {
+    grid-area: blog;
+    padding: 0 30px 40px 10px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
-.site-footer {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 30px 0;
-  text-align: center;
-  font-family: 'Manrope', sans-serif;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: 60px;
+.blog-section {
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+.blog-section h2 {
+    color: black;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.article-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+}
+
+.article-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.article-info {
+    padding: 20px;
+}
+
+.article-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.article-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.article-excerpt {
+    color: #333;
+    line-height: 1.5;
+}
+
+/* PDF-статьи */
+.pdf-article .pdf-thumbnail {
+    height: 200px;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 2rem;
+}
+
+.pdf-article .pdf-thumbnail span {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+/* Модальное окно статьи */
+.article-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    position: relative;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--primary);
+}
+
+.modal-body {
+    line-height: 1.6;
+}
+
+.modal-body h2 {
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.modal-body img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.modal-body p {
+    margin-bottom: 15px;
+}
+
+.modal-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* PDF Viewer */
+.pdf-viewer-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.pdf-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+.pdf-controls button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.pdf-controls button:hover:not(:disabled) {
+    background: #0d2a5c;
+    transform: scale(1.05);
+}
+
+.pdf-controls button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#pdf-canvas {
+    width: 100%;
+    border: 1px solid #eee;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: white;
+}
+
+.pdf-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.download-pdf {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.download-pdf:hover {
+    color: #0d2a5c;
+    transform: translateY(-2px);
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+.pagination button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #0d2a5c;
+    transform: scale(1.1);
+}
+
+.pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#page-info {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9em;
+    color: #333;
+}
+
+/* Футер */
 .footer-content {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
-  text-align: center;
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .copyright {
-  font-size: 14px;
-  color: black;
-  opacity: 0.8;
+    font-size: 14px;
+    color: black;
+    opacity: 0.8;
 }
 
-.company-name {
-  font-size: 16px;
-  color: black;
-  font-weight: 500;
-  margin-top: 10px;
-}
-
-.footer-divider {
-  width: 50px;
-  height: 2px;
-  background: var(--secondary);
-  margin: 15px auto;
-  opacity: 0.7;
-}
-
-/* Language Switcher Styles */
+/* Переключатель языка */
 .language-switcher {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  display: flex;
-  gap: 8px;
-  background: rgba(255,255,255,0.9);
-  padding: 8px 12px;
-  border-radius: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .language-switcher button {
-  background: none;
-  border: none;
-  padding: 4px 12px;
-  cursor: pointer;
-  font-family: 'Manrope', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  border-radius: 15px;
+    background: none;
+    border: none;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border-radius: 15px;
 }
 
 .language-switcher button:hover {
-  background: #000;
-  color: #fff;
+    background: #000;
+    color: #fff;
 }
 
 .language-switcher button.active {
-  background: #000;
-  color: #fff;
+    background: #000;
+    color: #fff;
 }
-
-
 
 /* Адаптация для планшетов */
 @media (max-width: 992px) {
-  .page-wrapper {
-      grid-template-columns: 200px 1fr;
-  }
-  
-  .header-text {
-      font-size: 1.5em;
-  }
+    .page-wrapper {
+        grid-template-columns: 200px 1fr;
+    }
+    
+    .header-text {
+        font-size: 1.5em;
+    }
 
-  .description {
-      text-align: left;
-      hyphens: none;
-      padding: 20px 15px; /* Уменьшаем отступы */
-  }
-
-  .sign {
-    margin-top: 2em;
-  }
+    .description {
+        text-align: left;
+        hyphens: none;
+        padding: 20px 15px;
+    }
 }
 
 /* Адаптация для мобильных */
 @media (max-width: 768px) {
-  .page-wrapper {
-      grid-template-columns: 1fr;
-      grid-template-areas: 
-          "logo"
-          "header"
-          "photo"
-          "description"
-          "contacts"
-          "aircraft";
-  }
-  
-  .logo-column {
-      position: static;
-      height: auto;
-      padding: 20px;
-      justify-content: center;
-  }
-  
-  .logo {
-      max-width: 200px;
-  }
-  
-  .header-content,
-  .photo-content,
-  .description-content,
-  .contacts-content,
-  .aircraft-content {
-      padding: 20px;
-  }
-  
-  .header-text {
-      font-size: 1.3em;
-      text-align: center;
-  }
-  
-  .contact-icons {
-      gap: 20px;
-  }
-  
-  .contact-icons a {
-      width: 50px;
-      height: 50px;
-  }
-  
-  .contact-icons i {
-      font-size: 25px;
-  }
+    .page-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "logo"
+            "header"
+            "photo"
+            "description"
+            "contacts"
+            "aircraft"
+            "blog";
+    }
+    
+    .logo-column {
+        position: static;
+        height: auto;
+        padding: 20px;
+        justify-content: center;
+    }
+    
+    .logo {
+        max-width: 200px;
+    }
+    
+    .header-content,
+    .photo-content,
+    .description-content,
+    .contacts-content,
+    .aircraft-content,
+    .blog-content {
+        padding: 20px;
+    }
+    
+    .header-text {
+        font-size: 1.3em;
+        text-align: center;
+    }
+    
+    .contact-icons {
+        gap: 20px;
+    }
+    
+    .contact-icons a {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .contact-icons i {
+        font-size: 25px;
+    }
 
-  description p {
-      line-height: 1.6; /* Уменьшаем межстрочный интервал */
-      margin-bottom: 1em; /* Оптимальные отступы */
-  }
-
-  .sign {
-    margin-top: 2em;
-  }
-
-  .copyright {
-      font-size: 12px;
-  }
-  .company-name {
-      font-size: 16px;
-  }
-
-  .site-footer {
-      padding: 25px 0;
-      margin-top: 40px;
-  }
-  .copyright {
-      font-size: 12px;
-  }
-  .company-name {
-      font-size: 15px;
-  }
+    #pdf-canvas {
+        height: auto;
+        max-height: 400px;
+    }
+    
+    .pdf-controls {
+        flex-wrap: wrap;
+    }
+    
+    .articles-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        padding: 20px;
+    }
+    
+    .copyright {
+        font-size: 12px;
+    }
+    
+    .pagination {
+        gap: 15px;
+        margin-top: 30px;
+    }
+    
+    .pagination button {
+        width: 36px;
+        height: 36px;
+    }
+    
+    #page-info {
+        font-size: 0.8em;
+    }
 }
