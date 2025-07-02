@@ -1,4 +1,19 @@
-// Тексты для разных языков
+// Инициализация PDF.js
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+// Состояние приложения
+const appState = {
+    currentBlogPage: 1,
+    articlesPerPage: 2,
+    pdf: {
+        doc: null,
+        currentPage: 1,
+        pages: [],
+        isFullscreen: false
+    }
+};
+
+// Переводы
 const translations = {
     ru: {
         header: "Вдумчивый, индивидуальный, эффективный подход к покупке и продаже самолётов.",
@@ -17,7 +32,11 @@ const translations = {
         loadingPdf: "Загрузка PDF...",
         downloadOriginal: "Скачать оригинал",
         pdfError: "Ошибка загрузки PDF",
-        downloadFile: "Скачать файл"
+        downloadFile: "Скачать файл",
+        prevPage: "Предыдущая",
+        nextPage: "Следующая",
+        fullscreen: "На весь экран",
+        exitFullscreen: "Выйти из полноэкранного режима"
     },
     en: {
         header: "Thoughtful, individual, human approach to buying and selling business aircraft.",
@@ -36,110 +55,66 @@ const translations = {
         loadingPdf: "Loading PDF...",
         downloadOriginal: "Download original",
         pdfError: "PDF loading error",
-        downloadFile: "Download file"
+        downloadFile: "Download file",
+        prevPage: "Previous",
+        nextPage: "Next",
+        fullscreen: "Fullscreen",
+        exitFullscreen: "Exit fullscreen"
     }
 };
 
 // Данные статей
 const articlesData = {
     ru: [
-        {
+            {
             id: 1,
-            title: "Как выбрать бизнес-джет",
-            image: "images/blog1.jpg",
-            excerpt: "В этой статье мы рассмотрим ключевые факторы, которые следует учитывать при выборе бизнес-джета для ваших нужд.",
-            content: "<h2>Как выбрать бизнес-джет</h2><p>Выбор бизнес-джета - это сложный процесс, который требует учета множества факторов. В этой статье мы рассмотрим основные аспекты, на которые стоит обратить внимание.</p><p>Первое, что нужно определить - это ваши типичные маршруты. Дальность полета, количество пассажиров и необходимый комфорт - все это влияет на выбор модели.</p><p>Не менее важным является бюджет, как на покупку, так и на эксплуатацию. Некоторые модели могут быть дешевле в приобретении, но дороже в обслуживании.</p>",
-            author: "Иван Веретенников",
-            date: "15 мая 2023"
+            image: "images/background.jpg",
+            title: "Продажа самолетов: премиальный выбор для требовательных покупателей (PDF)",
+            excerpt: "Авиационная индустрия предоставляет уникальные возможности для бизнеса и частных лиц, желающих приобрести высокопроизводительные воздушные суда. Будь то роскошный бизнес-джет, надежный турбовинтовой самолет или коммерческий авиалайнер — на современном рынке представлен широкий выбор моделей на любой запрос. Покупка самолета — это не просто приобретение, а стратегическое решение, повышающее эффективность, комфорт и глобальную мобильность.",
+            isPDF: true,
+            file: "docs/Продажа самолетов.pdf",
+            author: "Ivan Veretennikov",
+            date: "July 10, 2023"
         },
         {
             id: 2,
             title: "Тенденции рынка бизнес-авиации",
-            image: "images/blog2.jpg",
+            image: "images/background.jpg",
             excerpt: "Анализ текущих тенденций на рынке бизнес-авиации и прогноз на ближайшие годы.",
             content: "<h2>Тенденции рынка бизнес-авиации</h2><p>Рынок бизнес-авиации постоянно меняется, и в 2023 году мы наблюдаем несколько ключевых тенденций.</p><p>Во-первых, растет спрос на более экологичные решения. Производители активно работают над снижением выбросов и повышением эффективности.</p><p>Во-вторых, увеличивается популярность сервисов фракционного владения, что делает бизнес-авиацию доступнее для более широкого круга клиентов.</p>",
             author: "Иван Веретенников",
             date: "3 июня 2023"
-        },
-        {
-            id: 3,
-            title: "Руководство по покупке самолета (PDF)",
-            image: "images/pdf-icon.jpg",
-            excerpt: "Полное руководство по покупке бизнес-джета в формате PDF.",
-            isPDF: true,
-            file: "docs/Buyers-pay-brokers-pres.pdf",
-            author: "Иван Веретенников",
-            date: "10 июля 2023"
-        },
-        {
-            id: 4,
-            title: "Техническое обслуживание самолетов",
-            image: "images/blog3.jpg",
-            excerpt: "Все о регулярном техническом обслуживании бизнес-джетов.",
-            content: "<h2>Техническое обслуживание самолетов</h2><p>Регулярное техническое обслуживание - залог безопасной эксплуатации вашего бизнес-джета.</p><p>В статье рассмотрены основные виды обслуживания, рекомендуемые интервалы и ключевые аспекты, на которые стоит обратить внимание.</p>",
-            author: "Иван Веретенников",
-            date: "25 августа 2023"
         }
     ],
     en: [
         {
             id: 1,
-            title: "How to Choose a Business Jet",
-            image: "images/blog1.jpg",
-            excerpt: "This article covers the key factors to consider when selecting a business jet for your needs.",
-            content: "<h2>How to Choose a Business Jet</h2><p>Choosing a business jet is a complex process that requires considering many factors. In this article, we'll look at the main aspects to pay attention to.</p><p>The first thing to determine is your typical routes. Flight range, number of passengers, and required comfort all influence the choice of model.</p><p>Equally important is the budget, both for purchase and operation. Some models may be cheaper to buy but more expensive to maintain.</p>",
-            author: "Ivan Veretennikov",
-            date: "May 15, 2023"
-        },
-        {
-            id: 2,
-            title: "Business Aviation Market Trends",
-            image: "images/blog2.jpg",
-            excerpt: "Analysis of current trends in the business aviation market and forecast for the coming years.",
-            content: "<h2>Business Aviation Market Trends</h2><p>The business aviation market is constantly changing, and in 2023 we are seeing several key trends.</p><p>First, there is growing demand for more environmentally friendly solutions. Manufacturers are actively working to reduce emissions and increase efficiency.</p><p>Second, fractional ownership services are becoming increasingly popular, making business aviation more accessible to a wider range of clients.</p>",
-            author: "Ivan Veretennikov",
-            date: "June 3, 2023"
-        },
-        {
-            id: 3,
-            title: "Aircraft Buying Guide (PDF)",
-            image: "images/pdf-icon.jpg",
-            excerpt: "Complete business jet buying guide in PDF format.",
+            image: "images/background.jpg",
+            title: "Aircraft for Sale: Premium Selection for Discerning Buyers (PDF)",
+            excerpt: "The aviation industry offers unparalleled opportunities for businesses and private individuals seeking to own high-performance aircraft. Whether you are looking for a luxury private jet, a reliable turboprop, or a commercial airliner, the current market provides a wide range of options to meet every need. Investing in an aircraft is not just a purchase—it’s a strategic decision that enhances efficiency, comfort, and global mobility.",
             isPDF: true,
-            file: "docs/Buyers-pay-brokers-pres.pdf",
+            file: "docs/Aircraft for Sale.pdf",
             author: "Ivan Veretennikov",
             date: "July 10, 2023"
         },
         {
-            id: 4,
-            title: "Aircraft Maintenance",
-            image: "images/blog3.jpg",
-            excerpt: "Everything about regular business jet maintenance.",
-            content: "<h2>Aircraft Maintenance</h2><p>Regular maintenance is the key to safe operation of your business jet.</p><p>The article covers main maintenance types, recommended intervals and key aspects to pay attention to.</p>",
+            id: 2,
+            title: "Business Aviation Market Trends",
+            image: "images/background.jpg",
+            excerpt: "Analysis of current trends in the business aviation market and forecast for the coming years.",
+            content: "<h2>Business Aviation Market Trends</h2><p>The business aviation market is constantly changing, and in 2023 we are seeing several key trends.</p><p>First, there is growing demand for more environmentally friendly solutions. Manufacturers are actively working to reduce emissions and increase efficiency.</p><p>Second, fractional ownership services are becoming increasingly popular, making business aviation more accessible to a wider range of clients.</p>",
             author: "Ivan Veretennikov",
-            date: "August 25, 2023"
+            date: "June 3, 2023"
         }
     ]
 };
-
-// Глобальные переменные для пагинации
-let currentBlogPage = 1;
-const articlesPerPage = 2;
-let pdfDocument = null;
-let currentPdfPage = 1;
 
 // Функция для переключения языка
 function switchLanguage(lang) {
     document.documentElement.lang = lang;
     localStorage.setItem('siteLanguage', lang);
     applyTranslations(lang);
-    updateHreflangTags(lang);
-}
-
-function updateHreflangTags(lang) {
-    const baseUrl = 'https://andrewshoo.github.io/site-1/';
-    document.querySelector('link[hreflang="ru"]').href = baseUrl + (lang === 'ru' ? '' : '?lang=ru');
-    document.querySelector('link[hreflang="en"]').href = baseUrl + (lang === 'en' ? '' : '?lang=en');
+    renderArticles(lang);
 }
 
 // Применение переводов
@@ -159,17 +134,14 @@ function applyTranslations(lang) {
     icons[0].setAttribute('title', langData.telegramTitle);
     icons[1].setAttribute('title', langData.whatsappTitle);
     icons[2].setAttribute('title', langData.emailTitle);
-    
-    // Рендерим статьи
-    renderArticles(lang);
 }
 
 // Функция для отображения статей с пагинацией
 function renderArticles(lang) {
     const articlesContainer = document.getElementById('articles-container');
     const articles = articlesData[lang] || articlesData['en'];
-    const startIndex = (currentBlogPage - 1) * articlesPerPage;
-    const paginatedArticles = articles.slice(startIndex, startIndex + articlesPerPage);
+    const startIndex = (appState.currentBlogPage - 1) * appState.articlesPerPage;
+    const paginatedArticles = articles.slice(startIndex, startIndex + appState.articlesPerPage);
     
     articlesContainer.innerHTML = '';
     
@@ -216,14 +188,14 @@ function renderArticles(lang) {
 
 // Обновление пагинации блога
 function updatePagination(totalArticles, lang) {
-    const totalPages = Math.ceil(totalArticles / articlesPerPage);
+    const totalPages = Math.ceil(totalArticles / appState.articlesPerPage);
     const langData = translations[lang] || translations['en'];
     
     document.getElementById('page-info').textContent = 
-        `${langData.page} ${currentBlogPage} ${langData.of} ${totalPages}`;
+        `${langData.page} ${appState.currentBlogPage} ${langData.of} ${totalPages}`;
     
-    document.getElementById('prev-page').disabled = currentBlogPage === 1;
-    document.getElementById('next-page').disabled = currentBlogPage === totalPages;
+    document.getElementById('prev-page').disabled = appState.currentBlogPage === 1;
+    document.getElementById('next-page').disabled = appState.currentBlogPage === totalPages;
 }
 
 // Функция для открытия модального окна с статьей
@@ -232,79 +204,48 @@ async function openArticleModal(article) {
     const modalBody = document.getElementById('modal-body');
     const langData = translations[document.documentElement.lang] || translations['en'];
     
-    modalBody.innerHTML = `
-        <div class="modal-loading">
-            <i class="fas fa-spinner fa-spin"></i>
-            <p>${langData.loadingPdf}</p>
-        </div>
-    `;
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
     if (article.isPDF) {
-        try {
-            // Инициализация PDF.js
-            const loadingTask = pdfjsLib.getDocument(article.file);
-            pdfDocument = await loadingTask.promise;
-            currentPdfPage = 1;
-            
-            // Создаем контейнер для просмотра
-            modalBody.innerHTML = `
-                <div class="pdf-viewer-container">
-                    <div class="pdf-controls">
-                        <button id="prev-pdf-page" disabled><i class="fas fa-chevron-left"></i></button>
-                        <span>${langData.page} <span id="pdf-page-num">1</span> ${langData.of} ${pdfDocument.numPages}</span>
-                        <button id="next-pdf-page" ${pdfDocument.numPages <= 1 ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <canvas id="pdf-canvas"></canvas>
-                    <div class="pdf-actions">
-                        <a href="${article.file}" download class="download-pdf">
-                            <i class="fas fa-download"></i> ${langData.downloadOriginal}
-                        </a>
+        modalBody.innerHTML = `
+            <div class="pdf-viewer-container">
+                <div class="pdf-header">
+                    <h2>${article.title}</h2>
+                    <div class="pdf-meta">
+                        <span>${article.author}</span>
+                        <span>${article.date}</span>
                     </div>
                 </div>
-            `;
+                <div class="pdf-loading-indicator">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>${langData.loadingPdf}</p>
+                </div>
+                <div class="pdf-scroll-container" id="pdf-scroll-container"></div>
+                <div class="pdf-nav-buttons">
+                    <button class="pdf-nav-button" id="prev-pdf-page" title="${langData.prevPage}">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                    <button class="pdf-nav-button" id="next-pdf-page" title="${langData.nextPage}">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <button class="pdf-nav-button" id="fullscreen-pdf" title="${langData.fullscreen}">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+                <div class="pdf-actions">
+                    <a href="${article.file}" download class="download-pdf">
+                        <i class="fas fa-download"></i> ${langData.downloadOriginal}
+                    </a>
+                </div>
+            </div>
+        `;
 
-            // Настройка рендеринга
-            const canvas = document.getElementById('pdf-canvas');
-            const ctx = canvas.getContext('2d');
-
-            // Функция рендеринга страницы
-            async function renderPdfPage(pageNum) {
-                const page = await pdfDocument.getPage(pageNum);
-                const viewport = page.getViewport({ scale: 1.5 });
-                
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-                
-                await page.render({
-                    canvasContext: ctx,
-                    viewport: viewport
-                }).promise;
-                
-                document.getElementById('pdf-page-num').textContent = pageNum;
-                document.getElementById('prev-pdf-page').disabled = pageNum <= 1;
-                document.getElementById('next-pdf-page').disabled = pageNum >= pdfDocument.numPages;
-            }
-
-            // Первый рендер
-            await renderPdfPage(currentPdfPage);
-
-            // Навигация по страницам PDF
-            document.getElementById('prev-pdf-page').addEventListener('click', async () => {
-                if (currentPdfPage > 1) {
-                    currentPdfPage--;
-                    await renderPdfPage(currentPdfPage);
-                }
-            });
-
-            document.getElementById('next-pdf-page').addEventListener('click', async () => {
-                if (currentPdfPage < pdfDocument.numPages) {
-                    currentPdfPage++;
-                    await renderPdfPage(currentPdfPage);
-                }
-            });
-
+        try {
+            const loadingTask = pdfjsLib.getDocument(article.file);
+            appState.pdf.doc = await loadingTask.promise;
+            await renderAllPdfPages();
+            setupPdfNavigation();
         } catch (error) {
             console.error("PDF loading error:", error);
             modalBody.innerHTML = `
@@ -328,12 +269,153 @@ async function openArticleModal(article) {
     }
 }
 
+// Рендеринг всех страниц PDF
+async function renderAllPdfPages() {
+    const container = document.getElementById('pdf-scroll-container');
+    container.innerHTML = '';
+    appState.pdf.pages = [];
+
+    for (let i = 1; i <= appState.pdf.doc.numPages; i++) {
+        const page = await appState.pdf.doc.getPage(i);
+        const viewport = page.getViewport({ scale: 1.5 });
+        
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        await page.render({
+            canvasContext: context,
+            viewport: viewport,
+            intent: 'print'
+        }).promise;
+
+        const pageContainer = document.createElement('div');
+        pageContainer.className = 'pdf-page-container';
+        pageContainer.id = `pdf-page-${i}`;
+        pageContainer.appendChild(canvas);
+        container.appendChild(pageContainer);
+
+        appState.pdf.pages.push({
+            element: pageContainer,
+            top: pageContainer.offsetTop,
+            height: pageContainer.offsetHeight
+        });
+    }
+
+    // Удаляем индикатор загрузки
+    document.querySelector('.pdf-loading-indicator')?.remove();
+}
+
+// Настройка навигации по PDF
+function setupPdfNavigation() {
+    const container = document.getElementById('pdf-scroll-container');
+    
+    // Кнопки навигации
+    document.getElementById('prev-pdf-page').addEventListener('click', () => {
+        if (appState.pdf.currentPage > 1) {
+            appState.pdf.currentPage--;
+            scrollToPdfPage();
+        }
+    });
+    
+    document.getElementById('next-pdf-page').addEventListener('click', () => {
+        if (appState.pdf.currentPage < appState.pdf.pages.length) {
+            appState.pdf.currentPage++;
+            scrollToPdfPage();
+        }
+    });
+    
+    // Полноэкранный режим
+    document.getElementById('fullscreen-pdf').addEventListener('click', toggleFullscreen);
+    
+    // Обработчик прокрутки
+    container.addEventListener('scroll', () => {
+        const scrollPosition = container.scrollTop + (container.clientHeight / 2);
+        
+        for (let i = 0; i < appState.pdf.pages.length; i++) {
+            if (scrollPosition >= appState.pdf.pages[i].top && 
+                (i === appState.pdf.pages.length - 1 || scrollPosition < appState.pdf.pages[i + 1].top)) {
+                if (appState.pdf.currentPage !== i + 1) {
+                    appState.pdf.currentPage = i + 1;
+                    updatePdfNavButtons();
+                }
+                break;
+            }
+        }
+    });
+    
+    // Инициализация первой страницы
+    scrollToPdfPage();
+}
+
+// Прокрутка к текущей странице PDF
+function scrollToPdfPage() {
+    const page = appState.pdf.pages[appState.pdf.currentPage - 1];
+    if (page) {
+        const container = document.getElementById('pdf-scroll-container');
+        container.scrollTo({
+            top: page.top,
+            behavior: 'smooth'
+        });
+        updatePdfNavButtons();
+    }
+}
+
+// Обновление кнопок навигации PDF
+function updatePdfNavButtons() {
+    document.getElementById('prev-pdf-page').disabled = appState.pdf.currentPage === 1;
+    document.getElementById('next-pdf-page').disabled = appState.pdf.currentPage === appState.pdf.pages.length;
+}
+
+// Переключение полноэкранного режима
+function toggleFullscreen() {
+    const pdfViewer = document.querySelector('.pdf-viewer-container');
+    
+    if (!appState.pdf.isFullscreen) {
+        if (pdfViewer.requestFullscreen) {
+            pdfViewer.requestFullscreen();
+        } else if (pdfViewer.webkitRequestFullscreen) {
+            pdfViewer.webkitRequestFullscreen();
+        } else if (pdfViewer.msRequestFullscreen) {
+            pdfViewer.msRequestFullscreen();
+        }
+        
+        document.getElementById('fullscreen-pdf').innerHTML = 
+            '<i class="fas fa-compress"></i>';
+        document.getElementById('fullscreen-pdf').title = 
+            translations[document.documentElement.lang]?.exitFullscreen || 'Exit fullscreen';
+        appState.pdf.isFullscreen = true;
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        
+        document.getElementById('fullscreen-pdf').innerHTML = 
+            '<i class="fas fa-expand"></i>';
+        document.getElementById('fullscreen-pdf').title = 
+            translations[document.documentElement.lang]?.fullscreen || 'Fullscreen';
+        appState.pdf.isFullscreen = false;
+    }
+}
+
+// Обработчик изменения полноэкранного режима
+document.addEventListener('fullscreenchange', () => {
+    appState.pdf.isFullscreen = !!document.fullscreenElement;
+});
+
 // Функция для закрытия модального окна
 function closeArticleModal() {
     const modal = document.getElementById('article-modal');
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
-    pdfDocument = null;
+    appState.pdf.doc = null;
+    appState.pdf.pages = [];
+    appState.pdf.currentPage = 1;
 }
 
 // Обработчики событий
@@ -352,12 +434,12 @@ document.addEventListener('keydown', (e) => {
 
 // Навигация по страницам блога
 document.getElementById('prev-page').addEventListener('click', () => {
-    currentBlogPage--;
+    appState.currentBlogPage--;
     renderArticles(document.documentElement.lang);
 });
 
 document.getElementById('next-page').addEventListener('click', () => {
-    currentBlogPage++;
+    appState.currentBlogPage++;
     renderArticles(document.documentElement.lang);
 });
 
