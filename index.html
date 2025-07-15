@@ -16,10 +16,10 @@
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- Логотип (левая колонка) -->
+        <!-- Логотип -->
         <div class="logo-column">
             <div class="logo">
-                <img src="new/images/logo6.png" alt="Company Logo">
+                <img src="new/images/LogoOsn.png" alt="Company Logo">
             </div>
         </div>
 
@@ -66,6 +66,16 @@
             </div>
         </div>
 
+        <!-- Карусель статей -->
+        <div class="articles-carousel">
+            <h2 id="carousel-title">Featured Articles</h2>
+            <div class="carousel-container">
+                <div class="carousel-track" id="carousel-track"></div>
+            </div>
+            <div class="carousel-nav" id="carousel-dots"></div>
+            <a href="articles.html" class="view-all-articles" id="view-all-link">View All Articles</a>
+        </div>
+
         <!-- Секция самолетов -->
         <div class="aircraft-content">
             <div class="aircraft-section">
@@ -102,6 +112,8 @@
     <div class="language-switcher">
         <button onclick="switchLanguage('ru')">RU</button>
         <button onclick="switchLanguage('en')">EN</button>
+    </div>
     <script src="new/js/script.js"></script>
+    <script src="new/js/articles.js"></script>
 </body>
 </html>

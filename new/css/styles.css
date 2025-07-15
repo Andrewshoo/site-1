@@ -1,15 +1,15 @@
 :root {
     --primary: #1a3e72;
     --secondary: #e8c31e;
-  }
-  
-  * {
+}
+
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
-  
-  body {
+}
+
+body {
     font-family: 'Arial', sans-serif;
     color: #333;
     background-color: #f9f9f9;
@@ -18,9 +18,9 @@
     background-position: center;
     min-height: 100vh;
     overflow-x: hidden;
-  }
-  
-  body::before {
+}
+
+body::before {
     content: "";
     position: fixed;
     top: 0;
@@ -30,10 +30,10 @@
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(5px);
     z-index: -1;
-  }
-  
-  /* Основная сетка */
-  .page-wrapper {
+}
+
+/* Основная сетка */
+.page-wrapper {
     display: grid;
     grid-template-columns: 300px 1fr;
     grid-template-areas: 
@@ -41,77 +41,98 @@
         "logo photo"
         "logo description"
         "logo contacts"
+        "logo articles"
         "logo aircraft";
     max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
-  }
-  
-  /* Логотип (фиксированная ширина 300px) */
-  .logo-column {
+}
+
+/* Логотип */
+.logo-column {
     grid-area: logo;
     padding: 30px;
-    position: relative;
+    position: sticky;
     top: 0;
     height: 100vh;
-    display:flex;
-    align-items: top center;
+    display: flex;
+    align-items: flex-start;
     background: rgba(255, 255, 255, 0);
-  }
-  
-  .logo {
+}
+
+.logo {
     width: 100%;
     max-width: 400px;
-  }
-  
-  .logo img {
+}
+
+.logo img {
     width: 100%;
     height: auto;
-  }
-  
-  /* Заголовок */
-  .header-content {
+}
+
+.back-to-home {
+    margin-top: 30px;
+}
+
+.back-to-home a {
+    font-family: 'Manrope', sans-serif;
+    color: var(--primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Заголовок */
+.header-content {
     grid-area: header;
-    padding: 30px 30px 30px 30px;
+    padding: 30px;
     display: flex;
     align-items: center;
     min-height: 150px;
     background: rgba(255, 255, 255, 0.9);
-  }
-  
-  .header-text {
+}
+
+.header-content-article {
+    grid-area: header;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    min-height: 150px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.header-text {
     font-family: 'Manrope', sans-serif;
     font-size: 1.3em;
     color: black;
     font-weight: 400;
     line-height: 1.4;
-  }
-  
-  /* Фото */
-  .photo-content {
+}
+
+/* Фото */
+.photo-content {
     grid-area: photo;
-    padding-right: 30px;
-    padding-left: 10px;
+    padding: 0 30px;
     background: rgba(255, 255, 255, 0.9);
-    object-position: center;
-  }
-  
-  .airplane-photo img {
+}
+
+.airplane-photo img {
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     max-height: 400px;
     object-fit: cover;
-  }
-  
-  /* Описание */
-  .description-content {
+}
+
+/* Описание */
+.description-content {
     grid-area: description;
-    padding-right: 30px;
+    padding: 0 30px;
     background: rgba(255, 255, 255, 0.9);
-  }
-  
-  .description {
+}
+
+.description {
     font-family: 'Manrope', serif;
     font-weight: 400;
     font-size: large;
@@ -122,36 +143,36 @@
     border-radius: 8px;
     text-align: justify;
     hyphens: auto;
-  }
+}
 
-  .descr-p-en {
+.descr-p-en, .descr-p-ru {
     margin-top: 10px;
-  }
+}
 
-  .descr-p-ru {
-    margin-top: 10px;
+.descr-p-ru {
     text-indent: 60px;
-  }
-  
-  .sign {
+}
+
+.sign {
     margin-top: 2em;
     font-weight: bold;
     text-align: right;
-  }
-  
-  /* Контакты */
-  .contacts-content {
+}
+
+/* Контакты */
+.contacts-content {
     grid-area: contacts;
-    padding-right: 30px;
+    padding: 30px 30px 0 30px;
     background: rgba(255, 255, 255, 0.9);
-  }
-  
-  .contact {
-    margin: 30px 0;
+}
+
+.contact {
+    margin: 0 auto;
     text-align: center;
-  }
-  
-  .contact-circle {
+    max-width: 400px;
+}
+
+.contact-circle {
     display: inline-block;
     width: 150px;
     height: 150px;
@@ -161,23 +182,23 @@
     overflow: hidden;
     border: 3px solid white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contact-circle img {
+}
+
+.contact-circle img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center center;
-  }
-  
-  .contact-icons {
+}
+
+.contact-icons {
     display: flex;
     justify-content: center;
     gap: 30px;
     margin-top: 25px;
-  }
-  
-  .contact-icons a {
+}
+
+.contact-icons a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -188,126 +209,229 @@
     color: black;
     text-decoration: none;
     transition: all 0.3s;
-  }
-  
-  .contact-icons i {
+}
+
+.contact-icons i {
     font-size: 30px;
-  }
-  
-  .contact-icons a:hover {
+}
+
+.contact-icons a:hover {
     background: black;
     color: white;
     transform: scale(1.1);
-  }
-  
-  /* Секция самолетов */
-  .aircraft-content {
-    grid-area: aircraft;
-    padding-right: 30px;
-    padding-left:10px;
-    padding-bottom: 40px;
+}
+
+/* Карусель статей */
+.articles-carousel {
+    grid-area: articles;
+    padding: 30px 30px 0 30px;
     background: rgba(255, 255, 255, 0.9);
-  }
-  
-  .aircraft-section {
+}
+
+.articles-carousel h2 {
+    color: black;
+    font-family: 'Manrope', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+.carousel-item {
+    min-width: 100%;
+    flex-shrink: 0;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.carousel-item a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.carousel-image {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item:hover .carousel-image img {
+    transform: scale(1.05);
+}
+
+.carousel-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.2em;
+    margin-top: 15px;
+    color: var(--primary);
+}
+
+.carousel-excerpt {
+    font-family: 'Manrope', sans-serif;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: var(--primary);
+}
+
+.view-all-articles {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Manrope', sans-serif;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    padding-bottom: 30px;
+}
+
+/* Секция самолетов */
+.aircraft-content {
+    grid-area: aircraft;
+    padding: 0 30px 40px 30px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.aircraft-section {
     margin: 30px 0;
     background: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .aircraft-section h2 {
+}
+
+.aircraft-section h2 {
     color: black;
     margin-bottom: 50px;
     text-align: center;
     font-family: 'Manrope', sans-serif;
     font-size: 30px;
     font-weight: 500;
-  }
-  
-  .aircraft-columns {
+}
+
+.aircraft-columns {
     display: flex;
     justify-content: space-between;
     text-align: left;
     flex-wrap: wrap;
-  }
-  
-  .aircraft-column {
+}
+
+.aircraft-column {
     flex: 1;
     min-width: 250px;
     padding: 0 15px;
     margin-bottom: 20px;
-  }
-  
-  .aircraft-column h3 {
+}
+
+.aircraft-column h3 {
     color: black;
     border-bottom: 2px solid rgba(0, 0, 0, 0.493);
     padding-bottom: 10px;
     font-family: 'Manrope', sans-serif;
-  }
-  
-  .aircraft-list {
+}
+
+.aircraft-list {
     font-family: 'Monrope', serif;
     list-style: none;
     padding: 0;
-  }
-  
-  .aircraft-list li {
+}
+
+.aircraft-list li {
     margin: 15px 0;
     padding: 12px;
     background: rgba(255, 255, 255, 0.7);
     border-radius: 5px;
     transition: all 0.3s;
-  }
-  
-  .my-divider {
+}
+
+.my-divider {
     border: none;
     height: 1px;
     background: rgba(0, 0, 0, 0.555);
     margin: 20px 0;
     width: 100%;
-  }
-  
-  .site-footer {
+}
+
+.site-footer {
     background: rgba(255, 255, 255, 0.9);
     padding: 30px 0;
     text-align: center;
     font-family: 'Manrope', sans-serif;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     margin-top: 60px;
-  }
-  
-  .footer-content {
+}
+
+.footer-content {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
     text-align: center;
-  }
-  
-  .copyright {
+}
+
+.copyright {
     font-size: 14px;
     color: black;
     opacity: 0.8;
-  }
-  
-  .company-name {
+}
+
+.company-name {
     font-size: 16px;
     color: black;
     font-weight: 500;
     margin-top: 10px;
-  }
-  
-  .footer-divider {
+}
+
+.footer-divider {
     width: 50px;
     height: 2px;
     background: var(--secondary);
     margin: 15px auto;
     opacity: 0.7;
-  }
+}
 
-  /* Language Switcher Styles */
-  .language-switcher {
+/* Language Switcher */
+.language-switcher {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -318,9 +442,9 @@
     padding: 8px 12px;
     border-radius: 20px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
+}
 
-  .language-switcher button {
+.language-switcher button {
     background: none;
     border: none;
     padding: 4px 12px;
@@ -330,21 +454,110 @@
     font-size: 14px;
     transition: all 0.3s ease;
     border-radius: 15px;
-  }
+}
 
-  .language-switcher button:hover {
+.language-switcher button:hover {
     background: #000;
     color: #fff;
-  }
+}
 
-  .language-switcher button.active {
+.language-switcher button.active {
     background: #000;
     color: #fff;
-  }
-  
-  
-  /* Адаптация для планшетов */
-  @media (max-width: 992px) {
+}
+
+/* Стили для страницы статей */
+
+/* Специфичные стили для страницы статей */
+.articles-page .page-wrapper {
+    grid-template-areas: 
+        "logo header"
+        "logo articles"
+        "logo ."; /* Пустая область для футера */
+}
+
+.articles-page .articles-content {
+    grid-area: articles;
+    padding: 0 30px 30px 30px; /* Уменьшили верхний отступ */
+    background: rgb(255, 255, 255);
+    margin-top: -30px; /* Поднимаем блок статей ближе к хедеру */
+}
+
+.articles-page .header-content {
+    padding-bottom: 10px; /* Уменьшаем отступ снизу */
+   
+}
+
+.articles-page .articles-grid {
+    margin-top: 20px; /* Уменьшаем отступ сверху */
+}
+.articles-content {
+    grid-area: aircraft;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.article-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+}
+
+.article-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.article-card:hover .article-image img {
+    transform: scale(1.05);
+}
+
+.article-content {
+    padding: 20px;
+}
+
+.article-content h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.article-content p {
+    font-family: 'Manrope', sans-serif;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.read-more {
+    font-family: 'Manrope', sans-serif;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 992px) {
     .page-wrapper {
         grid-template-columns: 200px 1fr;
     }
@@ -352,20 +565,24 @@
     .header-text {
         font-size: 1.5em;
     }
-  
+
     .description {
         text-align: justify;
         hyphens: none;
-        padding: 20px 15px; /* Уменьшаем отступы */
+        padding: 20px 15px;
     }
-  
-    .sign {
-      margin-top: 2em;
+
+    .descr-p-ru {
+        text-indent: 0;
     }
-  }
-  
-  /* Адаптация для мобильных */
-  @media (max-width: 768px) {
+
+    .articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
     .page-wrapper {
         grid-template-columns: 1fr;
         grid-template-areas: 
@@ -374,6 +591,7 @@
             "photo"
             "description"
             "contacts"
+            "articles"
             "aircraft";
     }
     
@@ -392,6 +610,7 @@
     .photo-content,
     .description-content,
     .contacts-content,
+    .articles-carousel,
     .aircraft-content {
         padding: 20px;
     }
@@ -413,41 +632,36 @@
     .contact-icons i {
         font-size: 25px;
     }
-  
+
     .description {
-      text-align: left;
-      text-indent: 0;
+        text-align: left;
     }
 
-    description p {
-        line-height: 1.6; /* Уменьшаем межстрочный интервал */
-        margin-bottom: 1em; /* Оптимальные отступы */
+    .articles-grid {
+        grid-template-columns: 1fr;
     }
 
-    .descr-p-ru {
-      text-align: left;
-      text-indent: 0;
-    }
-  
-    .sign {
-      margin-top: 2em;
-    }
-  
-    .copyright {
-        font-size: 12px;
-    }
-    .company-name {
-        font-size: 16px;
-    }
-  
-    .site-footer {
-        padding: 25px 0;
-        margin-top: 40px;
-    }
     .copyright {
         font-size: 12px;
     }
     .company-name {
         font-size: 15px;
     }
-  }
+  
+    .site-footer {
+        padding: 25px 0;
+        margin-top: 40px;
+    }
+
+    .articles-page .page-wrapper {
+        grid-template-areas: 
+            "logo"
+            "header"
+            "articles";
+    }
+    
+    .articles-page .articles-content {
+        padding: 0 20px 20px 20px;
+        margin-top: -20px;
+    }
+}
