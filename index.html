@@ -2,21 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="new/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="new/apple-touch-icon.png">
+    <link rel="stylesheet" href="new/css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="alternate" hreflang="ru" href="https://upcast.pro/ru/"/>
+    <link rel="alternate" hreflang="en" href="https://upcast.pro/en/"/>
+    <link rel="alternate" hreflang="x-default" href="https://upcast.pro/en/"/>
     <title>UPCAST By Ivan Veretennikov</title>
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- Логотип -->
+        <!-- Логотип (левая колонка) -->
         <div class="logo-column">
             <div class="logo">
-                <img src="images/Logo IV Black inv.png" alt="Company Logo">
+                <img src="new/images/logo6.png" alt="Company Logo">
             </div>
         </div>
 
@@ -30,40 +33,24 @@
         <!-- Фото самолета -->
         <div class="photo-content">
             <div class="airplane-photo">
-                <img src="images/photo-web.jpg" alt="Private Jet">
+                <img src="new/images/photo-web.jpg" alt="Private Jet">
             </div>
         </div>
-
-        
 
         <!-- Описание -->
         <div class="description-content">
             <div class="description">
                 <hr class="my-divider">
-                <p>В мире нейросетей, автоматизации, воронок продаж даже такое сокровенное и редкое событие, как покупку самолёта, многие пытаются поставить на шаблонные рельсы, поручить алгоритмам и максимально подогнать под какой-то общий стандарт – потому что «так положено». Но самолёт покупают незаурядные люди, и у каждого из них есть свои мечты, свой характер, свои правила и принципы. И вы, те редкие и уникальные люди, которые задумываются о покупке самолёта или уже стали владельцем, точно добились этого не потому, что слушали «как положено» – а потому что прокладывали свой путь.</p>
+                <p></p>
                 <p class="sign">Иван Веретенников</p>
             </div>
-                <!-- Блог -->
-            <div class="blog-content">
-                <div class="blog-section">
-                    <h2>Блог</h2>
-                    <div class="articles-grid" id="articles-container"></div>
-                    <div class="pagination">
-                        <button id="prev-page" disabled><i class="fas fa-chevron-left"></i></button>
-                        <span id="page-info">Страница 1 из 1</span>
-                        <button id="next-page" disabled><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
         </div>
-        </div>
-
-        
 
         <!-- Контакты -->
         <div class="contacts-content">
             <div class="contact">
                 <div class="contact-circle">
-                    <img src="images/photoiv2.JPG" alt="Contact Person">
+                    <img src="new/images/photoiv2.JPG" alt="Contact Person">
                 </div>
                 <div class="contact-icons">
                     <a href="#" onclick="openEncodedLink()" title="Telegram">
@@ -88,51 +75,33 @@
                         <h3>Продажа</h3>
                         <ul class="aircraft-list">
                             <li>2009 BBJ</li>
-                            <li>2003 Legacy 600</li>
+                            <li>2015 Global 5000</li>
                             <li>2010 Legacy 650</li>
                             <li>2012 Falcon 2000LX</li>
-                            <li>2018 Global 6000</li>
                         </ul>
                     </div>
                     <div class="aircraft-column">
                         <h3>Покупка</h3>
                         <ul class="aircraft-list">
-                            <li>ACJ320 Neo or A330</li>
-                            <li>Challenger 300/350</li>
-                            <li>Challenger 650</li>
-                            <li>G650ER / G700</li>
-                            <li>Gulfstream G450</li>
+                            <li>Challenger 350</li>
+                            <li>Challenger 650 - 2021 and newer</li>
+                            <li>Gulfstream G700</li>
+                            <li>ACJ319 or 320 NEO</li>
+                            <li>Global 6500</li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
-
-        
-
-        <!-- Футер -->
-        <div class="footer-content">
-            <div class="copyright">
-                UPCAST By Ivan Veretennikov
-            </div>
-        </div>
-
-        <!-- Модальное окно статьи -->
-        <div class="article-modal" id="article-modal">
-            <div class="modal-content">
-                <button class="close-modal">&times;</button>
-                <div class="modal-body" id="modal-body"></div>
+            <div class="footer-content">
+                <div class="copyright">
+                    UPCAST By Ivan Veretennikov
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Переключатель языка -->
     <div class="language-switcher">
         <button onclick="switchLanguage('ru')">RU</button>
         <button onclick="switchLanguage('en')">EN</button>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="new/js/script.js"></script>
 </body>
 </html>
