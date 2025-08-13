@@ -41,11 +41,12 @@
         "logo photo"
         "logo description"
         "logo contacts"
-        "logo aircraft";
+        "logo articles"
+        "logo aircraft"; /* Добавляем новую область для статей */
     max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
-  }
+}
   
   /* Логотип (фиксированная ширина 300px) */
   .logo-column {
@@ -345,6 +346,189 @@
   background: #000;
   color: #fff;
 }
+
+/* Секция статей */
+.articles-section {
+    margin: 50px 0 30px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.articles-section h2 {
+    color: black;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.article-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.article-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.article-card:hover .article-image img {
+    transform: scale(1.05);
+}
+
+.article-text {
+    padding: 20px;
+}
+
+.article-text h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.article-text p {
+    font-family: 'Manrope', sans-serif;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.read-more {
+    font-family: 'Manrope', sans-serif;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary);
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.read-more:hover {
+    color: black;
+    border-bottom-color: black;
+}
+
+/* Публикации */
+.article-content {
+    grid-area: description;
+    padding-right: 30px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.article-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.article-container h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 2.5em;
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.article-meta {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+    font-family: 'Manrope', sans-serif;
+}
+
+.article-meta .author {
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+.article-image {
+    margin-bottom: 30px;
+}
+
+.article-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.article-text h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.8em;
+    color: var(--primary);
+    margin: 40px 0 20px;
+}
+
+.article-text p {
+    font-family: 'Manrope', serif;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.service-option {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--secondary);
+}
+
+.service-option h3 {
+    font-family: 'Manrope', sans-serif;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.service-option p {
+    margin-bottom: 0;
+}
+
+.article-footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    font-family: 'Manrope', sans-serif;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.back-link:hover {
+    color: black;
+}
   
   
   /* Адаптация для планшетов */
@@ -378,6 +562,7 @@
             "photo"
             "description"
             "contacts"
+            "articles"
             "aircraft";
     }
     
@@ -453,5 +638,22 @@
     }
     .company-name {
         font-size: 15px;
+    }
+
+     .articles-content {
+        padding: 20px;
+    }
+    
+    .articles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .articles-section {
+        padding: 20px;
+        margin: 30px 0;
+    }
+    
+    .article-image {
+        height: 180px;
     }
   }
