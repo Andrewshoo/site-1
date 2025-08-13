@@ -110,6 +110,7 @@
     grid-area: description;
     padding-right: 30px;
     background: rgba(255, 255, 255, 0.9);
+    object-position: center;
   }
   
   .description {
@@ -267,11 +268,12 @@
   }
   
   .my-divider {
+    margin:30px auto;
+    text-align: center;
     border: none;
     height: 1px;
     background: rgba(0, 0, 0, 0.555);
-    margin: 20px 0;
-    width: 100%;
+    width: 50%;
   }
   
   .site-footer {
