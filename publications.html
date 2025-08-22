@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="new/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="new/apple-touch-icon.png">
+    <link rel="stylesheet" href="./new/css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Publications - UPCAST By Ivan Veretennikov</title>
+</head>
+<body>
+    <!-- Бургер-меню -->
+    <div class="burger-menu">
+        <div class="burger-icon" id="burgerIcon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="burger-nav" id="burgerNav">
+            <div class="menu-content">
+                <div class="menu-header">
+                    <div class="menu-logo">
+                        <img src="new/images/logo6.png" alt="UPCAST Logo">
+                    </div>
+                    <h3>UPCAST</h3>
+                </div>
+                <ul class="menu-list">
+                    <li>
+                        <a href="index.html">
+                            <i class="fas fa-home"></i>
+                            <span data-lang="ru">Главная</span>
+                            <span data-lang="en">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="publications.html">
+                            <i class="fas fa-newspaper"></i>
+                            <span data-lang="ru">Публикации</span>
+                            <span data-lang="en">Publications</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openEncodedLink(); return false;">
+                            <i class="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openWA(); return false;">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="sendEmail(); return false;">
+                            <i class="fas fa-envelope"></i>
+                            <span data-lang="ru">Email</span>
+                            <span data-lang="en">Email</span>
+                        </a>
+                    </li>
+                    <li class="language-menu-item">
+                        <div class="language-buttons">
+                            <button onclick="switchLanguage('ru')">RU</button>
+                            <button onclick="switchLanguage('en')">EN</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="burger-overlay" id="burgerOverlay"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Логотип (левая колонка) -->
+        <div class="logo-column">
+            <a href="index.html?lang=ru" class="logo" aria-label="На главную" data-lang="ru">
+                 <img src="new/images/logo_new.png" alt="UPCAST - Главная страница">
+            </a>
+            <a href="index.html?lang=en" class="logo" aria-label="Home" data-lang="en" hidden>
+                <img src="new/images/logo_new.png" alt="UPCAST - Home">
+            </a>
+        </div>
+
+        <!-- Заголовок -->
+        <div class="header-content">
+            <div class="header-text" data-lang="ru">
+                Публикации — глубокий взгляд на мир бизнес-авиации
+            </div>
+            <div class="header-text" data-lang="en">
+                Publications — deep insights into business aviation
+            </div>
+        </div>
+
+        <!-- Сетка публикаций -->
+        
+
+            <div class="publications-grid">
+                <!-- Статья 1 -->
+                <article class="publication-card featured">
+                    <div class="publication-badge">Featured</div>
+                    <div class="publication-image">
+                        <img src="new/images/nobullshitaviation.jpg" alt="No Bullshit Aviation">
+                        <div class="publication-overlay">
+                            <span class="read-time" data-lang="ru">8 мин чтения</span>
+                            <span class="read-time" data-lang="en">8 min read</span>
+                        </div>
+                    </div>
+                    <div class="publication-content">
+                        <div class="publication-meta">
+                            <span class="publication-date">15.01.2024</span>
+                            <span class="publication-category">Business Aviation</span>
+                        </div>
+                        <h3 data-lang="ru">I. No Bullshit Aviation</h3>
+                        <h3 data-lang="en">I. No Bullshit Aviation</h3>
+                        <p data-lang="ru">18 лет в авиации — ваш надежный проводник в мире сделок с воздушными судами. Практические советы и честный взгляд на индустрию.</p>
+                        <p data-lang="en">18 years in aviation — your trusted advisor for aircraft transactions. Practical advice and honest perspective on the industry.</p>
+                        <div class="publication-actions">
+                            <a href="no-bullshit-aviation.html" class="read-more-btn">
+                                <span data-lang="ru">Читать статью</span>
+                                <span data-lang="en">Read article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Статья 2 -->
+                <article class="publication-card">
+                    <div class="publication-image">
+                        <img src="new/images/article-broker.jpg" alt="Why Hire a Broker">
+                        <div class="publication-overlay">
+                            <span class="read-time" data-lang="ru">12 мин чтения</span>
+                            <span class="read-time" data-lang="en">12 min read</span>
+                        </div>
+                    </div>
+                    <div class="publication-content">
+                        <div class="publication-meta">
+                            <span class="publication-date">22.01.2024</span>
+                            <span class="publication-category">Sales Strategy</span>
+                        </div>
+                        <h3 data-lang="ru">II. Зачем нанимать брокера? Я и сам продам</h3>
+                        <h3 data-lang="en">II. Why Should I Hire a Broker? I Can Sell It Myself</h3>
+                        <p data-lang="ru">Почему ваш самолёт годами пылится на рынке? 7 реальных причин, почему самостоятельные продажи в авиации — это дорогая иллюзия.</p>
+                        <p data-lang="en">Why is your jet collecting dust on the market? 7 harsh truths about why selling solo costs you more time and money.</p>
+                        <div class="publication-actions">
+                            <a href="why-should-i-hire-a-broker.html" class="read-more-btn">
+                                <span data-lang="ru">Читать статью</span>
+                                <span data-lang="en">Read article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Статья 3 -->
+                <article class="publication-card">
+                    <div class="publication-image">
+                        <img src="new/images/article3.jpg" alt="Exclusive Mandate">
+                        <div class="publication-overlay">
+                            <span class="read-time" data-lang="ru">6 мин чтения</span>
+                            <span class="read-time" data-lang="en">6 min read</span>
+                        </div>
+                    </div>
+                    <div class="publication-content">
+                        <div class="publication-meta">
+                            <span class="publication-date">30.01.2024</span>
+                            <span class="publication-category">Negotiation</span>
+                        </div>
+                        <h3 data-lang="ru">III. Зачем вам эксклюзивный мандат?</h3>
+                        <h3 data-lang="en">III. Why Exclusivity Matters in Aircraft Sales</h3>
+                        <p data-lang="ru">Эксклюзивный мандат — это не ограничение, а инструмент, который позволяет брокеру полностью посвятить себя продаже вашего самолёта.</p>
+                        <p data-lang="en">An exclusive mandate is not a limitation but a tool that allows a broker to fully commit to selling your aircraft.</p>
+                        <div class="publication-actions">
+                            <a href="exclusive-mandat.html" class="read-more-btn">
+                                <span data-lang="ru">Читать статью</span>
+                                <span data-lang="en">Read article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Статья 4 (новая) -->
+                <article class="publication-card">
+                    <div class="publication-image">
+                        <img src="new/images/article-market.jpg" alt="Market Analysis">
+                        <div class="publication-overlay">
+                            <span class="read-time" data-lang="ru">10 мин чтения</span>
+                            <span class="read-time" data-lang="en">10 min read</span>
+                        </div>
+                    </div>
+                    <div class="publication-content">
+                        <div class="publication-meta">
+                            <span class="publication-date">07.02.2024</span>
+                            <span class="publication-category">Market Analysis</span>
+                        </div>
+                        <h3 data-lang="ru">IV. Тренды рынка бизнес-авиации в 2024</h3>
+                        <h3 data-lang="en">IV. Business Aviation Market Trends in 2024</h3>
+                        <p data-lang="ru">Анализ текущей ситуации на рынке, перспективы развития и что ждать покупателям и продавцам в наступившем году.</p>
+                        <p data-lang="en">Analysis of the current market situation, development prospects and what to expect for buyers and sellers in the coming year.</p>
+                        <div class="publication-actions">
+                            <a href="market-trends-2024.html" class="read-more-btn">
+                                <span data-lang="ru">Читать статью</span>
+                                <span data-lang="en">Read article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Статья 5 (новая) -->
+                <article class="publication-card">
+                    <div class="publication-image">
+                        <img src="new/images/article-inspection.jpg" alt="Aircraft Inspection">
+                        <div class="publication-overlay">
+                            <span class="read-time" data-lang="ru">14 мин чтения</span>
+                            <span class="read-time" data-lang="en">14 min read</span>
+                        </div>
+                    </div>
+                    <div class="publication-content">
+                        <div class="publication-meta">
+                            <span class="publication-date">15.02.2024</span>
+                            <span class="publication-category">Technical</span>
+                        </div>
+                        <h3 data-lang="ru">V. Как проверить самолёт перед покупкой</h3>
+                        <h3 data-lang="en">V. How to Inspect an Aircraft Before Purchase</h3>
+                        <p data-lang="ru">Полное руководство по технической проверке воздушного судна: на что обращать внимание и как избежать скрытых проблем.</p>
+                        <p data-lang="en">Complete guide to technical aircraft inspection: what to look for and how to avoid hidden problems.</p>
+                        <div class="publication-actions">
+                            <a href="aircraft-inspection.html" class="read-more-btn">
+                                <span data-lang="ru">Читать статью</span>
+                                <span data-lang="en">Read article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Статья 6 (новая) -->
+                <article class="publication-card">
+                    <div class="publication-image">
+                        <img src="new/images/article-negotiation.jpg" alt="Negotiation Tips">
+                        <div class="publication-overlay">
+                            <span class="read-time" data-lang="ru">9 мин чтения</span>
+                            <span class="read-time" data-lang="en">9 min read</span>
+                        </div>
+                    </div>
+                    <div class="publication-content">
+                        <div class="publication-meta">
+                            <span class="publication-date">22.02.2024</span>
+                            <span class="publication-category">Negotiation</span>
+                        </div>
+                        <h3 data-lang="ru">VI. Искусство переговоров в авиации</h3>
+                        <h3 data-lang="en">VI. The Art of Negotiation in Aviation</h3>
+                        <p data-lang="ru">Стратегии и тактики успешных переговоров при покупке и продаже бизнес-джетов от опытного брокера.</p>
+                        <p data-lang="en">Strategies and tactics for successful negotiations when buying and selling business jets from an experienced broker.</p>
+                        <div class="publication-actions">
+                            <a href="negotiation-art.html" class="read-more-btn">
+                                <span data-lang="ru">Читать статью</span>
+                                <span data-lang="en">Read article</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <div class="footer-content">
+            <div class="copyright">
+                UPCAST By Ivan Veretennikov
+            </div>
+        </div>
+    </div>
+
+    <div class="language-switcher">
+        <button onclick="switchLanguage('ru')">RU</button>
+        <button onclick="switchLanguage('en')">EN</button>
+    </div>
+    
+    <script src="new/js/script.js"></script>
+</body>
+</html>

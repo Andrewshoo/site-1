@@ -11,11 +11,73 @@
     <title>UPCAST By Ivan Veretennikov</title>
 </head>
 <body>
+
+    <!-- Бургер-меню -->
+    <div class="burger-menu">
+        <div class="burger-icon" id="burgerIcon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="burger-nav" id="burgerNav">
+            <div class="menu-content">
+                <div class="menu-header">
+                    <div class="menu-logo">
+                        <img src="new/images/logo6.png" alt="UPCAST Logo">
+                    </div>
+                    <h3>UPCAST</h3>
+                </div>
+                <ul class="menu-list">
+                    <li>
+                        <a href="index.html">
+                            <i class="fas fa-home"></i>
+                            <span data-lang="ru">Главная</span>
+                            <span data-lang="en">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="publications.html">
+                            <i class="fas fa-newspaper"></i>
+                            <span data-lang="ru">Публикации</span>
+                            <span data-lang="en">Publications</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openEncodedLink(); return false;">
+                            <i class="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openWA(); return false;">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="sendEmail(); return false;">
+                            <i class="fas fa-envelope"></i>
+                            <span data-lang="ru">Email</span>
+                            <span data-lang="en">Email</span>
+                        </a>
+                    </li>
+                    <li class="language-menu-item">
+                        <div class="language-buttons">
+                            <button onclick="switchLanguage('ru')">RU</button>
+                            <button onclick="switchLanguage('en')">EN</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="burger-overlay" id="burgerOverlay"></div>
+    </div>
+
     <div class="page-wrapper">
         <!-- Логотип (левая колонка) -->
         <div class="logo-column">
             <div class="logo">
-                <img src="new/images/logo6.png" alt="Company Logo">
+                <img src="new/images/logo_new.png" alt="Company Logo">
             </div>
         </div>
 
@@ -62,60 +124,6 @@
             </div>
         </div>
 
-        <!-- Секция статей -->
-        <div class="articles-section">
-            <h2 data-lang="ru">Публикации</h2>
-            <h2 data-lang="en">Publications</h2>
-            <div class="articles-grid">
-                <!-- Статья 1 -->
-                <div class="article-card">
-                    <div class="article-image">
-                        <img src="new/images/nobullshitaviation.jpg" alt="Article Image">
-                    </div>
-                    <div class="article-text">
-                        <h3 data-lang="ru">I. No Bullshit Aviation</h3>
-                        <h3 data-lang="en">I. No Bullshit Aviation</h3>
-                        <p data-lang="ru">18 лет в авиации — ваш надежный проводник в мире сделок с воздушными судами.</p>
-                        <p data-lang="en">18 years in aviation — your trusted advisor for aircraft transactions.</p>
-                        <a href="no-bullshit-aviation.html" class="read-more" data-lang="ru">Читать →</a>
-                        <a href="no-bullshit-aviation.html" class="read-more" data-lang="en">Read →</a>
-                    </div>
-                </div>
-                
-                <!-- Статья 2 -->
-                <div class="article-card">
-                    <div class="article-image">
-                        <img src="new/images/article-broker.jpg" alt="Article Image">
-                    </div>
-                    <div class="article-text">
-                        <h3 data-lang="ru">II. Зачем нанимать брокера? Я и сам продам</h3>
-                        <h3 data-lang="en">II. Why Should I Hire a Broker? I Can Sell It Myself</h3>
-                        <p data-lang="ru"><strong>"Почему ваш самолёт годами пылится на рынке?"</strong>
-                            19 из 20 частных продавцов переоценивают свой самолёт на 15-30%. Брокер не просто "размещает объявление" — он знает, кому и как презентовать ваш лайнер, чтобы не продешевить. 7 реальных причин, почему DIY-продажи в авиации — это дорогая иллюзия.</p>
-                        <p data-lang="en">"Why Is Your Jet Collecting Dust on the Market?"
-                            95% of private sellers overprice their aircraft by 15-30%. A broker doesn’t just "list your plane" — they know exactly who needs it and how to position it. 7 harsh truths about why selling solo costs you more time and money than a broker’s commission.</p>
-                        <a href="why-should-i-hire-a-broker.html" class="read-more" data-lang="ru">Читать →</a>
-                        <a href="why-should-i-hire-a-broker.html" class="read-more" data-lang="en">Read →</a>
-                    </div>
-                </div>
-
-                <!-- Статья 3 -->
-                <div class="article-card">
-                    <div class="article-image">
-                        <img src="new/images/article3.jpg" alt="Article Image">
-                    </div>
-                    <div class="article-text">
-                        <h3 data-lang="ru">III. Зачем вам эксклюзивный мандат?</h3>
-                        <h3 data-lang="en">III. Why Exclusivity Matters in Aircraft Sales</h3>
-                        <p data-lang="ru">"Эксклюзивный мандат — это не ограничение, а инструмент, который позволяет брокеру полностью посвятить себя продаже вашего самолёта, зная, что его усилия будут вознаграждены."</p>
-                        <p data-lang="en">"An exclusive mandate is not a limitation but a tool that allows a broker to fully commit to selling your aircraft, knowing their efforts will be rewarded."</p>
-                        <a href="exclusive-mandat.html" class="read-more" data-lang="ru">Читать →</a>
-                        <a href="exclusive-mandat.html" class="read-more" data-lang="en">Read →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Секция самолетов -->
         <div class="aircraft-content">
             <div class="aircraft-section">
@@ -125,19 +133,19 @@
                         <h3>Продажа</h3>
                         <ul class="aircraft-list">
                             <li>2009 BBJ</li>
-                            <li>2015 Global 5000</li>
-                            <li>2010 Legacy 650</li>
-                            <li>2012 Falcon 2000LX</li>
+                            <li>2002 Falcon 50EX</li>
+                            <li>2015 and 2016 Global 5000</li>
+                            <li>2008 Challenger 850</li>
+                            <li>2021 PC-12 NGX</li>
                         </ul>
                     </div>
                     <div class="aircraft-column">
                         <h3>Покупка</h3>
                         <ul class="aircraft-list">
-                            <li>Challenger 350</li>
-                            <li>Challenger 650 - 2021 and newer</li>
                             <li>Gulfstream G700</li>
-                            <li>ACJ319 or 320 NEO</li>
                             <li>Global 6500</li>
+                            <li>Challenger 650 after 96 Month</li>
+                            <li>Legacy 600/650 reasonably priced</li>
                         </ul>
                     </div>
                 </div>

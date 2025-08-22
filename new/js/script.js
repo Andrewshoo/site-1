@@ -15,7 +15,11 @@ const translations = {
     emailTitle: "Написать email",
     publications: "Публикации",
     readMore: "Читать →",
-    backToHome: "← Вернуться на главную"
+    backToHome: "← Вернуться на главную",
+    publicationsTitle: "Публикации — глубокий взгляд на мир бизнес-авиации",
+    publicationsIntro: "Экспертные статьи и аналитика от профессионала с 18-летним опытом в авиации",
+    readArticle: "Читать статью",
+    readTime: "мин чтения"
   },
   en: {
     header: "Thoughtful, individual, human approach to buying and selling business aircraft.",
@@ -32,7 +36,11 @@ const translations = {
     emailTitle: "Email us",
     publications: "Publications",
     readMore: "Read →",
-    backToHome: "← Back to Home"
+    backToHome: "← Back to Home",
+    publicationsTitle: "Publications — deep insights into business aviation",
+    publicationsIntro: "Expert articles and analytics from a professional with 18 years of aviation experience",
+    readArticle: "Read article",
+    readTime: "min read"
   }
 };
 
@@ -48,6 +56,81 @@ function switchLanguage(lang) {
   const url = new URL(window.location.href);
   url.searchParams.set('lang', lang);
   window.history.pushState({}, '', url);
+}
+
+// Функции для бургер-меню
+function initBurgerMenu() {
+    const burgerIcon = document.getElementById('burgerIcon');
+    const burgerNav = document.getElementById('burgerNav');
+    const burgerOverlay = document.getElementById('burgerOverlay');
+    
+    if (burgerIcon && burgerNav && burgerOverlay) {
+        // Открытие/закрытие меню
+        burgerIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+        
+        // Закрытие меню при клике на оверлей
+        burgerOverlay.addEventListener('click', function() {
+            closeMenu();
+        });
+        
+        // Закрытие меню при клике на ссылку (кроме внешних)
+        const navLinks = burgerNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Для внутренних ссылок (без onclick или с определенными обработчиками)
+                if (this.hasAttribute('onclick')) {
+                    const onclickAttr = this.getAttribute('onclick');
+                    // Если это вызов функции для Telegram, WhatsApp или Email
+                    if (onclickAttr.includes('openEncodedLink') || 
+                        onclickAttr.includes('openWA') || 
+                        onclickAttr.includes('sendEmail')) {
+                        e.preventDefault();
+                        closeMenuWithDelay();
+                        // Выполняем действие из onclick
+                        eval(onclickAttr);
+                    }
+                    // Для других случаев с onclick позволяем стандартное поведение
+                } else {
+                    // Для обычных внутренних ссылок закрываем меню с задержкой
+                    closeMenuWithDelay();
+                }
+            });
+        });
+        
+        // Закрытие меню при клике вне его области
+        document.addEventListener('click', function(event) {
+            if (!burgerNav.contains(event.target) && !burgerIcon.contains(event.target) && burgerNav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+        
+        // Предотвращаем закрытие при клике внутри меню
+        burgerNav.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+        
+        // Функции для управления меню
+        function toggleMenu() {
+            burgerIcon.classList.toggle('active');
+            burgerNav.classList.toggle('active');
+            burgerOverlay.classList.toggle('active');
+        }
+        
+        function closeMenu() {
+            burgerIcon.classList.remove('active');
+            burgerNav.classList.remove('active');
+            burgerOverlay.classList.remove('active');
+        }
+        
+        function closeMenuWithDelay() {
+            setTimeout(() => {
+                closeMenu();
+            }, 300);
+        }
+    }
 }
 
 // Функция для применения переводов
@@ -78,6 +161,30 @@ function applyTranslations(lang) {
       aircraftTitles[1].textContent = langData.purchase;
     }
   }
+
+   const publicationTitle = document.querySelector('.header-text');
+  if (publicationTitle && publicationTitle.getAttribute('data-lang')) {
+    publicationTitle.textContent = langData.publicationsTitle;
+  }
+
+  // Обновляем навигацию в бургер-меню
+    const navLinks = document.querySelectorAll('.burger-nav a[data-lang]');
+    navLinks.forEach(link => {
+        if (link.getAttribute('data-lang') === lang) {
+            link.style.display = 'block';
+        } else {
+            link.style.display = 'none';
+        }
+    });
+
+    const menuTexts = document.querySelectorAll('.menu-list span[data-lang]');
+    menuTexts.forEach(element => {
+        if (element.getAttribute('data-lang') === lang) {
+            element.style.display = 'inline';
+        } else {
+            element.style.display = 'none';
+        }
+    });
   
   // Обновляем title атрибуты
   const icons = document.querySelectorAll('.contact-icons a');
@@ -123,6 +230,13 @@ function applyTranslations(lang) {
   // Устанавливаем язык документа
   document.documentElement.lang = lang;
 }
+
+// Обновим инициализацию при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    const lang = detectLanguage();
+    switchLanguage(lang);
+    initBurgerMenu(); // Инициализируем бургер-меню
+});
 
 // Функция для определения языка
 function detectLanguage() {
