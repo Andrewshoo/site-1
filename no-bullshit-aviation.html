@@ -9,18 +9,74 @@
     <link rel="stylesheet" href="site-1/new/css/article.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="alternate" hreflang="ru" href="no-bullshit-aviation.html?lang=ru">
-    <link rel="alternate" hreflang="en" href="no-bullshit-aviation.html?lang=en">
 </head>
 <body>
+    <!-- Бургер-меню -->
+    <div class="burger-menu">
+        <div class="burger-icon" id="burgerIcon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="burger-nav" id="burgerNav">
+            <div class="menu-content">
+                <div class="menu-header">
+                    <div class="menu-logo">
+                        <img src="site-1/new/images/logo_new.png" alt="UPCAST Logo">
+                    </div>
+                    <h3>UPCAST</h3>
+                </div>
+                <ul class="menu-list">
+                    <li>
+                        <a href="index.html?lang=ru" data-lang="ru">
+                            <i class="fas fa-home"></i>
+                            <span>Главная</span>
+                        </a>
+                        <a href="index.html?lang=en" data-lang="en">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="publications.html?lang=ru" data-lang="ru">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Публикации</span>
+                        </a>
+                        <a href="publications.html?lang=en" data-lang="en">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Publications</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openEncodedLink(); return false;">
+                            <i class="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openWA(); return false;">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="sendEmail(); return false;">
+                            <i class="fas fa-envelope"></i>
+                            <span data-lang="ru">Email</span>
+                            <span data-lang="en">Email</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="burger-overlay" id="burgerOverlay"></div>
+    </div>
+
     <div class="page-wrapper">
         <!-- Логотип (левая колонка) -->
         <div class="logo-column">
-            <a href="/site-1/index.html?lang=ru" class="logo" aria-label="На главную" data-lang="ru">
-                 <img src="site-1/new/images/logo_new.png" alt="UPCAST - Главная страница">
-            </a>
-            <a href="site-1/index.html?lang=en" class="logo" aria-label="Home" data-lang="en" hidden>
-                <img src="site-1/new/images/logo_new.png" alt="UPCAST - Home">
+            <a href="index.html" class="logo">
+                <img src="site-1/new/images/logo_new.png" alt="UPCAST">
             </a>
         </div>
 
@@ -40,7 +96,7 @@
                     <img src="site-1/new/images/nobullshitaviation.png" alt="No Bullshit Aviation">
                 </div>
 
-                <div class="article-content">
+                <div class="article-text">
                     <!-- Русская версия -->
                     <div data-lang="ru">
                         <p>Предположение: вы хотите делать дела эффективно, быстро и результативно, чтобы освободить время для приятных занятий. В случае авиации это значит – быстро и выгодно решать авиационные вопросы, чтобы спокойно наслаждаться магией полёта, авиационной тусовкой или владением своим самолётом.</p>
@@ -71,7 +127,7 @@
                         
                         <p>В рамках No Bullshit Aviation правила общения соблюдают обе стороны. Сжато и по существу. Если общение скатывается в «просто поболтать», вы либо рекомендуете меня другим, либо даёте мне свой вертолёт полетать, либо переходим на почасовую ставку, как психологи и юристы.</p>
                         
-                        <a href="publications.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад</a>
+                        <a href="publications.html" class="back-link" data-lang="ru"><i class="fas fa-arrow-left"></i> Назад к публикациям</a>
                     </div>
                     
                     <!-- Английская версия -->
@@ -104,7 +160,7 @@
                         
                         <p>We value each other's time. No Bullshit Aviation means quick and efficient communication from both sides. If it becomes a therapy session or hangar chit-chat, please recommend me to your friends, give me some flight time on your helicopter, or pay an hourly rate.</p>
                         
-                        <a href="site-1/publications.html" class="back-link"><i class="fas fa-arrow-left"></i> Back </a>
+                        <a href="publications.html" class="back-link" data-lang="en"><i class="fas fa-arrow-left"></i> Back to Publications</a>
                     </div>
                 </div>
             </div>
@@ -117,34 +173,25 @@
         </div>
     </div>
 
+    <script src="site-1/new/js/script.js"></script>
     <script>
-            document.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const lang = urlParams.get('lang') || localStorage.getItem('siteLanguage') || 'en';
-        
-        // Применяем перевод
-        document.querySelectorAll('[data-lang]').forEach(el => {
-            el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
-        });
-        
-        // Обработчик кнопок языка
-        document.querySelectorAll('.language-switcher button').forEach(btn => {
-            btn.addEventListener('click', function() {
-            const lang = this.textContent.toLowerCase();
-            localStorage.setItem('siteLanguage', lang);
-            window.location.search = `?lang=${lang}`;
-            });
+        // Инициализация для страницы статьи
+        document.addEventListener('DOMContentLoaded', function() {
+            const lang = detectLanguage();
+            applyTranslations(lang);
             
-            // Подсветка активной кнопки
-            btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            // Обновляем ссылку "Назад" с учетом языка
+            const backLinks = document.querySelectorAll('.back-link');
+            backLinks.forEach(link => {
+                const linkLang = link.getAttribute('data-lang');
+                if (linkLang === lang) {
+                    link.style.display = 'inline-block';
+                    link.href = `publications.html?lang=${lang}`;
+                } else {
+                    link.style.display = 'none';
+                }
+            });
         });
-        
-        // Кнопка "Назад"
-        const backLink = document.querySelector('.back-link');
-        if (backLink) {
-            backLink.href = `site-1/publications.html?lang=${lang}`;
-        }
-        });  
     </script>
 </body>
 </html>

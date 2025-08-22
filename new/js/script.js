@@ -44,229 +44,154 @@ const translations = {
   }
 };
 
+// Функция для определения языка с правильным приоритетом
+function detectLanguage() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const langParam = urlParams.get('lang');
+  
+  // Высший приоритет: параметр из URL
+  if (langParam && (langParam === 'ru' || langParam === 'en')) {
+    localStorage.setItem('siteLanguage', langParam);
+    return langParam;
+  }
+  
+  // Второй приоритет: сохраненный язык
+  const savedLang = localStorage.getItem('siteLanguage');
+  if (savedLang) {
+    return savedLang;
+  }
+  
+  // Третий приоритет: язык браузера
+  const browserLang = navigator.language.startsWith('ru') ? 'ru' : 'en';
+  localStorage.setItem('siteLanguage', browserLang);
+  return browserLang;
+}
+
 // Функция для переключения языка
 function switchLanguage(lang) {
+  if (!['ru', 'en'].includes(lang)) return;
+  
   // Сохраняем выбранный язык
   localStorage.setItem('siteLanguage', lang);
   
-  // Применяем переводы
-  applyTranslations(lang);
-  
-  // Обновляем URL без перезагрузки страницы
+  // Обновляем URL с параметром языка
   const url = new URL(window.location.href);
   url.searchParams.set('lang', lang);
-  window.history.pushState({}, '', url);
-}
-
-// Функции для бургер-меню
-function initBurgerMenu() {
-    const burgerIcon = document.getElementById('burgerIcon');
-    const burgerNav = document.getElementById('burgerNav');
-    const burgerOverlay = document.getElementById('burgerOverlay');
-    
-    if (burgerIcon && burgerNav && burgerOverlay) {
-        // Открытие/закрытие меню
-        burgerIcon.addEventListener('click', function(e) {
-            e.stopPropagation();
-            toggleMenu();
-        });
-        
-        // Закрытие меню при клике на оверлей
-        burgerOverlay.addEventListener('click', function() {
-            closeMenu();
-        });
-        
-        // Закрытие меню при клике на ссылку (кроме внешних)
-        const navLinks = burgerNav.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Для внутренних ссылок (без onclick или с определенными обработчиками)
-                if (this.hasAttribute('onclick')) {
-                    const onclickAttr = this.getAttribute('onclick');
-                    // Если это вызов функции для Telegram, WhatsApp или Email
-                    if (onclickAttr.includes('openEncodedLink') || 
-                        onclickAttr.includes('openWA') || 
-                        onclickAttr.includes('sendEmail')) {
-                        e.preventDefault();
-                        closeMenuWithDelay();
-                        // Выполняем действие из onclick
-                        eval(onclickAttr);
-                    }
-                    // Для других случаев с onclick позволяем стандартное поведение
-                } else {
-                    // Для обычных внутренних ссылок закрываем меню с задержкой
-                    closeMenuWithDelay();
-                }
-            });
-        });
-        
-        // Закрытие меню при клике вне его области
-        document.addEventListener('click', function(event) {
-            if (!burgerNav.contains(event.target) && !burgerIcon.contains(event.target) && burgerNav.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-        
-        // Предотвращаем закрытие при клике внутри меню
-        burgerNav.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-        
-        // Функции для управления меню
-        function toggleMenu() {
-            burgerIcon.classList.toggle('active');
-            burgerNav.classList.toggle('active');
-            burgerOverlay.classList.toggle('active');
-        }
-        
-        function closeMenu() {
-            burgerIcon.classList.remove('active');
-            burgerNav.classList.remove('active');
-            burgerOverlay.classList.remove('active');
-        }
-        
-        function closeMenuWithDelay() {
-            setTimeout(() => {
-                closeMenu();
-            }, 300);
-        }
-    }
+  window.history.replaceState({}, '', url);
+  
+  // Применяем переводы
+  applyTranslations(lang);
 }
 
 // Функция для применения переводов
 function applyTranslations(lang) {
   const langData = translations[lang] || translations['en'];
   
-  // Обновляем тексты
-  if (document.querySelector('.header-text')) {
-    document.querySelector('.header-text').textContent = langData.header;
-  }
+  // Обновляем основные тексты
+  document.querySelectorAll('.header-text').forEach(el => {
+    if (!el.hasAttribute('data-lang')) {
+      el.textContent = langData.header;
+    }
+  });
   
   if (document.querySelector('.description')) {
     document.querySelector('.description').innerHTML = langData.description;
   }
   
-  if (document.querySelector('.sign')) {
-    document.querySelector('.sign').textContent = langData.signature;
-  }
-  
-  if (document.querySelector('.aircraft-section h2')) {
-    document.querySelector('.aircraft-section h2').textContent = langData.projects;
-  }
-  
-  const aircraftTitles = document.querySelectorAll('.aircraft-column h3');
-  if (aircraftTitles.length > 0) {
-    aircraftTitles[0].textContent = langData.sale;
-    if (aircraftTitles[1]) {
-      aircraftTitles[1].textContent = langData.purchase;
-    }
-  }
-
-   const publicationTitle = document.querySelector('.header-text');
-  if (publicationTitle && publicationTitle.getAttribute('data-lang')) {
-    publicationTitle.textContent = langData.publicationsTitle;
-  }
-
-  // Обновляем навигацию в бургер-меню
-    const navLinks = document.querySelectorAll('.burger-nav a[data-lang]');
-    navLinks.forEach(link => {
-        if (link.getAttribute('data-lang') === lang) {
-            link.style.display = 'block';
-        } else {
-            link.style.display = 'none';
-        }
-    });
-
-    const menuTexts = document.querySelectorAll('.menu-list span[data-lang]');
-    menuTexts.forEach(element => {
-        if (element.getAttribute('data-lang') === lang) {
-            element.style.display = 'inline';
-        } else {
-            element.style.display = 'none';
-        }
-    });
-  
-  // Обновляем title атрибуты
-  const icons = document.querySelectorAll('.contact-icons a');
-  if (icons.length > 0) {
-    icons[0].setAttribute('title', langData.telegramTitle);
-    icons[1].setAttribute('title', langData.whatsappTitle);
-    icons[2].setAttribute('title', langData.emailTitle);
-  }
-
-  // Обновляем публикации
-  const pubTitles = document.querySelectorAll('.articles-section h2');
-  if (pubTitles.length > 0) {
-    pubTitles.forEach(title => {
-      if (title.getAttribute('data-lang') === lang) {
-        title.style.display = 'block';
-      } else {
-        title.style.display = 'none';
+  // Обновляем элементы с data-lang
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const elementLang = el.getAttribute('data-lang');
+    el.style.display = elementLang === lang ? 'block' : 'none';
+    
+    // Для элементов с текстовым содержимым
+    if (['P', 'SPAN', 'H1', 'H2', 'H3', 'A'].includes(el.tagName)) {
+      const translationKey = el.getAttribute('data-translation');
+      if (translationKey && langData[translationKey]) {
+        el.textContent = langData[translationKey];
       }
-    });
-  }
-
-  // Обновляем активное состояние кнопок
+    }
+  });
+  
+  // Обновляем активное состояние кнопок языка
   document.querySelectorAll('.language-switcher button').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
   });
-
-  // Скрываем/показываем элементы с data-lang
-  document.querySelectorAll('[data-lang]').forEach(el => {
-    if (el.tagName !== 'H2') { // Исключаем заголовки, которые обрабатываются отдельно
-      el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
-    }
-  });
-
-  // Обновляем ссылки "Читать далее"
-  document.querySelectorAll('.read-more').forEach(link => {
-    if (link.getAttribute('data-lang') === lang) {
-      link.style.display = 'inline-block';
-    } else {
-      link.style.display = 'none';
-    }
-  });
-
+  
   // Устанавливаем язык документа
   document.documentElement.lang = lang;
 }
 
-// Обновим инициализацию при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-    const lang = detectLanguage();
-    switchLanguage(lang);
-    initBurgerMenu(); // Инициализируем бургер-меню
-});
-
-// Функция для определения языка
-function detectLanguage() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const langParam = urlParams.get('lang');
-  const savedLang = localStorage.getItem('siteLanguage');
-  const browserLang = navigator.language.startsWith('ru') ? 'ru' : 'en';
+// Функции для бургер-меню
+function initBurgerMenu() {
+  const burgerIcon = document.getElementById('burgerIcon');
+  const burgerNav = document.getElementById('burgerNav');
+  const burgerOverlay = document.getElementById('burgerOverlay');
   
-  return langParam || savedLang || browserLang;
+  if (!burgerIcon || !burgerNav || !burgerOverlay) return;
+  
+  const toggleMenu = () => {
+    burgerIcon.classList.toggle('active');
+    burgerNav.classList.toggle('active');
+    burgerOverlay.classList.toggle('active');
+  };
+  
+  const closeMenu = () => {
+    burgerIcon.classList.remove('active');
+    burgerNav.classList.remove('active');
+    burgerOverlay.classList.remove('active');
+  };
+  
+  burgerIcon.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+  
+  burgerOverlay.addEventListener('click', closeMenu);
+  
+  // Обработка кликов по ссылкам меню
+  document.querySelectorAll('.burger-nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (link.hasAttribute('onclick')) {
+        // Для ссылок с обработчиками (Telegram, WhatsApp, Email)
+        e.preventDefault();
+        closeMenu();
+        const onclickAttr = link.getAttribute('onclick');
+        if (onclickAttr) eval(onclickAttr);
+      } else {
+        // Для обычных ссылок просто закрываем меню
+        setTimeout(closeMenu, 300);
+      }
+    });
+  });
+  
+  // Закрытие меню при клике вне его области
+  document.addEventListener('click', (e) => {
+    if (!burgerNav.contains(e.target) && !burgerIcon.contains(e.target) && burgerNav.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+  
+  burgerNav.addEventListener('click', (e) => e.stopPropagation());
+}
+
+// Функции для контактов
+function openEncodedLink() {
+  const encoded = 'aHR0cHM6Ly90Lm1lL2l2amV0';
+  window.open(atob(encoded), '_blank');
+}
+
+function openWA() {
+  const encoded = 'NzkwMzY2NjE1MTM=';
+  window.open(`https://wa.me/${atob(encoded)}`, '_blank');
+}
+
+function sendEmail() {
+  window.location.href = "mailto:ivan@upcast.pro";
 }
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
   const lang = detectLanguage();
   switchLanguage(lang);
+  initBurgerMenu();
 });
-
-// Функции для контактов
-function openEncodedLink() {
-  const encoded = 'aHR0cHM6Ly90Lm1lL2l2amV0';
-  const url = atob(encoded);
-  window.open(url, '_blank');
-}
-
-function openWA() {
-  const encoded = 'NzkwMzY2NjE1MTM=';
-  const phone = atob(encoded);
-  window.open(`https://wa.me/${phone}`, '_blank');
-}
-
-function sendEmail() {
-  window.location.href = "mailto:ivan@upcast.pro";
-}
