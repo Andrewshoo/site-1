@@ -16,7 +16,7 @@ const translations = {
     publications: "Публикации",
     readMore: "Читать →",
     backToHome: "← Вернуться на главную",
-    publicationsTitle: "Публикации — глубокий взгляд на мир бизнес-авиации",
+    publicationsTitle: "Глубокий взгляд на мир бизнес-авиации",
     publicationsIntro: "Экспертные статьи и аналитика от профессионала с 18-летним опытом в авиации",
     readArticle: "Читать статью",
     readTime: "мин чтения"
@@ -37,12 +37,19 @@ const translations = {
     publications: "Publications",
     readMore: "Read →",
     backToHome: "← Back to Home",
-    publicationsTitle: "Publications — deep insights into business aviation",
+    publicationsTitle: "Deep insights into business aviation",
     publicationsIntro: "Expert articles and analytics from a professional with 18 years of aviation experience",
     readArticle: "Read article",
     readTime: "min read"
   }
 };
+
+function getLocalizedUrl(path, lang = null) {
+    const currentLang = lang || localStorage.getItem('siteLanguage') || 'en';
+    const url = new URL(path, window.location.origin);
+    url.searchParams.set('lang', currentLang);
+    return url.pathname + url.search;
+}
 
 // Функция для определения языка с правильным приоритетом
 function detectLanguage() {

@@ -75,8 +75,11 @@
     <div class="page-wrapper">
         <!-- Логотип (левая колонка) -->
         <div class="logo-column">
-            <a href="index.html" class="logo">
-                <img src="site-1/new/images/logo_new.png" alt="UPCAST">
+            <a href="site-1/index.html?lang=ru" class="logo" aria-label="На главную" data-lang="ru">
+                 <img src="/site-1/new/images/logo_new.png" alt="UPCAST - Главная страница">
+            </a>
+            <a href="site-1/index.html?lang=en" class="logo" aria-label="Home" data-lang="en" hidden>
+                <img src="site-1/new/images/logo_new.png" alt="UPCAST - Home">
             </a>
         </div>
 
@@ -127,7 +130,7 @@
                         
                         <p>В рамках No Bullshit Aviation правила общения соблюдают обе стороны. Сжато и по существу. Если общение скатывается в «просто поболтать», вы либо рекомендуете меня другим, либо даёте мне свой вертолёт полетать, либо переходим на почасовую ставку, как психологи и юристы.</p>
                         
-                        <a href="publications.html" class="back-link" data-lang="ru"><i class="fas fa-arrow-left"></i> Назад к публикациям</a>
+                        <a href="site-1/publications.html" class="back-link" data-lang="ru"><i class="fas fa-arrow-left"></i> Назад к публикациям</a>
                     </div>
                     
                     <!-- Английская версия -->
@@ -160,7 +163,7 @@
                         
                         <p>We value each other's time. No Bullshit Aviation means quick and efficient communication from both sides. If it becomes a therapy session or hangar chit-chat, please recommend me to your friends, give me some flight time on your helicopter, or pay an hourly rate.</p>
                         
-                        <a href="publications.html" class="back-link" data-lang="en"><i class="fas fa-arrow-left"></i> Back to Publications</a>
+                        <a href="site-1/publications.html" class="back-link" data-lang="en"><i class="fas fa-arrow-left"></i> Back to Publications</a>
                     </div>
                 </div>
             </div>
@@ -175,23 +178,33 @@
 
     <script src="site-1/new/js/script.js"></script>
     <script>
-        // Инициализация для страницы статьи
-        document.addEventListener('DOMContentLoaded', function() {
-            const lang = detectLanguage();
-            applyTranslations(lang);
+      document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang') || localStorage.getItem('siteLanguage') || 'en';
             
-            // Обновляем ссылку "Назад" с учетом языка
-            const backLinks = document.querySelectorAll('.back-link');
-            backLinks.forEach(link => {
-                const linkLang = link.getAttribute('data-lang');
-                if (linkLang === lang) {
-                    link.style.display = 'inline-block';
-                    link.href = `publications.html?lang=${lang}`;
-                } else {
-                    link.style.display = 'none';
-                }
+            // Применяем перевод
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
             });
-        });
+            
+            // Обработчик кнопок языка
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                const lang = this.textContent.toLowerCase();
+                localStorage.setItem('siteLanguage', lang);
+                window.location.search = `?lang=${lang}`;
+                });
+                
+                // Подсветка активной кнопки
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+            
+            // Кнопка "Назад"
+            const backLink = document.querySelector('.back-link');
+            if (backLink) {
+                backLink.href = `site-1/publications.html?lang=${lang}`;
+            }
+        });  
     </script>
 </body>
 </html>

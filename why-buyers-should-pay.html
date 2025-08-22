@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Buyers Should Pay Their Brokers | UPCAST</title>
+    <base href="/">
+    <link rel="stylesheet" href="site-1/new/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Стили для этой конкретной статьи */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .article-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2.8rem;
+            color: #1a3e72;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #1a3e72 0%, #2c5282 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 20px;
+        }
+        
+        .article-title-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .article-title-wrapper:before,
+        .article-title-wrapper:after {
+            content: '✈️';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+        
+        .article-title-wrapper:before {
+            left: -50px;
+        }
+        
+        .article-title-wrapper:after {
+            right: -50px;
+        }
+        
+        .article-meta {
+            color: #666;
+            font-family: 'Manrope', sans-serif;
+            font-size: 1rem;
+            margin-top: 25px;
+            padding: 15px;
+            background: linear-gradient(to right, rgba(26, 62, 114, 0.1), rgba(232, 195, 30, 0.1));
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .article-image-container {
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 16/9;
+            max-height: 500px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #e8c31e;
+        }
+        
+        .article-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .article-image-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        .article-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 30px;
+            color: white;
+        }
+        
+        .article-content {
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.9;
+            color: #2d3748;
+            font-size: 1.1rem;
+        }
+        
+        /* Блоки ожидание/реальность */
+        .expectation-reality {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .expectation-box, .reality-box {
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .expectation-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #1a3e72;
+        }
+        
+        .reality-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #e8c31e;
+        }
+        
+        .expectation-box h3, .reality-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #1a3e72;
+            position: relative;
+            padding-left: 35px;
+        }
+        
+        .expectation-box h3:before {
+            content: '💭';
+            position: absolute;
+            left: 0;
+            font-size: 1.8rem;
+        }
+        
+        .reality-box h3:before {
+            content: '🎯';
+            position: absolute;
+            left: 0;
+            font-size: 1.8rem;
+        }
+        
+        /* Нумерованный список причин */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .reason-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-left: 5px solid #1a3e72;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reason-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a3e72, #e8c31e);
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .reason-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(26, 62, 114, 0.1);
+            line-height: 1;
+        }
+        
+        .reason-card h4 {
+            font-size: 1.3rem;
+            color: #1a3e72;
+            margin-bottom: 15px;
+            padding-right: 60px;
+        }
+        
+        /* Блок вывода */
+        .conclusion-block {
+            background: linear-gradient(135deg, #1a3e72 0%, #2c5282 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .conclusion-block:before {
+            content: '⭐';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 4rem;
+            opacity: 0.2;
+        }
+        
+        .conclusion-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #e8c31e;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 50px;
+            color: #1a3e72;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.4s;
+            padding: 15px 30px;
+            border: 3px solid #1a3e72;
+            border-radius: 50px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(26, 62, 114, 0.2);
+        }
+        
+        .back-link i {
+            margin-right: 12px;
+            transition: transform 0.4s;
+        }
+        
+        .back-link:hover {
+            color: white;
+            background: #1a3e72;
+            transform: translateX(-5px);
+        }
+        
+        .back-link:hover i {
+            transform: translateX(-8px);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 968px) {
+            .expectation-reality {
+                grid-template-columns: 1fr;
+            }
+            
+            .reasons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-title {
+                font-size: 2.2rem;
+            }
+            
+            .article-title-wrapper:before,
+            .article-title-wrapper:after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                padding: 20px 15px;
+            }
+            
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .article-image-container {
+                margin: 30px 0;
+                max-height: 300px;
+            }
+            
+            .reason-card {
+                padding: 20px;
+            }
+            
+            .conclusion-block {
+                padding: 25px;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .reason-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .reason-card:nth-child(1) { animation-delay: 0.1s; }
+        .reason-card:nth-child(2) { animation-delay: 0.2s; }
+        .reason-card:nth-child(3) { animation-delay: 0.3s; }
+        .reason-card:nth-child(4) { animation-delay: 0.4s; }
+        .reason-card:nth-child(5) { animation-delay: 0.5s; }
+        .reason-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Бургер-меню -->
+    <div class="burger-menu">
+        <div class="burger-icon" id="burgerIcon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="burger-nav" id="burgerNav">
+            <div class="menu-content">
+                <div class="menu-header">
+                    <div class="menu-logo">
+                        <img src="site-1/new/images/logo_new.png" alt="UPCAST Logo">
+                    </div>
+                    <h3>UPCAST</h3>
+                </div>
+                <ul class="menu-list">
+                    <li>
+                        <a href="index.html" class="nav-link" data-page="index">
+                            <i class="fas fa-home"></i>
+                            <span data-lang="ru">Главная</span>
+                            <span data-lang="en">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="publications.html" class="nav-link" data-page="publications">
+                            <i class="fas fa-newspaper"></i>
+                            <span data-lang="ru">Публикации</span>
+                            <span data-lang="en">Publications</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openEncodedLink(); return false;">
+                            <i class="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openWA(); return false;">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="sendEmail(); return false;">
+                            <i class="fas fa-envelope"></i>
+                            <span data-lang="ru">Email</span>
+                            <span data-lang="en">Email</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="burger-overlay" id="burgerOverlay"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Логотип (левая колонка) -->
+        <div class="logo-column">
+            <a href="index.html" class="logo" id="logoLink">
+                <img src="site-1/new/images/logo_new.png" alt="UPCAST">
+            </a>
+        </div>
+
+        <!-- Контент статьи -->
+        <div class="article-content">
+            <div class="article-container">
+                <div class="article-header">
+                    <div class="article-title-wrapper">
+                        <h1 class="article-title" data-lang="ru">IV. Собираюсь купить самолёт – пусть кто-нибудь найдёт мне хороший и возьмёт деньги с продавца</h1>
+                        <h1 class="article-title" data-lang="en">IV. I'm buying an aircraft. I'll tell people and let them bring me options. The seller can pay them.</h1>
+                    </div>
+                    <div class="article-meta">
+                        <span data-lang="ru">25 августа 2024 | Иван Веретенников</span>
+                        <span data-lang="en">August 25, 2024 | Ivan Veretennikov</span>
+                    </div>
+                </div>
+
+                <div class="article-image-container">
+                    <img src="new/images/buyer-broker-relationship.jpg" alt="Buyer Broker Relationship">
+                    <div class="article-image-overlay">
+                        <span data-lang="ru">Профессиональные отношения покупателя и брокера</span>
+                        <span data-lang="en">Professional buyer-broker relationship</span>
+                    </div>
+                </div>
+
+                <div class="article-content">
+                    <!-- Блоки ожидание/реальность -->
+                    <div class="expectation-reality">
+                        <div class="expectation-box" data-lang="ru">
+                            <h3>Ожидание</h3>
+                            <p>Серьёзных покупателей в мире не так много, поэтому со мной захотят работать и будут стараться. Сообщу о своём желании всем, кого знаю. Пусть ищут мне идеальный самолёт. Бюджет мой они знают. А комиссию им заплатит продавец – так ведь принято.</p>
+                        </div>
+                        
+                        <div class="expectation-box" data-lang="en">
+                            <h3>Expectation</h3>
+                            <p>Real buyers are rare so everyone will value me and want to work for me. I'll tell everyone I know that I want to buy an aeroplane. Let them go out and find it for me. They know my preferences and budget. As for commission – let the seller pay it. That's how it's done in the industry.</p>
+                        </div>
+                        
+                        <div class="reality-box" data-lang="ru">
+                            <h3>Реальность</h3>
+                            <p>В данном случае да, такое может быть. Самолёт найдут. Комиссию заплатит продавец. Но что это будет значить? Что человек, который привёл эту сделку, заинтересован максимально порадовать продавца, а не вас. Соответственно, цена, юридические условия, техническая инспекция, налоги, логистика – всё будет очень доброжелательно и «lovely», но не в вашу пользу. А на серьёзном самолёте это легко может быть разница в 2–3 миллиона долларов, плюс юридические и технические риски. Однако чаще всего работает другое правило: когда ищут все – не ищет никто. К самому запросу на рынке не будут относиться серьёзно, ваши пожелания многократно исковеркают, а цену на подходящий самолёт повысят из-за того, что будет сразу несколько обращений от разных человек, создавая видимость высокого спроса.</p>
+                        </div>
+                        
+                        <div class="reality-box" data-lang="en">
+                            <h3>Reality</h3>
+                            <p>Yes, indeed. This is a possible scenario. Someone might find the plane and the seller might agree to pay commission. But is this really the best deal? The person who brought it is motivated to please the seller, not you. Which means that the price, legal and technical aspects, taxes, logistics will all be more favourable for him. All with a pleasant smile and coherent explanation, of course. For a bigger business jet this can mean a 2–3 million dollars difference, plus legal and technical risks. However, even more often a different rule is in play: when everyone is looking, nobody's looking. The request won't be treated seriously once it comes from too many different people, your initial requirements will be lost in these reiterations, while the price for suitable aircraft will go up because sellers will think they have several prospects and a sudden surge in demand.</p>
+                        </div>
+                    </div>
+
+                    <!-- Заголовок лонгрида -->
+                    <h2 style="text-align: center; margin: 60px 0 40px; color: #1a3e72; font-family: 'Manrope', sans-serif;" data-lang="ru">
+                        Почему покупатели должны сами платить брокеру?
+                    </h2>
+                    <h2 style="text-align: center; margin: 60px 0 40px; color: #1a3e72; font-family: 'Manrope', sans-serif;" data-lang="en">
+                        Why should buyers pay their brokers?
+                    </h2>
+
+                    <p style="font-style: italic; color: #666; text-align: center; margin-bottom: 50px;" data-lang="ru">
+                        На самом деле, вопрос довольно странный, если над ним задуматься...
+                    </p>
+                    <p style="font-style: italic; color: #666; text-align: center; margin-bottom: 50px;" data-lang="en">
+                        It's hard to believe when you really think about it...
+                    </p>
+
+                    <!-- Сетка причин -->
+                    <div class="reasons-grid">
+                        <!-- Причина 1 -->
+                        <div class="reason-card" data-lang="ru">
+                            <div class="reason-number">1</div>
+                            <h4>Потому что это серьёзная работа</h4>
+                            <p>Кажется, что этот пункт и так понятен – но нет. Чтобы стать и оставаться знающим, эффективным и успешным брокером, который может найти подходящий самолёт на самых лучших условиях, приходится как следует поработать. И за эту работу надо платить.</p>
+                        </div>
+                        
+                        <div class="reason-card" data-lang="en">
+                            <div class="reason-number">1</div>
+                            <h4>Because it's hard work</h4>
+                            <p>The first point is self-evident but worth making. Being a highly-qualified, efficient, knowledgeable, and professional broker who can find the perfect aircraft and help you avoid the pitfalls requires experience and hard work that should be reimbursed.</p>
+                        </div>
+
+                        <!-- Причина 2 -->
+                        <div class="reason-card" data-lang="ru">
+                            <div class="reason-number">2</div>
+                            <h4>Чтобы брокер был на вашей стороне</h4>
+                            <p>Продавец может заплатить кому угодно – и своему брокеру, и вашему. Но когда речь идёт о столь сложных сделках и больших суммах, точно ли вы хотите, чтобы он получал комиссию с той стороны? Всё же лучше, чтобы он действовал в ваших интересах – а для этого именно вы должны его нанять и ему заплатить.</p>
+                        </div>
+                        
+                        <div class="reason-card" data-lang="en">
+                            <div class="reason-number">2</div>
+                            <h4>So the broker is on your side</h4>
+                            <p>Sure, the seller could pay both brokers – his own and the one you've asked to help you with a transaction. However, with complex deals and expensive assets it's better to know that the broker is really working for you and not trying to push some seller's plane to receive commission from that side.</p>
+                        </div>
+
+                        <!-- Причина 3 -->
+                        <div class="reason-card" data-lang="ru">
+                            <div class="reason-number">3</div>
+                            <h4>Чтобы знать, сколько вы платите</h4>
+                            <p>Компания, которая занимается покупкой и продажей самолётов, не благотворительная организация и не инфлюенсер – бесплатно работать не может. Если вы не платите, то она эти деньги должна откуда-то взять. Поэтому при покупке самолёта вы точно переплатите, а вот сколько – знать не будете.</p>
+                        </div>
+                        
+                        <div class="reason-card" data-lang="en">
+                            <div class="reason-number">3</div>
+                            <h4>To know how much you are paying</h4>
+                            <p>A company in the aircraft sales and acquisitions business is neither a charity nor an Internet celebrity. If you're not paying for its services, it must be getting the money elsewhere. This means that when you buy an aircraft, you will overpay – but never know how much.</p>
+                        </div>
+
+                        <!-- Причина 4 -->
+                        <div class="reason-card" data-lang="ru">
+                            <div class="reason-number">4</div>
+                            <h4>Чтобы наконец решиться</h4>
+                            <p>Подписание мандата с брокером – важный шаг. Это переход от раздумий и разговоров непосредственно к покупке самолёта. Чтобы пойти на него, вам нужно будет договориться с собой, решиться, подсчитать деньги, определиться с выбором. Очень полезно, поверьте.</p>
+                        </div>
+                        
+                        <div class="reason-card" data-lang="en">
+                            <div class="reason-number">4</div>
+                            <h4>To really make the decision</h4>
+                            <p>Signing an acquisition mandate with a broker is a big step. It marks the transition from talking about buying an aeroplane to actually buying it. It will make you sit down with yourself and say "I'm serious about this, I know that I want a plane and I'm ready to go through the process."</p>
+                        </div>
+
+                        <!-- Причина 5 -->
+                        <div class="reason-card" data-lang="ru">
+                            <div class="reason-number">5</div>
+                            <h4>Иначе вас никто не будет принимать всерьёз</h4>
+                            <p>На рынке бизнес-авиации полно «сказочников», которые обзванивают продавцов и заявляют, что собираются что-то купить. Случаи, когда запрос поступает от брокера, у которого есть мандат на покупку, чёткие требования и бюджет, настолько редки, что сразу привлекают к себе внимание.</p>
+                        </div>
+                        
+                        <div class="reason-card" data-lang="en">
+                            <div class="reason-number">5</div>
+                            <h4>So everyone takes you seriously</h4>
+                            <p>The business aviation market is flooded with "tyre kickers" and casual enquiries. It's a rare occasion that sellers or their representatives receive a request from a mandated broker working for a serious and ready buyer. It immediately makes your case stand out.</p>
+                        </div>
+
+                        <!-- Причина 6 -->
+                        <div class="reason-card" data-lang="ru">
+                            <div class="reason-number">6</div>
+                            <h4>Это «служба одного окна»</h4>
+                            <p>Да, избитое выражение, но здесь оно подходит. Важно, чтобы покупкой занимался один уполномоченный человек, который собирает предложения и знает все ваши ожидания. Когда вашим запросом занимается все, кому не лень, очень скоро мировой рынок про него знает.</p>
+                        </div>
+                        
+                        <div class="reason-card" data-lang="en">
+                            <div class="reason-number">6</div>
+                            <h4>Have a "one stop shop"</h4>
+                            <p>It's a bigger problem for sellers, but aircraft buyers, too, can become entangled in rumours and misunderstings, distorting their initial request and eventually making them seem lacking seriousness.</p>
+                        </div>
+                    </div>
+
+                    <!-- Блок вывода -->
+                    <div class="conclusion-block">
+                        <h3 data-lang="ru">Вывод</h3>
+                        <h3 data-lang="en">Conclusion</h3>
+                        <p data-lang="ru">Во всех случаях выгоднее нанять одного хорошего брокера, который проанализирует все пожелания и предпочтения покупателя, будет знать бюджет, а также размер своего вознаграждения и время, за которое он должен достичь результата. Наличие мандата на покупку очень упрощает диалоги с продавцами и их представителями. Сделки становятся быстрее, дешевле и предсказуемее.</p>
+                        <p data-lang="en">It is always more efficient to have one professional broker who has carefully analysed all the buyer's needs and preferences, works towards a budget, and knows the size of his commission as well as the time within which he must deliver results. Having an acquisition mandate greatly improves dialogues with sellers and their representatives, making deals faster, cheaper, and more predictable.</p>
+                    </div>
+
+                    <!-- Кнопка назад -->
+                    <div style="text-align: center;">
+                        <a href="publications.html" class="back-link" id="backLink" data-lang="ru">
+                            <i class="fas fa-arrow-left"></i> Назад к публикациям
+                        </a>
+                        <a href="publications.html" class="back-link" id="backLink" data-lang="en">
+                            <i class="fas fa-arrow-left"></i> Back to Publications
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Переключатель языка -->
+        <div class="language-switcher">
+            <button onclick="switchLanguage('ru')">RU</button>
+            <button onclick="switchLanguage('en')">EN</button>
+        </div>
+    </div>
+
+    <script src="site-1/new/js/script.js"></script>
+    <script>
+        // Инициализация для страницы статьи
+        document.addEventListener('DOMContentLoaded', function() {
+            // Функция для обновления ссылок с учетом языка
+            function updateArticleLinks() {
+                const lang = localStorage.getItem('siteLanguage') || 'en';
+                
+                // Обновляем ссылку логотипа
+                const logoLink = document.getElementById('logoLink');
+                if (logoLink) {
+                    logoLink.href = `index.html?lang=${lang}`;
+                }
+                
+                // Обновляем ссылки "Назад"
+                const backLinks = document.querySelectorAll('.back-link');
+                backLinks.forEach(link => {
+                    const linkLang = link.getAttribute('data-lang');
+                    if (linkLang === lang) {
+                        link.style.display = 'inline-block';
+                        link.href = `publications.html?lang=${lang}&return=true`;
+                    } else {
+                        link.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Вызываем при загрузке
+            updateArticleLinks();
+            
+            // Перехватываем клики по кнопкам языка для обновления ссылок
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    setTimeout(updateArticleLinks, 100);
+                });
+            });
+            
+            // Сохраняем информацию о текущей статье для возможного возврата
+            const articleId = 'buyers-pay-brokers';
+            sessionStorage.setItem('currentArticleId', articleId);
+        });
+    </script>
+</body>
+</html>
