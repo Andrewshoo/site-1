@@ -193,6 +193,73 @@
     </style>
 </head>
 <body>
+    <!-- Бургер-меню -->
+    <div class="burger-menu">
+        <div class="burger-icon" id="burgerIcon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="burger-nav" id="burgerNav">
+            <div class="menu-content">
+                <div class="menu-header">
+                    <div class="menu-logo">
+                        <img src="site-1/new/images/logo_new.png" alt="UPCAST Logo">
+                    </div>
+                    <h3>UPCAST</h3>
+                </div>
+                <ul class="menu-list">
+                    <li>
+                        <a href="site-1/index.html?lang=ru" data-lang="ru">
+                            <i class="fas fa-home"></i>
+                            <span>Главная</span>
+                        </a>
+                        <a href="site-1/index.html?lang=en" data-lang="en">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="site-1/publications.html?lang=ru" data-lang="ru">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Ваши вопросы</span>
+                        </a>
+                        <a href="site-1/publications.html?lang=en" data-lang="en">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Your questions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openEncodedLink(); return false;">
+                            <i class="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="openWA(); return false;">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="sendEmail(); return false;">
+                            <i class="fas fa-envelope"></i>
+                            <span data-lang="ru">Email</span>
+                            <span data-lang="en">Email</span>
+                        </a>
+                    </li>
+                    <li class="language-menu-item">
+                        <div class="language-buttons">
+                            <button onclick="switchLanguage('ru')">RU</button>
+                            <button onclick="switchLanguage('en')">EN</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="burger-overlay" id="burgerOverlay"></div>
+    </div>
+    
     <div class="page-wrapper">
         <!-- Логотип (левая колонка) -->
         <div class="logo-column">
