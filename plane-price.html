@@ -106,6 +106,41 @@
             color: #2e7d32;
             font-weight: 500;
         }
+
+         /* Измененный стиль для блоков с контентом */
+        .content-block {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #ed6c02;
+            transition: all 0.3s ease;
+        }
+        
+        .content-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .content-block h3 {
+            color: #1a3e72;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .content-block h3:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: 70%;
+            width: 4px;
+            background: #1a3e72;
+            border-radius: 2px;
+        }
         
         @media (max-width: 768px) {
             .price-table {
@@ -217,7 +252,7 @@
                 <div class="article-text">
                     <!-- Русская версия -->
                     <div data-lang="ru">
-                        <div class="service-option">
+                        <div class="content-block">
                             <h3>Ожидание</h3>
                             <p>Если продаю, то ого-го сколько! Значительно выше рынка. Ну, а если покупаю, то что за сумасшедшие такие цены поставили? Я им дам максимум половину от того, что они хотят!</p>
                         </div>
@@ -312,7 +347,7 @@
                     
                     <!-- Английская версия -->
                     <div data-lang="en">
-                        <div class="service-option">
+                        <div class="content-block">
                             <h3>Expectation</h3>
                             <p>If I'm selling then it's pure gold. Diamonds even. Way above market! But if I'm buying then I'll never pay what sellers are asking. Who set such high prices anyway? They should be happy with half of that!</p>
                         </div>
