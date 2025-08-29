@@ -135,8 +135,22 @@
                         </div>
                         
                         <p>В рамках No Bullshit Aviation правила общения соблюдают обе стороны. Сжато и по существу. Если общение скатывается в «просто поболтать», вы либо рекомендуете меня другим, либо даёте мне свой вертолёт полетать, либо переходим на почасовую ставку, как психологи и юристы.</p>
+
+                        <p>Если у вас есть свой вопрос или хотите прокомментировать – отлично! Пожалуйста, пишите в мессенджеры или на email.</p>
+
+                        <div class="contact-icons">
+                            <a href="#" onclick="openEncodedLink()" title="Telegram">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" onclick="openWA()" title="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="#" onclick="sendEmail()" title="Написать email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
                         
-                        <a href="site-1/publications.html" class="back-link" data-lang="ru"><i class="fas fa-arrow-left"></i> Назад к публикациям</a>
+                        <a href="site-1/publications.html" class="back-link" data-lang="ru"><i class="fas fa-arrow-left"></i> Назад</a>
                     </div>
                     
                     <!-- Английская версия -->
@@ -168,12 +182,58 @@
                         </div>
                         
                         <p>We value each other's time. No Bullshit Aviation means quick and efficient communication from both sides. If it becomes a therapy session or hangar chit-chat, please recommend me to your friends, give me some flight time on your helicopter, or pay an hourly rate.</p>
-                        
-                        <a href="site-1/publications.html" class="back-link" data-lang="en"><i class="fas fa-arrow-left"></i> Back to Publications</a>
+
+                        <p>If you have your own question or comment, that’s fabulous! Please contact me via email or one of the messengers.</p>
+
+                        <div class="contact-icons">
+                            <a href="#" onclick="openEncodedLink()" title="Telegram">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" onclick="openWA()" title="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="#" onclick="sendEmail()" title="Написать email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+
+                                                
+                        <a href="site-1/publications.html" class="back-link" data-lang="en"><i class="fas fa-arrow-left"></i>Back</a>
                     </div>
+                        <div class="share-dropdown">
+                            <button class="share-toggle" onclick="toggleShareMenu()">
+                                <i class="fas fa-share-alt"></i>
+                                <span class="share-text" data-lang="ru">Поделиться</span>
+                                <span class="share-text" data-lang="en">Share</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            
+                            <div class="share-menu" id="shareMenu">
+                                <button onclick="shareTelegram()" class="share-item">
+                                    <i class="fab fa-telegram"></i>
+                                    <span>Telegram</span>
+                                </button>
+                                <button onclick="shareWhatsApp()" class="share-item">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>WhatsApp</span>
+                                </button>
+                                <button onclick="shareEmail()" class="share-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span data-lang="ru">Email</span>
+                                    <span data-lang="en">Email</span>
+                                </button>
+                                <button onclick="copyLink()" class="share-item">
+                                    <i class="fas fa-link"></i>
+                                    <span data-lang="ru">Копировать ссылку</span>
+                                    <span data-lang="en">Copy link</span>
+                                </button>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
+
+        
 
         <!-- Переключатель языка -->
         <div class="language-switcher">

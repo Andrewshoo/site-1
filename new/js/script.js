@@ -54,6 +54,8 @@ function scrollToProjects() {
     }
 }
 
+
+
 function getLocalizedUrl(path, lang = null) {
     const currentLang = lang || localStorage.getItem('siteLanguage') || 'en';
     const url = new URL(path, window.location.origin);
@@ -132,6 +134,18 @@ function applyTranslations(lang) {
   // Обновляем активное состояние кнопок языка
   document.querySelectorAll('.language-switcher button').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+
+  // Обновляем текст кнопки sharing
+  document.querySelectorAll('.share-text').forEach(el => {
+    const elementLang = el.getAttribute('data-lang');
+    el.style.display = elementLang === lang ? 'inline' : 'none';
+  });
+  
+  // Обновляем элементы в меню sharing
+  document.querySelectorAll('.share-item [data-lang]').forEach(el => {
+    const elementLang = el.getAttribute('data-lang');
+    el.style.display = elementLang === lang ? 'inline' : 'none';
   });
   
   // Устанавливаем язык документа
@@ -212,3 +226,97 @@ document.addEventListener('DOMContentLoaded', () => {
   switchLanguage(lang);
   initBurgerMenu();
 });
+
+// Функция для toggle меню sharing
+function toggleShareMenu() {
+    const shareMenu = document.getElementById('shareMenu');
+    if (shareMenu) {
+        shareMenu.classList.toggle('active');
+        
+        // Закрываем другие открытые меню если есть
+        const allMenus = document.querySelectorAll('.share-menu.active');
+        allMenus.forEach(menu => {
+            if (menu !== shareMenu) {
+                menu.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Закрытие меню при клике вне его
+document.addEventListener('click', function(e) {
+    const shareMenu = document.getElementById('shareMenu');
+    const shareToggle = document.querySelector('.share-toggle');
+    
+    if (shareMenu && shareToggle && 
+        !shareMenu.contains(e.target) && 
+        !shareToggle.contains(e.target)) {
+        shareMenu.classList.remove('active');
+    }
+});
+
+// Функция для toggle меню sharing
+function toggleShareMenu() {
+    const shareMenu = document.getElementById('shareMenu');
+    if (shareMenu) {
+        shareMenu.classList.toggle('active');
+        
+        // Закрываем другие открытые меню если есть
+        const allMenus = document.querySelectorAll('.share-menu.active');
+        allMenus.forEach(menu => {
+            if (menu !== shareMenu) {
+                menu.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Закрытие меню при клике вне его
+document.addEventListener('click', function(e) {
+    const shareMenu = document.getElementById('shareMenu');
+    const shareToggle = document.querySelector('.share-toggle');
+    
+    if (shareMenu && shareToggle && 
+        !shareMenu.contains(e.target) && 
+        !shareToggle.contains(e.target)) {
+        shareMenu.classList.remove('active');
+    }
+});
+
+// Функции sharing (оставляем без изменений)
+function shareTelegram() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+    closeShareMenu();
+}
+
+function shareWhatsApp() {
+    const text = encodeURIComponent(document.title + ' - ' + window.location.href);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+    closeShareMenu();
+}
+
+function shareEmail() {
+    const subject = encodeURIComponent(document.title);
+    const body = encodeURIComponent('Посмотрите эту статью: ' + window.location.href);
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    closeShareMenu();
+}
+
+function copyLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        showNotification('Ссылка скопирована!', 'Link copied!');
+    }).catch(err => {
+        console.error('Ошибка копирования: ', err);
+    });
+    closeShareMenu();
+}
+
+function closeShareMenu() {
+    const shareMenu = document.getElementById('shareMenu');
+    if (shareMenu) {
+        shareMenu.classList.remove('active');
+    }
+}

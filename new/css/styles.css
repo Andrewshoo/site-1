@@ -927,6 +927,88 @@
     display: block;
 }
 
+/* Стили для выпадающего меню sharing */
+.share-dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 40px 0;
+}
+
+.share-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.share-toggle:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+.share-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 10px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 8px;
+    min-width: 180px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.share-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.share-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.share-item:hover {
+    background: #f5f5f5;
+}
+
+.share-item i {
+    width: 16px;
+    text-align: center;
+}
+
+.share-item:nth-child(1) i { color: #0088cc; }
+.share-item:nth-child(2) i { color: #25D366; }
+.share-item:nth-child(3) i { color: #EA4335; }
+.share-item:nth-child(4) i { color: #666; }
+
   
   
   /* Адаптация для планшетов */
@@ -1077,6 +1159,29 @@
     
     .article-full h1 {
         font-size: 2em;
+    }
+
+    .share-toggle {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    .share-menu {
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        min-width: 160px;
+    }
+    
+    .share-menu.active {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .share-toggle .fa-chevron-down {
+    transition: transform 0.3s ease;
+    }
+
+    .share-menu.active ~ .share-toggle .fa-chevron-down {
+        transform: rotate(180deg);
     }
   }
 
