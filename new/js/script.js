@@ -320,3 +320,42 @@ function closeShareMenu() {
         shareMenu.classList.remove('active');
     }
 }
+
+function showNotification(ruText, enText) {
+    const lang = localStorage.getItem('siteLanguage') || 'en';
+    const text = lang === 'ru' ? ruText : enText;
+    
+    const notification = document.createElement('div');
+    notification.className = 'copy-notification';
+    notification.textContent = text;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #000;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 4px;
+        z-index: 10000;
+        font-family: 'Manrope', sans-serif;
+        font-size: 14px;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateY(0)';
+    }, 10);
+    
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 2000);
+}
