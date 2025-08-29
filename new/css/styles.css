@@ -1009,6 +1009,11 @@
 .share-item:nth-child(3) i { color: #EA4335; }
 .share-item:nth-child(4) i { color: #666; }
 
+.fa-plane.rotate-left {
+    transform: rotateY(180deg);
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
   
   
   /* Адаптация для планшетов */
