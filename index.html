@@ -36,10 +36,17 @@
                         </a>
                     </li>
                     <li>
+                        <a href="#" onclick="scrollToProjects(); return false;">
+                            <i class="fas fa-plane"></i>
+                            <span data-lang="ru">Текущие проекты</span>
+                            <span data-lang="en">Currently working on</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="publications.html">
                             <i class="fas fa-newspaper"></i>
-                            <span data-lang="ru">Публикации</span>
-                            <span data-lang="en">Publications</span>
+                            <span data-lang="ru">Ваши вопросы</span>
+                            <span data-lang="en">Your Questions</span>
                         </a>
                     </li>
                     <li>
@@ -126,11 +133,13 @@
 
         <!-- Секция самолетов -->
         <div class="aircraft-content">
-            <div class="aircraft-section">
-                <h2>Текущие проекты</h2>
+            <div class="aircraft-section" id="projects">
+                <h2 data-lang="ru" data-translation="projects">Текущие проекты</h2>
+                <h2 data-lang="en" data-translation="projects" style="display: none;">Currently working on</h2>
                 <div class="aircraft-columns">
                     <div class="aircraft-column">
-                        <h3>Продажа</h3>
+                        <h3 data-lang="ru" data-translation="sale">Продажа</h3>
+                        <h3 data-lang="en" data-translation="sale" style="display: none;">Offering for Sale</h3>
                         <ul class="aircraft-list">
                             <li>2009 BBJ</li>
                             <li>2002 Falcon 50EX</li>
@@ -140,7 +149,8 @@
                         </ul>
                     </div>
                     <div class="aircraft-column">
-                        <h3>Покупка</h3>
+                        <h3 data-lang="ru" data-translation="purchase">Покупка</h3>
+                        <h3 data-lang="en" data-translation="purchase" style="display: none;">Looking to Buy</h3>
                         <ul class="aircraft-list">
                             <li>Gulfstream G700</li>
                             <li>Global 6500</li>

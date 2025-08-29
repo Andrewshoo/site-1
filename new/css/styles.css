@@ -909,6 +909,24 @@
     text-align: center;
 }
 
+.publication-image a {
+    display: block;
+    position: relative;
+    text-decoration: none;
+}
+
+.publication-image a:hover img {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.publication-image img {
+    transition: all 0.3s ease;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
   
   
   /* Адаптация для планшетов */

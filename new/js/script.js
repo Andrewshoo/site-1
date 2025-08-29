@@ -44,6 +44,16 @@ const translations = {
   }
 };
 
+function scrollToProjects() {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+        projectsSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
 function getLocalizedUrl(path, lang = null) {
     const currentLang = lang || localStorage.getItem('siteLanguage') || 'en';
     const url = new URL(path, window.location.origin);
