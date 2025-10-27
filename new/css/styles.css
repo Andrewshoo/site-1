@@ -41,6 +41,7 @@
         "logo photo"
         "logo description"
         "logo contacts"
+        "logo cases"
         "logo articles"
         "logo aircraft"; /* Добавляем новую область для статей */
     max-width: 1200px;
@@ -1014,7 +1015,199 @@
     transition: transform 0.3s ease;
     display: inline-block;
 }
-  
+
+/* Секция кейсов - чистый слайдер */
+.cases-content {
+    grid-area: cases;
+    padding-right: 30px;
+    padding-left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.cases-section {
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cases-section h2 {
+    color: black;
+    margin-bottom: 50px;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+/* Описание секции кейсов */
+.cases-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+}
+
+.cases-intro p {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #555;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Контейнер слайдера */
+.cases-slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.slider-container {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.case-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+}
+
+/* Карточка кейса */
+.case-card {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 500px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.case-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.case-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.case-card:hover .case-image img {
+    transform: scale(1.03);
+}
+
+.case-content {
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.case-tag {
+    display: inline-block;
+    background: rgba(26, 62, 114, 0.08);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+
+.case-content h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 2em;
+    color: var(--primary);
+    margin-bottom: 25px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.case-content p {
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.7;
+    color: #555;
+    font-size: 1.05em;
+    margin: 0;
+}
+
+/* Чистая навигация */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.slider-prev,
+.slider-next {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    pointer-events: all;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Анимации контента */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.case-content > * {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.case-tag {
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+.case-content h3 {
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.case-content p {
+    animation-delay: 0.3s;
+    opacity: 0;
+}
   
   /* Адаптация для планшетов */
   @media (max-width: 992px) {
@@ -1035,6 +1228,27 @@
     .sign {
       margin-top: 2em;
     }
+
+    .case-card {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+    
+    .case-image {
+        height: 300px;
+    }
+    
+    .case-content {
+        padding: 40px 30px;
+    }
+    
+    .case-content h3 {
+        font-size: 1.8em;
+    }
+    
+    .slider-nav {
+        padding: 0 15px;
+    }
   }
   
   /* Адаптация для мобильных */
@@ -1047,8 +1261,49 @@
             "photo"
             "description"
             "contacts"
+            "cases"
             "articles"
             "aircraft";
+    }
+
+    .cases-section {
+        padding: 30px 20px;
+        margin: 20px 0;
+    }
+    
+    .cases-section h2 {
+        margin-bottom: 20px;
+        font-size: 26px;
+    }
+    
+    .cases-intro {
+        margin-bottom: 30px;
+        padding: 0 10px;
+    }
+    
+    .cases-intro p {
+        font-size: 1em;
+        line-height: 1.6;
+    }
+    
+    .case-content {
+        padding: 30px 25px;
+    }
+    
+    .case-content h3 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+    
+    .case-image {
+        height: 250px;
+    }
+    
+    .slider-prev,
+    .slider-next {
+        width: 44px;
+        height: 44px;
+        font-size: 14px;
     }
     
     .logo-column {
@@ -1196,5 +1451,33 @@
         right: 15px;
         left: 15px;
         top: 15px;
+    }
+
+    .case-content {
+        padding: 25px 20px;
+    }
+    
+    .case-content h3 {
+        font-size: 1.4em;
+    }
+    
+    .case-image {
+        height: 200px;
+    }
+    
+    .slider-prev,
+    .slider-next {
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+    }
+    
+    .slider-nav {
+        padding: 0 10px;
+    }
+    
+    .cases-intro p {
+        text-align: left;
+        font-size: 0.95em;
     }
 }

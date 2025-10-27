@@ -225,6 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const lang = detectLanguage();
   switchLanguage(lang);
   initBurgerMenu();
+
+   // Инициализируем чистый слайдер
+   if (document.querySelector('.cases-slider')) {
+    CleanCaseSlider.init();
+}
 });
 
 // Функция для toggle меню sharing
@@ -359,3 +364,121 @@ function showNotification(ruText, enText) {
         }, 300);
     }, 2000);
 }
+
+// Чистый авто-слайдер
+const CleanCaseSlider = {
+  currentSlide: 0,
+  slides: [],
+  container: null,
+  autoPlayInterval: null,
+  isPaused: false,
+
+  init() {
+      this.container = document.querySelector('.slider-container');
+      this.slides = document.querySelectorAll('.case-slide');
+      
+      this.setupEventListeners();
+      this.startAutoPlay();
+      this.updateSlider();
+  },
+
+  setupEventListeners() {
+      document.querySelector('.slider-prev').addEventListener('click', () => this.prevSlide());
+      document.querySelector('.slider-next').addEventListener('click', () => this.nextSlide());
+      
+      // Пауза при наведении
+      this.container.addEventListener('mouseenter', () => this.pauseAutoPlay());
+      this.container.addEventListener('mouseleave', () => this.resumeAutoPlay());
+      
+      // Поддержка клавиатуры
+      document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') this.prevSlide();
+          if (e.key === 'ArrowRight') this.nextSlide();
+      });
+      
+      // Swipe для мобильных
+      this.setupSwipe();
+  },
+
+  setupSwipe() {
+      let startX = 0;
+      let endX = 0;
+      
+      this.container.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          this.pauseAutoPlay();
+      });
+      
+      this.container.addEventListener('touchend', (e) => {
+          endX = e.changedTouches[0].clientX;
+          this.handleSwipe(startX, endX);
+          setTimeout(() => this.resumeAutoPlay(), 3000);
+      });
+  },
+
+  handleSwipe(startX, endX) {
+      const diff = startX - endX;
+      const swipeThreshold = 50;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+              this.nextSlide();
+          } else {
+              this.prevSlide();
+          }
+      }
+  },
+
+  nextSlide() {
+      this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+      this.updateSlider();
+      this.resetAutoPlay();
+  },
+
+  prevSlide() {
+      this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+      this.updateSlider();
+      this.resetAutoPlay();
+  },
+
+  updateSlider() {
+      const translateX = -this.currentSlide * 100;
+      this.container.style.transform = `translateX(${translateX}%)`;
+      
+      // Анимируем контент
+      this.animateContent();
+  },
+
+  animateContent() {
+      const currentContent = this.slides[this.currentSlide].querySelector('.case-content');
+      const elements = currentContent.querySelectorAll('*');
+      
+      elements.forEach(el => {
+          el.style.animation = 'none';
+          setTimeout(() => {
+              el.style.animation = '';
+          }, 10);
+      });
+  },
+
+  startAutoPlay() {
+      this.autoPlayInterval = setInterval(() => {
+          if (!this.isPaused) {
+              this.nextSlide();
+          }
+      }, 5000);
+  },
+
+  pauseAutoPlay() {
+      this.isPaused = true;
+  },
+
+  resumeAutoPlay() {
+      this.isPaused = false;
+  },
+
+  resetAutoPlay() {
+      clearInterval(this.autoPlayInterval);
+      this.startAutoPlay();
+  }
+};
