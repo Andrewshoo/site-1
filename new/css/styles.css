@@ -1068,11 +1068,20 @@
 .slider-container {
     display: flex;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 100%;
 }
 
 .case-slide {
     flex: 0 0 100%;
     min-width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: none;
+}
+
+.case-slide.active {
+    opacity: 1;
+    display: block;
 }
 
 /* Карточка кейса */
@@ -1082,6 +1091,12 @@
     grid-template-columns: 1fr 1fr;
     min-height: 500px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.case-card:hover {
+    transform: translateY(-2px);
 }
 
 .case-image {
@@ -1105,6 +1120,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
 }
 
 .case-tag {
@@ -1135,47 +1151,85 @@
     line-height: 1.7;
     color: #555;
     font-size: 1.05em;
-    margin: 0;
+    margin: 0 0 30px 0;
 }
 
-/* Чистая навигация */
-.slider-nav {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-    pointer-events: none;
-    z-index: 10;
-}
-
-.slider-prev,
-.slider-next {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--primary);
-    cursor: pointer;
+/* Подсказка для переключения */
+.slide-hint {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: #666;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9em;
+    font-weight: 500;
     transition: all 0.3s ease;
-    font-size: 16px;
-    pointer-events: all;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
 }
 
-.slider-prev:hover,
-.slider-next:hover {
+.slide-hint i {
+    color: var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.case-card:hover .slide-hint {
+    color: var(--primary);
+}
+
+.case-card:hover .slide-hint i {
+    transform: translateX(3px);
+}
+
+/* Индикатор слайдов */
+.slider-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.indicator-dots {
+    display: flex;
+    gap: 12px;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
     background: var(--primary);
-    color: white;
+    transform: scale(1.2);
+}
+
+.indicator-dot:hover {
+    background: var(--primary);
     transform: scale(1.1);
+}
+
+.indicator-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
+
+.current-number {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.total-number {
+    color: #999;
 }
 
 /* Анимации контента */
@@ -1190,7 +1244,7 @@
     }
 }
 
-.case-content > * {
+.case-content > *:not(.slide-hint) {
     animation: fadeInUp 0.6s ease forwards;
 }
 
@@ -1207,6 +1261,21 @@
 .case-content p {
     animation-delay: 0.3s;
     opacity: 0;
+}
+
+@media (max-width: 1200px) {
+    .case-content {
+        padding: 50px 40px;
+    }
+    
+    .case-content h3 {
+        font-size: 1.8em;
+    }
+    
+    .case-content p {
+        font-size: 1em;
+        line-height: 1.6;
+    }
 }
   
   /* Адаптация для планшетов */
@@ -1243,11 +1312,22 @@
     }
     
     .case-content h3 {
-        font-size: 1.8em;
+        font-size: 1.6em;
     }
     
     .slider-nav {
         padding: 0 15px;
+    }
+    
+    /* Специально для русского текста */
+    [data-lang="ru"] .case-content h3 {
+        font-size: 1.5em;
+        line-height: 1.3;
+    }
+    
+    [data-lang="ru"] .case-content p {
+        font-size: 0.95em;
+        line-height: 1.5;
     }
   }
   
@@ -1291,7 +1371,7 @@
     }
     
     .case-content h3 {
-        font-size: 1.6em;
+        font-size: 1.4em;
         margin-bottom: 20px;
     }
     
@@ -1304,6 +1384,16 @@
         width: 44px;
         height: 44px;
         font-size: 14px;
+    }
+    
+    /* Для русского текста на мобильных */
+    [data-lang="ru"] .case-content h3 {
+        font-size: 1.3em;
+    }
+    
+    [data-lang="ru"] .case-content p {
+        font-size: 0.9em;
+        line-height: 1.4;
     }
     
     .logo-column {

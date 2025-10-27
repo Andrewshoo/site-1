@@ -226,10 +226,10 @@ document.addEventListener('DOMContentLoaded', () => {
   switchLanguage(lang);
   initBurgerMenu();
 
-   // Инициализируем чистый слайдер
-   if (document.querySelector('.cases-slider')) {
-    CleanCaseSlider.init();
-}
+    // Инициализируем чистый слайдер
+    if (document.querySelector('.cases-slider')) {
+      CleanCaseSlider.init();
+  }
 });
 
 // Функция для toggle меню sharing
@@ -369,31 +369,28 @@ function showNotification(ruText, enText) {
 const CleanCaseSlider = {
   currentSlide: 0,
   slides: [],
-  container: null,
   autoPlayInterval: null,
   isPaused: false,
 
   init() {
-      this.container = document.querySelector('.slider-container');
       this.slides = document.querySelectorAll('.case-slide');
-      
       this.setupEventListeners();
       this.startAutoPlay();
       this.updateSlider();
   },
 
   setupEventListeners() {
-      document.querySelector('.slider-prev').addEventListener('click', () => this.prevSlide());
-      document.querySelector('.slider-next').addEventListener('click', () => this.nextSlide());
-      
       // Пауза при наведении
-      this.container.addEventListener('mouseenter', () => this.pauseAutoPlay());
-      this.container.addEventListener('mouseleave', () => this.resumeAutoPlay());
+      const slider = document.querySelector('.cases-slider');
+      if (slider) {
+          slider.addEventListener('mouseenter', () => this.pauseAutoPlay());
+          slider.addEventListener('mouseleave', () => this.resumeAutoPlay());
+      }
       
       // Поддержка клавиатуры
       document.addEventListener('keydown', (e) => {
           if (e.key === 'ArrowLeft') this.prevSlide();
-          if (e.key === 'ArrowRight') this.nextSlide();
+          if (e.key === 'ArrowRight' || e.key === ' ') this.nextSlide();
       });
       
       // Swipe для мобильных
@@ -404,12 +401,15 @@ const CleanCaseSlider = {
       let startX = 0;
       let endX = 0;
       
-      this.container.addEventListener('touchstart', (e) => {
+      const slider = document.querySelector('.cases-slider');
+      if (!slider) return;
+      
+      slider.addEventListener('touchstart', (e) => {
           startX = e.touches[0].clientX;
           this.pauseAutoPlay();
       });
       
-      this.container.addEventListener('touchend', (e) => {
+      slider.addEventListener('touchend', (e) => {
           endX = e.changedTouches[0].clientX;
           this.handleSwipe(startX, endX);
           setTimeout(() => this.resumeAutoPlay(), 3000);
@@ -441,17 +441,46 @@ const CleanCaseSlider = {
       this.resetAutoPlay();
   },
 
+  goToSlide(index) {
+      this.currentSlide = index;
+      this.updateSlider();
+      this.resetAutoPlay();
+  },
+
   updateSlider() {
-      const translateX = -this.currentSlide * 100;
-      this.container.style.transform = `translateX(${translateX}%)`;
+      // Обновляем активный слайд
+      this.slides.forEach((slide, index) => {
+          slide.classList.remove('active');
+          if (index === this.currentSlide) {
+              slide.classList.add('active');
+          }
+      });
+      
+      // Обновляем индикатор
+      this.updateIndicator();
       
       // Анимируем контент
       this.animateContent();
   },
 
+  updateIndicator() {
+      const dots = document.querySelectorAll('.indicator-dot');
+      const currentNumber = document.querySelector('.current-number');
+      
+      dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === this.currentSlide);
+      });
+      
+      if (currentNumber) {
+          currentNumber.textContent = this.currentSlide + 1;
+      }
+  },
+
   animateContent() {
       const currentContent = this.slides[this.currentSlide].querySelector('.case-content');
-      const elements = currentContent.querySelectorAll('*');
+      if (!currentContent) return;
+      
+      const elements = currentContent.querySelectorAll('*:not(.slide-hint)');
       
       elements.forEach(el => {
           el.style.animation = 'none';
@@ -466,7 +495,7 @@ const CleanCaseSlider = {
           if (!this.isPaused) {
               this.nextSlide();
           }
-      }, 5000);
+      }, 6000); // Увеличили до 6 секунд
   },
 
   pauseAutoPlay() {
@@ -478,7 +507,9 @@ const CleanCaseSlider = {
   },
 
   resetAutoPlay() {
-      clearInterval(this.autoPlayInterval);
+      if (this.autoPlayInterval) {
+          clearInterval(this.autoPlayInterval);
+      }
       this.startAutoPlay();
   }
 };
