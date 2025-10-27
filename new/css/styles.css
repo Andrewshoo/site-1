@@ -1051,8 +1051,9 @@
 
 .cases-intro p {
     font-family: 'Manrope', sans-serif;
-    font-size: 1.1em;
-    line-height: 1.7;
+    font-weight: 400;
+    font-size: large;
+    line-height: 1.5;
     color: #000000;
     font-weight: 400;
     margin: 0;
@@ -1143,7 +1144,7 @@
 
 .case-content h3 {
     font-family: 'Manrope', sans-serif;
-    font-size: 2em;
+    font-size: 1.3em;
     color: black;
     margin-bottom: 25px;
     font-weight: 600;
@@ -1152,7 +1153,9 @@
 
 .case-content p {
     font-family: 'Manrope', sans-serif;
-    line-height: 1.7;
+    font-weight: 400;
+    font-size: large;
+    line-height: 1.6;
     color: #161616;
     font-size: 1.05em;
     margin: 0 0 30px 0;
