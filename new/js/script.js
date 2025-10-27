@@ -365,18 +365,31 @@ function showNotification(ruText, enText) {
     }, 2000);
 }
 
-// Чистый авто-слайдер
+// Чистый авто-слайдер с плавными переходами
 const CleanCaseSlider = {
   currentSlide: 0,
   slides: [],
   autoPlayInterval: null,
   isPaused: false,
+  isAnimating: false,
 
   init() {
+      console.log('Инициализация слайдера...');
       this.slides = document.querySelectorAll('.case-slide');
+      
+      console.log('Найдено слайдов:', this.slides.length);
+      
+      if (this.slides.length === 0) {
+          console.log('Слайдер не найден - проверьте HTML структуру');
+          return;
+      }
+      
+      // Показываем первый слайд
+      this.slides[0].classList.add('active');
+      
       this.setupEventListeners();
       this.startAutoPlay();
-      this.updateSlider();
+      this.updateIndicator();
   },
 
   setupEventListeners() {
@@ -385,10 +398,19 @@ const CleanCaseSlider = {
       if (slider) {
           slider.addEventListener('mouseenter', () => this.pauseAutoPlay());
           slider.addEventListener('mouseleave', () => this.resumeAutoPlay());
+          
+          // Обработчик кликов на карточку
+          slider.addEventListener('click', (e) => {
+              // Игнорируем клики по индикатору
+              if (!e.target.closest('.slider-indicator') && !this.isAnimating) {
+                  this.nextSlide();
+              }
+          });
       }
       
       // Поддержка клавиатуры
       document.addEventListener('keydown', (e) => {
+          if (this.isAnimating) return;
           if (e.key === 'ArrowLeft') this.prevSlide();
           if (e.key === 'ArrowRight' || e.key === ' ') this.nextSlide();
       });
@@ -405,11 +427,13 @@ const CleanCaseSlider = {
       if (!slider) return;
       
       slider.addEventListener('touchstart', (e) => {
+          if (this.isAnimating) return;
           startX = e.touches[0].clientX;
           this.pauseAutoPlay();
       });
       
       slider.addEventListener('touchend', (e) => {
+          if (this.isAnimating) return;
           endX = e.changedTouches[0].clientX;
           this.handleSwipe(startX, endX);
           setTimeout(() => this.resumeAutoPlay(), 3000);
@@ -430,37 +454,54 @@ const CleanCaseSlider = {
   },
 
   nextSlide() {
+      if (this.isAnimating) return;
+      this.isAnimating = true;
+      
+      const currentSlide = this.slides[this.currentSlide];
+      currentSlide.classList.remove('active');
+      
       this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-      this.updateSlider();
-      this.resetAutoPlay();
+      
+      setTimeout(() => {
+          const nextSlide = this.slides[this.currentSlide];
+          nextSlide.classList.add('active');
+          this.updateIndicator();
+          this.isAnimating = false;
+      }, 300);
   },
 
   prevSlide() {
+      if (this.isAnimating) return;
+      this.isAnimating = true;
+      
+      const currentSlide = this.slides[this.currentSlide];
+      currentSlide.classList.remove('active');
+      
       this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
-      this.updateSlider();
-      this.resetAutoPlay();
+      
+      setTimeout(() => {
+          const prevSlide = this.slides[this.currentSlide];
+          prevSlide.classList.add('active');
+          this.updateIndicator();
+          this.isAnimating = false;
+      }, 300);
   },
 
   goToSlide(index) {
+      if (this.isAnimating || index === this.currentSlide) return;
+      this.isAnimating = true;
+      
+      const currentSlide = this.slides[this.currentSlide];
+      currentSlide.classList.remove('active');
+      
       this.currentSlide = index;
-      this.updateSlider();
-      this.resetAutoPlay();
-  },
-
-  updateSlider() {
-      // Обновляем активный слайд
-      this.slides.forEach((slide, index) => {
-          slide.classList.remove('active');
-          if (index === this.currentSlide) {
-              slide.classList.add('active');
-          }
-      });
       
-      // Обновляем индикатор
-      this.updateIndicator();
-      
-      // Анимируем контент
-      this.animateContent();
+      setTimeout(() => {
+          const targetSlide = this.slides[this.currentSlide];
+          targetSlide.classList.add('active');
+          this.updateIndicator();
+          this.isAnimating = false;
+      }, 300);
   },
 
   updateIndicator() {
@@ -476,26 +517,12 @@ const CleanCaseSlider = {
       }
   },
 
-  animateContent() {
-      const currentContent = this.slides[this.currentSlide].querySelector('.case-content');
-      if (!currentContent) return;
-      
-      const elements = currentContent.querySelectorAll('*:not(.slide-hint)');
-      
-      elements.forEach(el => {
-          el.style.animation = 'none';
-          setTimeout(() => {
-              el.style.animation = '';
-          }, 10);
-      });
-  },
-
   startAutoPlay() {
       this.autoPlayInterval = setInterval(() => {
-          if (!this.isPaused) {
+          if (!this.isPaused && !this.isAnimating) {
               this.nextSlide();
           }
-      }, 6000); // Увеличили до 6 секунд
+      }, 6000);
   },
 
   pauseAutoPlay() {
