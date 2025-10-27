@@ -436,7 +436,7 @@ const CleanCaseSlider = {
           if (this.isAnimating) return;
           endX = e.changedTouches[0].clientX;
           this.handleSwipe(startX, endX);
-          setTimeout(() => this.resumeAutoPlay(), 3000);
+          setTimeout(() => this.resumeAutoPlay(), 10000);
       });
   },
 
@@ -522,7 +522,7 @@ const CleanCaseSlider = {
           if (!this.isPaused && !this.isAnimating) {
               this.nextSlide();
           }
-      }, 6000);
+      }, 10000);
   },
 
   pauseAutoPlay() {

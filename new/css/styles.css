@@ -1199,6 +1199,7 @@
 .indicator-dots {
     display: flex;
     gap: 12px;
+    margin-left: 10px;
 }
 
 .indicator-dot {
@@ -1211,7 +1212,7 @@
 }
 
 .indicator-dot.active {
-    background: var(--primary);
+    background: rgb(168, 168, 168);
     transform: scale(1.2);
 }
 
